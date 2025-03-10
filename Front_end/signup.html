@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Signup</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">MyApp</a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+            <a class="nav-link" href="login.html">Login</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card p-4 shadow" style="width: 400px;">
+        <h2 class="text-center mb-4">Register</h2>
+        <form id="signupForm">
+            <div class="mb-3">
+                <label for="name" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Enter your full name" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Enter password" required>
+            </div>
+            <div class="mb-3">
+                <label for="confirm-password" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" id="confirm-password" placeholder="Confirm password" required>
+            </div>
+            <div class="mb-3">
+                <label for="role" class="form-label">Role</label>
+                <select class="form-control" id="role">
+                    <option value="USER">User</option>
+                    <option value="ADMIN">Admin</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="profilePicture" class="form-label">Profile Picture</label>
+                <input type="file" class="form-control" id="profilePicture" required>
+            </div>
+            <button id="registerBtn" type="button" class="btn btn-primary w-100">Register</button>
+        </form>
+        <p class="text-center mt-3">Already have an account? <a href="login.html">Login</a></p>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#registerBtn').click(function (){
+            let name = $('#name').val();
+            let email = $('#email').val();
+            let password = $('#password').val();
+            let confirmPassword = $('#confirm-password').val();
+            let role = $('#role').val();
+            if (password !== confirmPassword) {
+                alert('Password and Confirm Password do not match');
+                return;
+            }
+
+            let formData = new FormData();
+            formData.append('user', new Blob([JSON.stringify({
+                "email": email,
+                "password": password,
+                "name": name,
+                "role": role,
+            })], { type: "application/json" }));
+            formData.append('file', profilePicture);
+
+            $.ajax({
+                url: 'http://localhost:8080/api/v1/user/register',
+                method: 'POST',
+                contentType: false,
+                processData: false,
+                data: formData,
+                success: function(response) {
+                    alert('User registered successfully');
+                    window.localStorage.setItem('token', response.data.token);
+                    window.location.href = 'login.html';
+                },
+                error: function(error) {
+                    console.error('Error details:', error);
+                    alert('An error occurred while registering user: ' + (error.responseText || 'Unknown error'));
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
