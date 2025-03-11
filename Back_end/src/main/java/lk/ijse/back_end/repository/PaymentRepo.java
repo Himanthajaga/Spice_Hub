@@ -1,12 +1,12 @@
 package lk.ijse.back_end.repository;
 
-import lk.ijse.back_end.entity.Order;
+import lk.ijse.back_end.entity.Payment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface OrderRepo extends JpaRepository<Order, String> {
-    @Query("SELECT o.oid FROM Order o ORDER BY o.oid DESC")
-    String findLastOrderId();
+public interface PaymentRepo extends JpaRepository<Payment, String> {
+    @Query("SELECT p.pid FROM Payment p ORDER BY p.pid DESC")
+    String findLastPaymentId();
 }

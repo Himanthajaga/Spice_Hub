@@ -5,8 +5,8 @@ import lk.ijse.back_end.dto.SpiceDTO;
 import java.util.List;
 
 public interface SpiceService {
-    void save(SpiceDTO spiceListeningDTO);
+    void save(SpiceDTO spiceDTO);
     List<SpiceDTO> getAll();
     void delete(Long id);
-    void update(SpiceDTO spiceListeningDTO);
+    void update(SpiceDTO spiceDTO);
 }
