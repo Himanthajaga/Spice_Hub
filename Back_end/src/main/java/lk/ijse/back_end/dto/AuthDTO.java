@@ -1,11 +1,13 @@
 package lk.ijse.back_end.dto;
 
+import jakarta.validation.constraints.Email;
 import org.springframework.stereotype.Component;
 
 
 
 @Component
 public class AuthDTO {
+    @Email(message = "Invalid email")
     private String email;
     private String token;
 

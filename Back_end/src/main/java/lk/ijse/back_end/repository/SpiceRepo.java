@@ -5,9 +5,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
-public interface SpiceRepo extends JpaRepository<Spice,Long> {
+public interface SpiceRepo extends JpaRepository<Spice, UUID> {
 
     SpiceRepo findByUserName(String userName);
 
@@ -16,5 +17,5 @@ public interface SpiceRepo extends JpaRepository<Spice,Long> {
     int deleteByUserName(String userName);
 
     List<Spice> findByCategory(String category);
-    List<Spice> findByUserUid(Long userUid);
+    List<Spice> findByUserUid(UUID userUid);
 }

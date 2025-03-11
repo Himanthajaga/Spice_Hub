@@ -13,7 +13,7 @@ import java.util.Map;
 
 @RestControllerAdvice
 @CrossOrigin
-public class AppWideExceptionHandler {
+public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ResponseDTO> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         Map<String, String> errors = new HashMap<>();

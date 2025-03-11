@@ -13,4 +13,8 @@ public interface OrderService {
 
     boolean checkItemsInStock(List<BidSpiceListningDTO> bidSpiceListnings);
     String getLastOrderId();
+
+    void deleteOrder(Long id);
+
+    void updateOrder(OrderDTO orderDTO);
 }

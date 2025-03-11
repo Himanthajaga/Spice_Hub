@@ -6,30 +6,39 @@ import lk.ijse.back_end.utill.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api/v1/spice")
 @CrossOrigin(origins = "http://localhost:63342")
 public class SpiceController {
     @Autowired
-    private SpiceServiceImpl spiceServiceImpl;
+    private SpiceServiceImpl spiceService;
     @PostMapping(path = "/save")
-    public ResponseUtil saveSpiceListening(@RequestBody SpiceDTO SpiceListeningDTO) {
-        spiceServiceImpl.save(SpiceListeningDTO);
-        return new ResponseUtil(201,"Spice Listening saved successfully",null);
-    }
+        public ResponseUtil saveSpiceListening(@RequestBody SpiceDTO spiceDTO) {
+            try {
+                spiceService.save(spiceDTO);
+                return new ResponseUtil(201, "Spice Listening Updated Successfully", true);
+            } catch (RuntimeException e) {
+                return new ResponseUtil(500, "Error updating spice", false);
+            }
+        }
     @GetMapping(path = "/get")
     public ResponseUtil getAllSpiceListenings(){
-        return new ResponseUtil(201,"Spice Listening saved successfully", spiceServiceImpl.getAll());
+        return new ResponseUtil(201,"Spice Listening saved successfully", spiceService.getAll());
     }
     @DeleteMapping(path = "/delete/{id}")
-    public ResponseUtil deleteSpiceListening(@PathVariable Long id){
-        spiceServiceImpl.delete(id);
+    public ResponseUtil deleteSpiceListening(@PathVariable UUID id){
+        spiceService.delete(id);
         return new ResponseUtil(201,"Spice Listening Deleted Successfully",null);
     }
     @PutMapping(path = "/update")
     public ResponseUtil updateSpiceListening(@RequestBody SpiceDTO SpiceListeningDTO){
-        spiceServiceImpl.update(SpiceListeningDTO);
-        return new ResponseUtil(201,"Spice Listening Updated Successfully",null);
+        try {
+            spiceService.update(SpiceListeningDTO);
+            return new ResponseUtil(201, "Spice Listening Updated Successfully", true);
+        } catch (RuntimeException e) {
+            return new ResponseUtil(409, e.getMessage(), false);
+        }
     }
-
 }

@@ -1,20 +1,45 @@
 package lk.ijse.back_end.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
+import java.util.UUID;
+
 public class SpiceDTO {
-    private Long id;
+    private UUID id;
+    @NotBlank(message = "Name is required")
+    @Pattern(regexp = "^[a-zA-Z ]*$", message = "Invalid name")
+    @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters")
     private String name;
+    @NotBlank(message = "Description is required")
+    @Size(min = 3, max = 100, message = "Description must be between 3 and 100 characters")
+    @Pattern(regexp = "^[a-zA-Z ]*$", message = "Invalid description")
     private String description;
+    @NotBlank(message = "Category is required")
+    @Pattern(regexp = "^[a-zA-Z ]*$", message = "Invalid category")
+    @Size(min = 3, max = 50, message = "Category must be between 3 and 50 characters")
     private String category;
+    @NotBlank(message = "Price is required")
+    @Pattern(regexp = "^[0-9]*$", message = "Invalid price")
+    @Size(min = 1, max = 10, message = "Price must be between 1 and 10 characters")
     private double price;
+    @NotBlank(message = "Quantity is required")
+    @Pattern(regexp = "^[0-9]*$", message = "Invalid quantity")
+    @Size(min = 1, max = 10, message = "Quantity must be between 1 and 10 characters")
     private int quantity;
+    @NotBlank(message = "Image URL is required")
+    @Size(min = 3, max = 100, message = "Image URL must be between 3 and 100 characters")
+    @Pattern(regexp = "^(http(s?):)([/|.|\\w|\\s|-])*\\.(?:jpg|gif|png)$", message = "Invalid image URL")
     private String imageURL;
+
     private Long sellerId;
     private boolean active;
 
     public SpiceDTO() {
     }
 
-    public SpiceDTO(Long id, String name, String description, String category, double price, int quantity, String imageURL, Long sellerId, boolean active) {
+    public SpiceDTO(UUID id, String name, String description, String category, double price, int quantity, String imageURL, Long sellerId, boolean active) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -26,11 +51,11 @@ public class SpiceDTO {
         this.active = active;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

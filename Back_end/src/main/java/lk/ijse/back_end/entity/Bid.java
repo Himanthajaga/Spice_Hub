@@ -1,31 +1,31 @@
 package lk.ijse.back_end.entity;
 
 import jakarta.persistence.*;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
-
 public class Bid implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
     private double bidAmount;
 
     @ManyToOne
-    @JoinColumn(name = "listing_id")
+    @JoinColumn(name = "listing_id", nullable = false)
     private Spice listing;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @Enumerated(EnumType.STRING)
     private BidStatus status = BidStatus.PENDING;
 
     private LocalDateTime bidTime = LocalDateTime.now();
-    enum BidStatus{
+
+    public enum BidStatus {
         PENDING,
         ACCEPTED,
         REJECTED
@@ -34,20 +34,20 @@ public class Bid implements Serializable {
     public Bid() {
     }
 
-    public Bid(Long id, double bidAmount, Spice listening, User user, BidStatus status, LocalDateTime bidTime) {
+    public Bid(UUID id, double bidAmount, Spice listing, User user, BidStatus status, LocalDateTime bidTime) {
         this.id = id;
         this.bidAmount = bidAmount;
-        this.listing = listening;
+        this.listing = listing;
         this.user = user;
         this.status = status;
         this.bidTime = bidTime;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -59,12 +59,12 @@ public class Bid implements Serializable {
         this.bidAmount = bidAmount;
     }
 
-    public Spice getListening() {
+    public Spice getListing() {
         return listing;
     }
 
-    public void setListening(Spice listening) {
-        this.listing = listening;
+    public void setListing(Spice listing) {
+        this.listing = listing;
     }
 
     public User getUser() {
@@ -91,4 +91,3 @@ public class Bid implements Serializable {
         this.bidTime = bidTime;
     }
 }
-

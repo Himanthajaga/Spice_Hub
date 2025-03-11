@@ -25,19 +25,17 @@ public class UserController {
     private final UserService userService;
     private final JwtUtil jwtUtil;
 
-    // Constructor injection
+    //constructor injection
     public UserController(UserService userService, JwtUtil jwtUtil) {
         this.userService = userService;
         this.jwtUtil = jwtUtil;
     }
-
-    public ResponseEntity<ResponseDTO> registerUser(@RequestPart("user") @Valid UserDTO userDTO, @RequestPart("file") MultipartFile file) {
+    @PostMapping(value = "/register")
+    public ResponseEntity<ResponseDTO> registerUser(@RequestPart("user")@Valid UserDTO userDTO,@RequestPart("file")MultipartFile file) {
         try {
-            // Save the profile picture
             String fileName = saveProfilePicture(file);
             userDTO.setProfilePicture(fileName);
 
-            // Save the user
             int res = userService.saveUser(userDTO);
             switch (res) {
                 case VarList.Created -> {
@@ -62,7 +60,6 @@ public class UserController {
                     .body(new ResponseDTO(VarList.Internal_Server_Error, e.getMessage(), null));
         }
     }
-
     private String saveProfilePicture(MultipartFile file) throws IOException {
         String desktopPath = System.getProperty("user.home") + "/Desktop/profile_pictures/";
         File directory = new File(desktopPath);

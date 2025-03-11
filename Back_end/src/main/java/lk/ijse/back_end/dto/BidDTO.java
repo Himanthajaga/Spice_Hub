@@ -1,20 +1,31 @@
 package lk.ijse.back_end.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 
 public class BidDTO {
-    private Long id;
+    private UUID id;
+    @NotNull
     private Long userId;
+    @NotNull
     private Long listingId;
+    @NotNull
+    @NotBlank(message = "Bid amount is required")
     private double bidAmount;
+    @NotBlank(message = "Status is required")
+    @Size(max = 255)
     private String status;
     private LocalDateTime bidTime;
 
     public BidDTO() {
     }
 
-    public BidDTO(Long id, Long userId, Long listingId, double bidAmount, String status, LocalDateTime bidTime) {
+    public BidDTO(UUID id, Long userId, Long listingId, double bidAmount, String status, LocalDateTime bidTime) {
         this.id = id;
         this.userId = userId;
         this.listingId = listingId;
@@ -23,11 +34,11 @@ public class BidDTO {
         this.bidTime = bidTime;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

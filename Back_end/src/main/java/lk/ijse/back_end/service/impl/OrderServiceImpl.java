@@ -47,4 +47,14 @@ public class OrderServiceImpl implements OrderService {
     public String getLastOrderId() {
         return null;
     }
+
+    @Override
+    public void deleteOrder(Long id) {
+
+    }
+
+    @Override
+    public void updateOrder(OrderDTO orderDTO) {
+
+    }
 }

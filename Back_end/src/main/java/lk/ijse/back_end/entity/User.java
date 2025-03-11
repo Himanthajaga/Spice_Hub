@@ -4,10 +4,7 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.UUID;
-//@AllArgsConstructor
-//@NoArgsConstructor
-//@Data
-//@ToString
+
 @Entity
 @Table(name = "systemuser")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -18,6 +15,7 @@ public class User implements Serializable {
     private UUID uid;
     @Column(unique = true)
     private String email;
+    private String Phone;
     private String password;
     private String name;
     @Column(insertable = false, updatable = false)
@@ -25,15 +23,6 @@ public class User implements Serializable {
     private String profilePicture;
 
     public User() {
-    }
-
-    public User(UUID uid, String email, String password, String name, String role, String profilePicture) {
-        this.uid = uid;
-        this.email = email;
-        this.password = password;
-        this.name = name;
-        this.role = role;
-        this.profilePicture = profilePicture;
     }
 
     public UUID getUid() {
@@ -50,6 +39,14 @@ public class User implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPhone() {
+        return Phone;
+    }
+
+    public void setPhone(String phone) {
+        Phone = phone;
     }
 
     public String getPassword() {
@@ -81,6 +78,16 @@ public class User implements Serializable {
     }
 
     public void setProfilePicture(String profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+
+    public User(UUID uid, String email, String phone, String password, String name, String role, String profilePicture) {
+        this.uid = uid;
+        this.email = email;
+        Phone = phone;
+        this.password = password;
+        this.name = name;
+        this.role = role;
         this.profilePicture = profilePicture;
     }
 }

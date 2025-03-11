@@ -5,12 +5,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
-public interface BidRepo extends JpaRepository<Bid, Long> {
-    Bid findBidById(Long Id);
-    boolean existsById(Long Id);
-    void deleteById(Long Id);
-    List<Bid> findByUserUid(Long userUid);
-    List<Bid> findByListingId(Long listingId);
+public interface BidRepo extends JpaRepository<Bid, UUID> {
+    Bid findBidById(UUID Id);
+    boolean existsById(UUID Id);
+    void deleteById(UUID Id);
+    List<Bid> findByUserUid(UUID userUid);
+    List<Bid> findByListingId(UUID listingId);
 }
