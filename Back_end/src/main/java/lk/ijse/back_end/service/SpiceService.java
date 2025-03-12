@@ -1,13 +1,14 @@
 package lk.ijse.back_end.service;
 
 import lk.ijse.back_end.dto.SpiceDTO;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface SpiceService {
-    void save(SpiceDTO spiceDTO);
-    List<SpiceDTO> getAll();
-    void delete(UUID id);
-    void update(SpiceDTO spiceDTO);
+  SpiceDTO<String> save(SpiceDTO spiceDTO, MultipartFile file);
+  List<SpiceDTO<String>> getAll();
+  void delete(UUID id);
+  SpiceDTO<String> update(UUID id, SpiceDTO spiceDTO, MultipartFile file);
 }

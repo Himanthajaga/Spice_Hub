@@ -1,10 +1,5 @@
 package lk.ijse.back_end.utill;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-
 public class ResponseUtil {
     private int code;
     private String message;

@@ -4,10 +4,15 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 import java.util.UUID;
-
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class PaymentDTO {
 
     private UUID pid;
@@ -23,55 +28,4 @@ public class PaymentDTO {
     private String paymentMethod;
     @NotNull
     private UUID orderId;
-
-    public PaymentDTO() {
-    }
-
-    public PaymentDTO(UUID pid, double amount, Date paymentDate, String paymentMethod, UUID orderId) {
-        this.pid = pid;
-        this.amount = amount;
-        this.paymentDate = paymentDate;
-        this.paymentMethod = paymentMethod;
-        this.orderId = orderId;
-    }
-
-    public UUID getPid() {
-        return pid;
-    }
-
-    public void setPid(UUID pid) {
-        this.pid = pid;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
-    public Date getPaymentDate() {
-        return paymentDate;
-    }
-
-    public void setPaymentDate(Date paymentDate) {
-        this.paymentDate = paymentDate;
-    }
-
-    public String getPaymentMethod() {
-        return paymentMethod;
-    }
-
-    public void setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
-    }
-
-    public UUID getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(UUID orderId) {
-        this.orderId = orderId;
-    }
 }

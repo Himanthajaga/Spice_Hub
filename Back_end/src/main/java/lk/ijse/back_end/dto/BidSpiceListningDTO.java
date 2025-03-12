@@ -4,9 +4,14 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.UUID;
-
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class BidSpiceListningDTO {
 
     private UUID id;
@@ -22,55 +27,4 @@ public class BidSpiceListningDTO {
     private UUID orderId;
     @NotNull
     private UUID spiceId;
-
-    public BidSpiceListningDTO() {
-    }
-
-    public BidSpiceListningDTO(UUID id, int quantity, double price, UUID orderId, UUID spiceId) {
-        this.id = id;
-        this.quantity = quantity;
-        this.price = price;
-        this.orderId = orderId;
-        this.spiceId = spiceId;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public UUID getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(UUID orderId) {
-        this.orderId = orderId;
-    }
-
-    public UUID getSpiceId() {
-        return spiceId;
-    }
-
-    public void setSpiceId(UUID spiceId) {
-        this.spiceId = spiceId;
-    }
 }

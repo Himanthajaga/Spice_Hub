@@ -1,10 +1,17 @@
 package lk.ijse.back_end.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.UUID;
-
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "systemuser")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -21,73 +28,4 @@ public class User implements Serializable {
     @Column(insertable = false, updatable = false)
     private String role;
     private String profilePicture;
-
-    public User() {
-    }
-
-    public UUID getUid() {
-        return uid;
-    }
-
-    public void setUid(UUID uid) {
-        this.uid = uid;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return Phone;
-    }
-
-    public void setPhone(String phone) {
-        Phone = phone;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public String getProfilePicture() {
-        return profilePicture;
-    }
-
-    public void setProfilePicture(String profilePicture) {
-        this.profilePicture = profilePicture;
-    }
-
-    public User(UUID uid, String email, String phone, String password, String name, String role, String profilePicture) {
-        this.uid = uid;
-        this.email = email;
-        Phone = phone;
-        this.password = password;
-        this.name = name;
-        this.role = role;
-        this.profilePicture = profilePicture;
-    }
 }

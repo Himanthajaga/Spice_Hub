@@ -4,9 +4,14 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.UUID;
-
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class CategoryDTO {
 
     private UUID id;
@@ -14,36 +19,4 @@ public class CategoryDTO {
     @Pattern(regexp = "^[a-zA-Z ]*$", message = "Invalid category name")
     @Size(min = 3, max = 50, message = "Category name must be between 3 and 50 characters")
     private String name;
-
-    public CategoryDTO() {
-    }
-
-    public CategoryDTO(UUID id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "CategoryDTO{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
 }

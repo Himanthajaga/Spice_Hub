@@ -5,6 +5,7 @@ import lk.ijse.back_end.dto.AuthDTO;
 import lk.ijse.back_end.dto.ResponseDTO;
 import lk.ijse.back_end.dto.UserDTO;
 import lk.ijse.back_end.service.UserService;
+import lk.ijse.back_end.utill.AppUtil;
 import lk.ijse.back_end.utill.JwtUtil;
 import lk.ijse.back_end.utill.VarList;
 import org.springframework.http.HttpStatus;
@@ -33,8 +34,8 @@ public class UserController {
     @PostMapping(value = "/register")
     public ResponseEntity<ResponseDTO> registerUser(@RequestPart("user")@Valid UserDTO userDTO,@RequestPart("file")MultipartFile file) {
         try {
-            String fileName = saveProfilePicture(file);
-            userDTO.setProfilePicture(fileName);
+            String base64Image = AppUtil.toBase64(file);
+            userDTO.setProfilePicture(base64Image);
 
             int res = userService.saveUser(userDTO);
             switch (res) {
