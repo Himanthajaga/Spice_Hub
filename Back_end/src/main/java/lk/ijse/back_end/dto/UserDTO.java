@@ -9,10 +9,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+import java.util.UUID;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class UserDTO {
+public class UserDTO <T>implements Serializable {
+    private UUID uid;
     @Email(message = "Invalid email")
     private String email;
     @NotBlank
@@ -29,6 +33,6 @@ public class UserDTO {
     @NotBlank(message = "Role is required")
     @Pattern(regexp = "^(ADMIN|USER)$", message = "Invalid role")
     private String role;
-    private String profilePicture;
+    private T profilePicture;
 
 }

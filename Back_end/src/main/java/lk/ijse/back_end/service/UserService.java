@@ -2,9 +2,17 @@ package lk.ijse.back_end.service;
 
 
 import lk.ijse.back_end.dto.UserDTO;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
+import java.util.UUID;
 
 
 public interface UserService {
-    int saveUser(UserDTO userDTO);
-    UserDTO searchUser(String username);
+    UserDTO<String>saveUser(UserDTO userDTO, MultipartFile file);
+   List<UserDTO<String>>getAll();
+    void deleteUser(UUID id);
+    UserDTO<String>updateUser(UUID id, UserDTO userDTO, MultipartFile file);
+
+    UserDTO loadUserDetailsByUsername(String email);
 }

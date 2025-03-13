@@ -1,74 +1,68 @@
 package lk.ijse.back_end.controller;
 
-import jakarta.validation.Valid;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lk.ijse.back_end.dto.AuthDTO;
-import lk.ijse.back_end.dto.ResponseDTO;
 import lk.ijse.back_end.dto.UserDTO;
 import lk.ijse.back_end.service.UserService;
 import lk.ijse.back_end.utill.AppUtil;
 import lk.ijse.back_end.utill.JwtUtil;
+import lk.ijse.back_end.utill.ResponseUtil;
 import lk.ijse.back_end.utill.VarList;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 @CrossOrigin(origins = "http://localhost:63342")
 @RestController
 @RequestMapping("api/v1/user")
 public class UserController {
+    private static final Logger log = LoggerFactory.getLogger(UserController.class);
     private final UserService userService;
     private final JwtUtil jwtUtil;
 
-    //constructor injection
+    // Constructor injection
     public UserController(UserService userService, JwtUtil jwtUtil) {
         this.userService = userService;
         this.jwtUtil = jwtUtil;
     }
-    @PostMapping(value = "/register")
-    public ResponseEntity<ResponseDTO> registerUser(@RequestPart("user")@Valid UserDTO userDTO,@RequestPart("file")MultipartFile file) {
-        try {
-            String base64Image = AppUtil.toBase64(file);
-            userDTO.setProfilePicture(base64Image);
 
-            int res = userService.saveUser(userDTO);
-            switch (res) {
-                case VarList.Created -> {
-                    String token = jwtUtil.generateToken(userDTO);
-                    AuthDTO authDTO = new AuthDTO();
-                    authDTO.setEmail(userDTO.getEmail());
-                    authDTO.setToken(token);
-                    return ResponseEntity.status(HttpStatus.CREATED)
-                            .body(new ResponseDTO(VarList.Created, "Success", authDTO));
-                }
-                case VarList.Not_Acceptable -> {
-                    return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE)
-                            .body(new ResponseDTO(VarList.Not_Acceptable, "Email Already Used", null));
-                }
-                default -> {
-                    return ResponseEntity.status(HttpStatus.BAD_GATEWAY)
-                            .body(new ResponseDTO(VarList.Bad_Gateway, "Error", null));
-                }
+    @PostMapping(value = "/register", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil registerUser(@RequestPart("user") String userJson, @RequestPart("file") MultipartFile file) throws JsonProcessingException {
+        try {
+            UserDTO userDTO = new ObjectMapper().readValue(userJson, UserDTO.class);
+            log.info("Received request to register user: {}", userDTO.getName());
+            userDTO.setProfilePicture(AppUtil.toBase64(file));
+
+            UserDTO<String> res = userService.saveUser(userDTO, file);
+            if (res.equals(VarList.Created)) {
+                String token = jwtUtil.generateToken(userDTO);
+                AuthDTO authDTO = new AuthDTO();
+                authDTO.setEmail(userDTO.getEmail());
+                authDTO.setToken(token);
+                return new ResponseUtil(VarList.Created, "User Registered Successfully", authDTO);
+            } else if (res.equals(VarList.Not_Acceptable)) {
+                return new ResponseUtil(VarList.Not_Acceptable, "Email Already Used", null);
+            } else {
+                return new ResponseUtil(VarList.Bad_Gateway, "Error", null);
             }
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseDTO(VarList.Internal_Server_Error, e.getMessage(), null));
+            log.error("Error registering user", e);
+            return new ResponseUtil(VarList.Internal_Server_Error, e.getMessage(), null);
         }
     }
-    private String saveProfilePicture(MultipartFile file) throws IOException {
-        String desktopPath = System.getProperty("user.home") + "/Desktop/profile_pictures/";
-        File directory = new File(desktopPath);
-        if (!directory.exists()) {
-            directory.mkdirs();
+    @GetMapping("/profile")
+    public ResponseUtil getUserProfile() {
+        try {
+            // Assuming you have a method to get the logged-in user's email
+            String email = jwtUtil.extractUsernameFromToken();
+            UserDTO userDTO = userService.loadUserDetailsByUsername(email);
+            return new ResponseUtil(VarList.Accepted, "User details fetched successfully", userDTO);
+        } catch (Exception e) {
+            log.error("Error fetching user details", e);
+            return new ResponseUtil(VarList.Internal_Server_Error, e.getMessage(), null);
         }
-        Path path = Paths.get(desktopPath + file.getOriginalFilename());
-        Files.write(path, file.getBytes());
-        return file.getOriginalFilename();
     }
 }

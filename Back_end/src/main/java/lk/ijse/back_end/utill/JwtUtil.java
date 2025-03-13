@@ -2,7 +2,9 @@ package lk.ijse.back_end.utill;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import lk.ijse.back_end.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -10,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
+import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,14 +22,14 @@ import java.util.function.Function;
 @Component
 @PropertySource(ignoreResourceNotFound = true, value = "classpath:otherprops.properties")
 public class JwtUtil implements Serializable {
-
     private static final long serialVersionUID = 234234523523L;
-
     public static final long JWT_TOKEN_VALIDITY = 24 * 60 * 60 * 12;
 
     @Value("${jwt.secret}")
     private String secretKey;
-
+    private Key getSigningKey() {
+        return Keys.hmacShaKeyFor(secretKey.getBytes());
+    }
     //retrieve username from jwt token
     public String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
@@ -49,10 +52,20 @@ public class JwtUtil implements Serializable {
 
 
     //for retrieving any information from token we will need the secret key
+//    private Claims getAllClaimsFromToken(String token) {
+//        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
+//    }
     private Claims getAllClaimsFromToken(String token) {
-        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
+        try {
+            if (token == null || token.split("\\.").length != 3) {
+                throw new MalformedJwtException("JWT strings must contain exactly 2 period characters. Found: " + (token == null ? 0 : token.split("\\.").length - 1));
+            }
+            return Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(token).getBody();
+        } catch (MalformedJwtException e) {
+            // Log the exception and rethrow it or handle it as needed
+            throw e;
+        }
     }
-
 
     //check if the token has expired
     private Boolean isTokenExpired(String token) {
@@ -85,5 +98,9 @@ public class JwtUtil implements Serializable {
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = getUsernameFromToken(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+    }
+
+    public String extractUsernameFromToken() {
+        return getUsernameFromToken(secretKey);
     }
 }

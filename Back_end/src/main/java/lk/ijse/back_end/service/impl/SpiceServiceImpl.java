@@ -55,8 +55,10 @@ public class SpiceServiceImpl implements SpiceService {
         List<Spice> spices = spiceRepo.findAll();
         List<SpiceDTO<String>> spiceDTOS = modelMapper.map(spices, new TypeToken<List<SpiceDTO<String>>>() {}.getType());
         for (SpiceDTO<String> spiceDTO : spiceDTOS) {
-            String base64Image = imageUtil.getImage(spiceDTO.getImageURL());
-            spiceDTO.setImageURL(base64Image);
+           spices.stream().filter(spice ->
+                   spice.getId().equals(spiceDTO.getId()))
+                   .findFirst()
+                   .ifPresent(spice -> spiceDTO.setImageURL(imageUtil.getImage(spice.getImageURL())));
         }
         return spiceDTOS;
     }
