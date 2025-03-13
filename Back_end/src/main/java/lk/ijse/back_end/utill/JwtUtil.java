@@ -17,90 +17,88 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
-
+import java.util.logging.Logger;
 
 @Component
 @PropertySource(ignoreResourceNotFound = true, value = "classpath:otherprops.properties")
 public class JwtUtil implements Serializable {
     private static final long serialVersionUID = 234234523523L;
     public static final long JWT_TOKEN_VALIDITY = 24 * 60 * 60 * 12;
-
+    private final Logger logger = Logger.getLogger(JwtUtil.class.getName());
     @Value("${jwt.secret}")
     private String secretKey;
+
     private Key getSigningKey() {
         return Keys.hmacShaKeyFor(secretKey.getBytes());
     }
-    //retrieve username from jwt token
+
+    // Retrieve username from JWT token
     public String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
     }
 
-    public Claims getUserRoleCodeFromToken(String token) {
-        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
-    }
-
-    //retrieve expiration date from jwt token
+    // Retrieve expiration date from JWT token
     public Date getExpirationDateFromToken(String token) {
         return getClaimFromToken(token, Claims::getExpiration);
     }
-
 
     public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = getAllClaimsFromToken(token);
         return claimsResolver.apply(claims);
     }
 
-
-    //for retrieving any information from token we will need the secret key
-//    private Claims getAllClaimsFromToken(String token) {
-//        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
-//    }
+    // For retrieving any information from token we will need the secret key
     private Claims getAllClaimsFromToken(String token) {
         try {
             if (token == null || token.split("\\.").length != 3) {
-                throw new MalformedJwtException("JWT strings must contain exactly 2 period characters. Found: " + (token == null ? 0 : token.split("\\.").length - 1));
             }
             return Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(token).getBody();
         } catch (MalformedJwtException e) {
-            // Log the exception and rethrow it or handle it as needed
+            logger.severe("MalformedJwtException: " + e.getMessage());
             throw e;
+        } catch (Exception e) {
+            logger.severe("Exception while parsing JWT token: " + e.getMessage());
+            throw new RuntimeException("Error parsing JWT token", e);
         }
     }
 
-    //check if the token has expired
+    // Check if the token has expired
     private Boolean isTokenExpired(String token) {
         final Date expiration = getExpirationDateFromToken(token);
         return expiration.before(new Date());
     }
 
-
-    //generate token for user
+    // Generate token for user
     public String generateToken(UserDTO userDTO) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("role",userDTO.getRole());
+        claims.put("role", userDTO.getRole());
         return doGenerateToken(claims, userDTO.getEmail());
     }
 
-    //while creating the token -
-    //1. Define  claims of the token, like Issuer, Expiration, Subject, and the ID
-    //2. Sign the JWT using the HS512 algorithm and secret key.
+    // While creating the token -
+    // 1. Define claims of the token, like Issuer, Expiration, Subject, and the ID
+    // 2. Sign the JWT using the HS512 algorithm and secret key.
     private String doGenerateToken(Map<String, Object> claims, String subject) {
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
-                .signWith(SignatureAlgorithm.HS512, secretKey).compact();
+                .signWith(getSigningKey(), SignatureAlgorithm.HS512)
+                .compact();
     }
 
-
-    //validate token
+    // Validate token
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = getUsernameFromToken(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
-    public String extractUsernameFromToken() {
-        return getUsernameFromToken(secretKey);
+    public String extractUsernameFromToken(String token) {
+        return getUsernameFromToken(token);
+    }
+
+    public Claims getUserRoleCodeFromToken(String token) {
+        return getAllClaimsFromToken(token);
     }
 }

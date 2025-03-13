@@ -2,6 +2,7 @@ $(document).ready(function() {
     $('#registerBtn').click(function (){
         let name = $('#name').val();
         let email = $('#email').val();
+        let address = $('#address').val();
         let phone = $('#phone').val();
         let password = $('#password').val();
         let confirmPassword = $('#confirm-password').val();
@@ -17,6 +18,7 @@ $(document).ready(function() {
         formData.append('user', new Blob([JSON.stringify({
             "phone": phone,
             "email": email,
+            "address": address,
             "password": password,
             "name": name,
             "role": role,
@@ -32,7 +34,9 @@ $(document).ready(function() {
             success: function(response) {
                 alert('User registered successfully');
                 window.localStorage.setItem('token', response.data.token);
-                window.location.href = 'login.html';
+                setTimeout(function() {
+                    window.location.href = 'login.html';
+                }, 500); // Adding a 500ms delay before redirection
             },
             error: function(error) {
                 console.error('Error details:', error);

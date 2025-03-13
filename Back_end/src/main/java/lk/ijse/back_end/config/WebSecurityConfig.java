@@ -64,6 +64,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
                                 "/api/v1/user/register",
                                 "/api/v1/spice/**",
                                 "/api/v1/user/profile/**",
+                                "/api/v1/user/update",
                                 "/api/v1/auth/refreshToken",
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",

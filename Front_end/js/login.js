@@ -22,8 +22,12 @@ $(document).ready(function() {
                 }
             },
             error: function (error) {
-                console.log(error);
-                alert('Something went wrong!');
+                console.log('Error:', error);
+                if (error.status === 401) {
+                    alert('Invalid Credentials. Please try again.');
+                } else {
+                    alert('Something went wrong! Error: ' + error.responseText);
+                }
             }
         });
     });

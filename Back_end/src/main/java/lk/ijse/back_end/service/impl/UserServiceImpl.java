@@ -45,7 +45,11 @@ private ImageUtil imageUtil;
 
     public UserDTO loadUserDetailsByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(username);
-        return modelMapper.map(user,UserDTO.class);
+        UserDTO userDTO = modelMapper.map(user, UserDTO.class);
+        if (user.getProfilePicture() != null) {
+            userDTO.setProfilePicture(imageUtil.getImage(user.getProfilePicture()));
+        }
+        return userDTO;
     }
 
     private Set<SimpleGrantedAuthority> getAuthority(User user) {
@@ -106,6 +110,7 @@ if (userRepository.existsById(id)){
             tempUser.get().setName(userDTO.getName());
             tempUser.get().setRole(userDTO.getRole());
             tempUser.get().setPassword(new BCryptPasswordEncoder().encode(userDTO.getPassword()));
+            tempUser.get().setAddress(userDTO.getAddress());
             tempUser.get().setPhone(userDTO.getPhone());
             try {
                 userRepository.save(tempUser.get());

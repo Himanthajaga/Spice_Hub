@@ -22,6 +22,8 @@ public class UserDTO <T>implements Serializable {
     @NotBlank
     @Pattern(regexp = "^[0-9]*$", message = "Invalid phone number")
     private String phone;
+    @NotBlank(message = "Address is required")
+    private String address;
     @NotBlank(message = "Password is required")
     @Pattern(regexp = "^[a-zA-Z0-9]*$", message = "Invalid password")
     @Size(min = 6, message = "Password must be at least 6 characters")

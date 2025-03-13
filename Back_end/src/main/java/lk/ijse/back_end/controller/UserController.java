@@ -15,6 +15,9 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Base64;
+import java.util.UUID;
+
 @CrossOrigin(origins = "http://localhost:63342")
 @RestController
 @RequestMapping("api/v1/user")
@@ -53,15 +56,41 @@ public class UserController {
             return new ResponseUtil(VarList.Internal_Server_Error, e.getMessage(), null);
         }
     }
+
     @GetMapping("/profile")
-    public ResponseUtil getUserProfile() {
+    public ResponseUtil getUserProfile(@RequestHeader("Authorization") String token) {
         try {
+            // Extracting the email from the "Bearer" prefix
+            String jwtToken = token.substring(7);
             // Assuming you have a method to get the logged-in user's email
-            String email = jwtUtil.extractUsernameFromToken();
+            String email = jwtUtil.extractUsernameFromToken(jwtToken);
             UserDTO userDTO = userService.loadUserDetailsByUsername(email);
+
             return new ResponseUtil(VarList.Accepted, "User details fetched successfully", userDTO);
         } catch (Exception e) {
             log.error("Error fetching user details", e);
+            return new ResponseUtil(VarList.Internal_Server_Error, e.getMessage(), null);
+        }
+    }
+
+    @PostMapping(value = "/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil updateUser(@RequestPart("user") String userJson, @RequestPart("file") MultipartFile file) throws JsonProcessingException {
+        try {
+            UserDTO userDTO = new ObjectMapper().readValue(userJson, UserDTO.class);
+            log.info("Received request to update user: {}", userDTO.getName());
+            userDTO.setProfilePicture(AppUtil.toBase64(file));
+//Assuming the userDTO contains the user ID
+            UUID userid = userDTO.getUid();
+            UserDTO<String> res = userService.updateUser(userid,userDTO, file);
+            if (res.equals(VarList.Created)) {
+                return new ResponseUtil(VarList.Created, "User Updated Successfully", null);
+            } else if (res.equals(VarList.Not_Acceptable)) {
+                return new ResponseUtil(VarList.Not_Acceptable, "Email Already Used", null);
+            } else {
+                return new ResponseUtil(VarList.Bad_Gateway, "Error", null);
+            }
+        } catch (Exception e) {
+            log.error("Error updating user", e);
             return new ResponseUtil(VarList.Internal_Server_Error, e.getMessage(), null);
         }
     }
