@@ -1,15 +1,25 @@
+function isValidUUID(uuid) {
+    const regex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    return regex.test(uuid);
+}
+
 document.getElementById('addSpiceForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    const formData = new FormData();
     const spice = {
-        name: document.getElementById('spiceName').value,
-        description: document.getElementById('spiceDescription').value,
-        price: parseFloat(document.getElementById('spicePrice').value),
+        name: document.getElementById('spiceName').value.trim(),
+        description: document.getElementById('spiceDescription').value.trim(),
         quantity: parseInt(document.getElementById('spiceStock').value),
-        category: document.getElementById('spiceCategory').value,
-        imageURL: document.getElementById('spiceImageURL').value
+        price: parseFloat(document.getElementById('spicePrice').value),
+        category: document.getElementById('spiceCategory').value.trim()
     };
+
+    // Validate the name field
+    if (!spice.name) {
+        return;
+    }
+
+    const formData = new FormData();
     formData.append('spice', JSON.stringify(spice));
 
     const spiceImageFile = document.getElementById('spiceImageURL');
@@ -20,28 +30,41 @@ document.getElementById('addSpiceForm').addEventListener('submit', function(even
         return;
     }
 
+    // Log the FormData object
+    for (let pair of formData.entries()) {
+        console.log(pair[0] + ': ' + pair[1]);
+    }
+
     fetch('http://localhost:8080/api/v1/spice/save', {
         method: 'POST',
-        body: formData
+        body: formData,
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token'), // Include authentication token if required
+            'Accept': 'application/json' // Ensure the server expects JSON response
+        }
     })
         .then(response => {
             if (!response.ok) {
-                return response.json().then(errorData => {
-                    throw new Error(JSON.stringify(errorData));
+                return response.text().then(errorText => {
+                    console.error('Server response:', errorText);
+                    throw new Error(errorText);
                 });
             }
             return response.json();
         })
         .then(data => {
             console.log('Spice saved successfully:', data);
+            alert('Spice saved successfully');
+            window.location.href = 'user_index.html';
         })
         .catch(error => {
-            console.error('Error:', error);
+            console.error('Error:', error.message);
             try {
                 const errorData = JSON.parse(error.message);
                 console.log('Response data:', errorData);
                 if (errorData.data) {
                     for (const [field, message] of Object.entries(errorData.data)) {
+                        // Handle field-specific errors
                     }
                 }
             } catch (e) {

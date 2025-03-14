@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lk.ijse.back_end.dto.AuthDTO;
 import lk.ijse.back_end.dto.UserDTO;
+import lk.ijse.back_end.entity.User;
 import lk.ijse.back_end.service.UserService;
 import lk.ijse.back_end.utill.AppUtil;
 import lk.ijse.back_end.utill.JwtUtil;
@@ -92,6 +93,20 @@ public class UserController {
         } catch (Exception e) {
             log.error("Error updating user", e);
             return new ResponseUtil(VarList.Internal_Server_Error, e.getMessage(), null);
+        }
+    }
+    @GetMapping(path = "/getByEmail")
+    public ResponseUtil getUserByEmail(@RequestParam String email) {
+        try {
+            User user = userService.findByEmail(email);
+            if (user == null) {
+                log.error("User not found with email: {}", email);
+                return new ResponseUtil(404, "User not found", null);
+            }
+            return new ResponseUtil(200, "User retrieved successfully", user);
+        } catch (Exception e) {
+            log.error("Error retrieving user", e);
+            return new ResponseUtil(500, "Internal server error", null);
         }
     }
 }

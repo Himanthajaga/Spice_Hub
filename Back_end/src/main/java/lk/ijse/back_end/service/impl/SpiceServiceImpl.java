@@ -4,8 +4,10 @@ package lk.ijse.back_end.service.impl;
 import jakarta.transaction.Transactional;
 import lk.ijse.back_end.dto.SpiceDTO;
 import lk.ijse.back_end.entity.Spice;
+import lk.ijse.back_end.entity.User;
 import lk.ijse.back_end.enums.ImageType;
 import lk.ijse.back_end.repository.SpiceRepo;
+import lk.ijse.back_end.repository.UserRepository;
 import lk.ijse.back_end.service.SpiceService;
 import lk.ijse.back_end.utill.ImageUtil;
 import org.hibernate.StaleObjectStateException;
@@ -31,7 +33,8 @@ public class SpiceServiceImpl implements SpiceService {
     private ModelMapper modelMapper;
     @Autowired
     private ImageUtil imageUtil;
-
+@Autowired
+private UserRepository userRepo;
     @Override
     @Transactional
     public SpiceDTO<String> save(SpiceDTO spiceDTO, MultipartFile file) {
@@ -39,6 +42,14 @@ public class SpiceServiceImpl implements SpiceService {
         logger.info("Base64 image: {}", base64Image);
         Spice spice = modelMapper.map(spiceDTO, Spice.class);
         spice.setImageURL(base64Image);
+        // Retrieve the User object using the userId from the SpiceDTO
+        UUID userId = spiceDTO.getSellerId();
+        if (userId == null) {
+            throw new IllegalArgumentException("User ID must not be null");
+        }
+       User user = userRepo.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        spice.setUser(user);
+
         try {
             Spice savedSpice = spiceRepo.save(spice);
             SpiceDTO<String> stringSpiceDTO = modelMapper.map(savedSpice, SpiceDTO.class);
@@ -75,7 +86,7 @@ public class SpiceServiceImpl implements SpiceService {
             throw new RuntimeException("Spice Listing Not Found");
         }
     }
-
+@Transactional
     @Override
     public SpiceDTO<String> update(UUID id, SpiceDTO spiceDTO, MultipartFile file) {
         Optional<Spice> spice = spiceRepo.findById(id);
@@ -101,6 +112,41 @@ public class SpiceServiceImpl implements SpiceService {
         } else {
             logger.warn("Spice with id {} not found", id);
             throw new RuntimeException("Spice Listing Not Found");
+        }
+    }
+
+    @Override
+    public List<SpiceDTO<String>> getByUserId(UUID userId) {
+        List<Spice> spices = spiceRepo.findByUserUid(userId);
+        List<SpiceDTO<String>> spiceDTOS = modelMapper.map(spices, new TypeToken<List<SpiceDTO<String>>>() {}.getType());
+        for (SpiceDTO<String> spiceDTO : spiceDTOS) {
+            spices.stream().filter(spice ->
+                    spice.getId().equals(spiceDTO.getId()))
+                    .findFirst()
+                    .ifPresent(spice -> spiceDTO.setImageURL(imageUtil.getImage(spice.getImageURL())));
+        }
+        return spiceDTOS;
+    }
+
+    @Override
+    public SpiceDTO<String> getById(String id) {
+        Optional<Spice> spice = spiceRepo.findById(UUID.fromString(id));
+        if (spice.isPresent()) {
+            SpiceDTO<String> spiceDTO = modelMapper.map(spice.get(), SpiceDTO.class);
+            spiceDTO.setImageURL(imageUtil.getImage(spice.get().getImageURL()));
+            return spiceDTO;
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public boolean deleteSpiceById(String id) {
+        if (spiceRepo.existsById(UUID.fromString(id))) {
+            spiceRepo.deleteById(UUID.fromString(id));
+            return true;
+        } else {
+            return false;
         }
     }
 }

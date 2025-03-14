@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Spice</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Admin Panel</a>
+        <span class="navbar-toggler-icon"></span>
+        <div class="collapse navbar-collapse" id="adminNavbar">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="my_bids.html">My Bids</a></li>
+                <li class="nav-item"><a class="nav-link" href="profile_management.html">Profile</a></li>
+                <li class="nav-item"><a class="nav-link" href="manage_spice.html">Spice</a></li>
+                <li class="nav-item"><a class="nav-link" href="Add_spice.html">Add Spice</a></li>
+                <li class="nav-item"><a class="nav-link" href="logout.html">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container mt-4">
+    <h2>Update Spice</h2>
+    <form id="updateSpiceForm" enctype="multipart/form-data">
+        <div class="row"><div class="mb-3">
+            <label for="profilePicture" class="form-label">Profile Picture</label>
+            <img id="profilePicture" src="" alt="Profile Picture" class="img-thumbnail" style="max-width: 150px;">
+            <input type="file" class="form-control mt-2" id="profilePictureFile">
+        </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="spiceName" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="spiceName" placeholder="Enter spice name" required>
+                </div>
+                <div class="mb-3">
+                    <!--            <label for="uid" class="form-label">ID</label>-->
+                    <input type="hidden" id="uid" value="USER_ID_HERE">
+                </div>
+                <div class="mb-3">
+                    <label for="spiceDescription" class="form-label">Description</label>
+                    <textarea class="form-control" id="spiceDescription" placeholder="Enter spice description" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="spicePrice" class="form-label">Price</label>
+                    <input type="number" class="form-control" id="spicePrice" placeholder="Enter spice price" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="spiceStock" class="form-label">Items in Stock</label>
+                    <input type="number" class="form-control" id="spiceStock" placeholder="Enter items in stock" required>
+                </div>
+                <div class="mb-3">
+                    <label for="spiceCategory" class="form-label">Category</label>
+                    <input type="text" class="form-control" id="spiceCategory" placeholder="Enter spice category" required>
+                </div>
+
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Spice</button>
+    </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="js/update_spice.js"></script>
+</body>
+</html>

@@ -18,4 +18,6 @@ public interface SpiceRepo extends JpaRepository<Spice, UUID> {
 
     List<Spice> findByCategory(String category);
     List<Spice> findByUserUid(UUID userUid);
+
+
 }

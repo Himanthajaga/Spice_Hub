@@ -30,9 +30,10 @@ public class Spice implements Serializable {
     @Version
     private int version;
     @ManyToOne
-    @JoinColumn(name = "user_uid")
+    @JoinColumn(name = "user_uid", referencedColumnName = "uid")
     private User user;
 
     @OneToMany(mappedBy = "listing")
     private List<Bid> bids;
+
 }

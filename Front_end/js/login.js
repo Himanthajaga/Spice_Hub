@@ -13,12 +13,17 @@ $(document).ready(function() {
             }),
             success: function(response) {
                 console.log(response);
-                alert('User logged in successfully');
-                window.localStorage.setItem('token', response.data.token);
-                if (response.data.role === 'ADMIN') {
-                    window.location.href = 'admin_index.html';
+                if (response.data && response.data.token) {
+                    alert('User logged in successfully');
+                    window.localStorage.setItem('token', response.data.token);
+                    console.log('User role:', response.data.role); // Log the user role
+                    if (response.data.role === 'ADMIN') {
+                        window.location.href = 'admin_index.html';
+                    } else {
+                        window.location.href = 'user_index.html';
+                    }
                 } else {
-                    window.location.href = 'user_index.html';
+                    alert('Login failed: Invalid response from server.');
                 }
             },
             error: function (error) {

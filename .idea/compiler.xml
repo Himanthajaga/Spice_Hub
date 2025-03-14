@@ -4,15 +4,14 @@
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true">
         <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false" useProcessorModulePath="true" />
+        <processorPath useClasspath="false" useProcessorModulePath="true">
+          <entry name="$PROJECT_DIR$" />
+        </processorPath>
       </profile>
-      <profile name="Annotation profile for Back_end" enabled="true">
+      <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <processorPath>
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
-        </processorPath>
         <module name="Back_end" />
       </profile>
     </annotationProcessing>

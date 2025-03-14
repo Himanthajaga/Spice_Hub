@@ -23,7 +23,7 @@ public class GlobalExceptionHandler {
         ResponseDTO responseDTO = new ResponseDTO(
                 400,
                 "Validation Error",
-                        errors
+                null
                 );
         return new ResponseEntity<>(responseDTO, org.springframework.http.HttpStatus.BAD_REQUEST);
     }

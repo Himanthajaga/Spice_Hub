@@ -29,6 +29,6 @@ public class SpiceDTO<T> implements Serializable {
     private int quantity;
 
     private T imageURL;
-    private Long sellerId;
+    private UUID sellerId;
     private boolean active;
 }

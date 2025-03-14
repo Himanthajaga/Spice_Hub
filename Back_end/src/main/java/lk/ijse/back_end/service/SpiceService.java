@@ -9,6 +9,13 @@ import java.util.UUID;
 public interface SpiceService {
   SpiceDTO<String> save(SpiceDTO spiceDTO, MultipartFile file);
   List<SpiceDTO<String>> getAll();
+
   void delete(UUID id);
   SpiceDTO<String> update(UUID id, SpiceDTO spiceDTO, MultipartFile file);
+
+    List<SpiceDTO<String>> getByUserId(UUID userId);
+
+  SpiceDTO<String> getById(String id);
+
+  boolean deleteSpiceById(String id);
 }

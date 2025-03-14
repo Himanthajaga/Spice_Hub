@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.HttpServletRequest;
 import lk.ijse.back_end.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -16,6 +17,7 @@ import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.function.Function;
 import java.util.logging.Logger;
 
@@ -79,6 +81,7 @@ public class JwtUtil implements Serializable {
     // 1. Define claims of the token, like Issuer, Expiration, Subject, and the ID
     // 2. Sign the JWT using the HS512 algorithm and secret key.
     private String doGenerateToken(Map<String, Object> claims, String subject) {
+        claims.put("email",subject);
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(subject)
@@ -100,5 +103,33 @@ public class JwtUtil implements Serializable {
 
     public Claims getUserRoleCodeFromToken(String token) {
         return getAllClaimsFromToken(token);
+    }
+
+    public String extractUserIdFromJwt(String jwt) {
+        Claims claims = getAllClaimsFromToken(jwt);
+        String userId = claims.get("userId", String.class); // Assuming the user ID is stored in the "userId" claim
+        if (userId == null || userId.isEmpty()) {
+            throw new IllegalArgumentException("User ID cannot be null or empty");
+        }
+        return userId;
+    }
+    public String extractUserEmailFromJwt(String jwt) {
+        Claims claims = getAllClaimsFromToken(jwt);
+        String email = claims.get("email", String.class); // Assuming the email is stored in the "email" claim
+        if (email == null || email.isEmpty()) {
+            throw new IllegalArgumentException("User email cannot be null or empty");
+        }
+        return email;
+    }
+    private String extractNameFromJwt(String jwt) {
+        return Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(jwt).getBody().getSubject();
+    }
+
+    public String extractAuthTokenFromHeader(HttpServletRequest request) {
+        String bearerToken = request.getHeader("Authorization");
+        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
+            return bearerToken.substring(7);
+        }
+        return null;
     }
 }
