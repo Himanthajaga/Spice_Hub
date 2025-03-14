@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/v1/bid")
+@RequestMapping("/api/v1/bids")
 @CrossOrigin(origins = "http://localhost:63342")
 public class BidController {
 @Autowired

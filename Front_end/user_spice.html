@@ -10,7 +10,9 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Admin Panel</a>
-        <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar" aria-controls="adminNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse" id="adminNavbar">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
@@ -19,34 +21,40 @@
     </div>
 </nav>
 <form id="addSpiceForm" enctype="multipart/form-data">
-    <div class="mb-3">
-        <label for="spiceName" class="form-label">Name</label>
-        <input type="text" class="form-control" id="spiceName" placeholder="Enter spice name" required>
-        <span id="nameError" class="error text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label for="spiceDescription" class="form-label">Description</label>
-        <textarea class="form-control" id="spiceDescription" placeholder="Enter spice description" required></textarea>
-        <span id="descriptionError" class="error text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label for="spicePrice" class="form-label">Price</label>
-        <input type="number" class="form-control" id="spicePrice" placeholder="Enter spice price" required>
-        <span id="priceError" class="error text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label for="spiceStock" class="form-label">Items in Stock</label>
-        <input type="number" class="form-control" id="spiceStock" placeholder="Enter items in stock" required>
-        <span id="quantityError" class="error text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label for="spiceCategory" class="form-label">Category</label>
-        <input type="text" class="form-control" id="spiceCategory" placeholder="Enter spice category" required>
-        <span id="categoryError" class="error text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label for="spiceImageURL" class="form-label">Image URL</label>
-        <input type="file" class="form-control" id="spiceImageURL" required>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="spiceName" class="form-label">Name</label>
+                <input type="text" class="form-control" id="spiceName" placeholder="Enter spice name" required>
+                <span id="nameError" class="error text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label for="spiceDescription" class="form-label">Description</label>
+                <textarea class="form-control" id="spiceDescription" placeholder="Enter spice description" required></textarea>
+                <span id="descriptionError" class="error text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label for="spicePrice" class="form-label">Price</label>
+                <input type="number" class="form-control" id="spicePrice" placeholder="Enter spice price" required>
+                <span id="priceError" class="error text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="spiceStock" class="form-label">Items in Stock</label>
+                <input type="number" class="form-control" id="spiceStock" placeholder="Enter items in stock" required>
+                <span id="quantityError" class="error text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label for="spiceCategory" class="form-label">Category</label>
+                <input type="text" class="form-control" id="spiceCategory" placeholder="Enter spice category" required>
+                <span id="categoryError" class="error text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label for="spiceImageURL" class="form-label">Image URL</label>
+                <input type="file" class="form-control" id="spiceImageURL" required>
+            </div>
+        </div>
     </div>
     <button type="submit" class="btn btn-primary">Add Spice</button>
 </form>

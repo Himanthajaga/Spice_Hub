@@ -32,11 +32,11 @@ $(document).ready(function() {
             processData: false,
             data: formData,
             success: function(response) {
+                console.log('Registration successful:', response);
                 alert('User registered successfully');
                 window.localStorage.setItem('token', response.data.token);
-                setTimeout(function() {
-                    window.location.href = 'login.html';
-                }, 500); // Adding a 500ms delay before redirection
+                console.log('Redirecting to login page...');
+                window.location.href = 'login.html';
             },
             error: function(error) {
                 console.error('Error details:', error);
