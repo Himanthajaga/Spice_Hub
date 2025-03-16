@@ -23,15 +23,15 @@ $(document).ready(function() {
                     $('#spiceStock').val(spice.quantity);
                     $('#spiceCategory').val(spice.category);
                 } else {
-                    alert('Failed to load spice details');
+                   Swal.fire('Failed to load spice details');
                 }
             },
             error: function() {
-                alert('Error fetching spice details');
+                Swal.fire('Error fetching spice details');
             }
         });
     } else {
-        alert('Invalid spice ID or user not logged in');
+        Swal.fire('Invalid spice ID or user not logged in');
     }
 
     $('#updateSpiceForm').submit(function(event) {
@@ -58,13 +58,28 @@ $(document).ready(function() {
             processData: false,
             contentType: false,
             success: function(response) {
-                alert('Spice updated successfully');
+                Swal.fire('Spice updated successfully');
                 // Redirect to the manage spices page
                 window.location.href = 'manage_spice.html';
             },
             error: function() {
-                alert('Error updating spice');
+                Swal.fire('Error updating spice');
             }
         });
     });
 });
+function confirmLogout() {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#0084ff',
+        cancelButtonColor: '#ff0000',
+        confirmButtonText: 'Yes, logout!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = "login.html";
+        }
+    });
+}

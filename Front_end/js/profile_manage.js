@@ -19,11 +19,11 @@ $(document).ready(function() {
                 $('#phone').val(user.phone);
                 $('#address').val(user.address);
             } else {
-                alert('Failed to load user details');
+                  Swal.fire('Failed to load user details');
             }
         },
         error: function() {
-            alert('Error fetching user details');
+              Swal.fire('Error fetching user details');
         }
     });
 
@@ -51,13 +51,28 @@ $(document).ready(function() {
             processData: false,
             contentType: false,
             success: function(response) {
-                alert('Profile updated successfully');
+                  Swal.fire('Profile updated successfully');
                 // Redirect to the Home page
                 window.location.href = 'user_index.html';
             },
             error: function() {
-                alert('Error updating profile');
+                  Swal.fire('Error updating profile');
             }
         });
     });
 });
+function confirmLogout() {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#0080ff',
+        cancelButtonColor: '#ff0000',
+        confirmButtonText: 'Yes, logout!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = "login.html";
+        }
+    });
+}

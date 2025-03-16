@@ -14,7 +14,7 @@ $(document).ready(function() {
             success: function(response) {
                 console.log(response);
                 if (response.data && response.data.token) {
-                    alert('User logged in successfully');
+                    Swal.fire('User logged in successfully');
                     window.localStorage.setItem('token', response.data.token);
                     console.log('User role:', response.data.role); // Log the user role
                     if (response.data.role === 'ADMIN') {
@@ -23,15 +23,15 @@ $(document).ready(function() {
                         window.location.href = 'user_index.html';
                     }
                 } else {
-                    alert('Login failed: Invalid response from server.');
+                    Swal.fire('Login failed: Invalid response from server.');
                 }
             },
             error: function (error) {
                 console.log('Error:', error);
                 if (error.status === 401) {
-                    alert('Invalid Credentials. Please try again.');
+                    Swal.fire('Invalid Credentials. Please try again.');
                 } else {
-                    alert('Something went wrong! Error: ' + error.responseText);
+                    Swal.fire('Something went wrong! Error: ' + error.responseText);
                 }
             }
         });

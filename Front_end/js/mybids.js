@@ -31,10 +31,10 @@ $(document).ready(function() {
                     contentType: 'application/json',
                     data: JSON.stringify({ spiceId: spiceId }),
                     success: function(response) {
-                        alert('Bid placed successfully');
+                          Swal.fire('Bid placed successfully');
                     },
                     error: function(error) {
-                        alert('Error placing bid: ' + error.responseText);
+                          Swal.fire('Error placing bid: ' + error.responseText);
                     }
                 });
             });
@@ -57,4 +57,20 @@ function filterSpices() {
             card.style.display = 'none';
         }
     }
+}
+
+function confirmLogout() {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#0084ff',
+        cancelButtonColor: '#ff0000',
+        confirmButtonText: 'Yes, logout!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = "login.html";
+        }
+    });
 }

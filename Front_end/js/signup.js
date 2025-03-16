@@ -10,7 +10,7 @@ $(document).ready(function() {
         let profilePicture = $('#profilePicture')[0].files[0];
 
         if (password !== confirmPassword) {
-            alert('Password and Confirm Password do not match');
+              Swal.fire('Password and Confirm Password do not match');
             return;
         }
 
@@ -33,14 +33,14 @@ $(document).ready(function() {
             data: formData,
             success: function(response) {
                 console.log('Registration successful:', response);
-                alert('User registered successfully');
+                  Swal.fire('User registered successfully');
                 window.localStorage.setItem('token', response.data.token);
                 console.log('Redirecting to login page...');
                 window.location.href = 'login.html';
             },
             error: function(error) {
                 console.error('Error details:', error);
-                alert('An error occurred while registering user: ' + (error.responseText || 'Unknown error'));
+                  Swal.fire('An error occurred while registering user: ' + (error.responseText || 'Unknown error'));
             }
         });
     });

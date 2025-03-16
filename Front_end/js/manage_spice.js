@@ -63,14 +63,14 @@ $(document).ready(function() {
                                                     },
                                                     success: function(response) {
                                                         if (response.code === 200) {
-                                                            alert('Spice deleted successfully');
+                                                              Swal.fire('Spice deleted successfully');
                                                             location.reload(); // Reload the page to update the spice list
                                                         } else {
-                                                            alert('Failed to delete spice');
+                                                              Swal.fire('Failed to delete spice');
                                                         }
                                                     },
                                                     error: function() {
-                                                        alert('Error deleting spice');
+                                                          Swal.fire('Error deleting spice');
                                                     }
                                                 });
                                             }
@@ -81,31 +81,46 @@ $(document).ready(function() {
                                             window.location.href = `update_spice.html?id=${spiceId}`;
                                         });
                                     } else {
-                                        alert('Failed to load spices');
+                                          Swal.fire('Failed to load spices');
                                     }
                                 },
                                 error: function() {
-                                    alert('Error fetching spices');
+                                      Swal.fire('Error fetching spices');
                                 }
                             });
                         } else {
-                            alert('Failed to fetch user details');
+                              Swal.fire('Failed to fetch user details');
                         }
                     },
                     error: function() {
-                        alert('Error fetching user details');
+                          Swal.fire('Error fetching user details');
                     }
                 });
             } else {
                 console.log('User email not found in token'); // Log the case when user email is not found in token
-                alert('User email not found in token');
+                  Swal.fire('User email not found in token');
             }
         } catch (e) {
             console.log('Error parsing token payload', e); // Log parsing errors
-            alert('Invalid token');
+              Swal.fire('Invalid token');
         }
     } else {
         console.log('User not logged in'); // Log the case when user is not logged in
-        alert('User not logged in');
+          Swal.fire('User not logged in');
     }
 });
+function confirmLogout() {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#0084ff',
+        cancelButtonColor: '#ff0000',
+        confirmButtonText: 'Yes, logout!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = "login.html";
+        }
+    });
+}

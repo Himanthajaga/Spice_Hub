@@ -9,13 +9,13 @@ $(document).ready(function() {
                 const imageUrl = spice.imageURL ? `data:image/png;base64,${spice.imageURL}` : 'assests/Images/noImage.png';
                 let spiceCard = `
                     <div class="col-md-4">
-                        <div class="card mb-4">
+                        <div class="card mb-4 fs-5 border border-success rounded shadow-lg spice-card bg-light text-dark p-3 mb-5 border-2" style="width: 20rem">
                             <img src="${imageUrl}" class="card-img-top" alt="Spice Image">
                             <div class="card-body">
                                 <h5 class="card-title">${spice.name}</h5>
                                 <p class="card-text">${spice.description}</p>
                                 <p class="card-text"><strong>Price: </strong> ${spice.price}</p>
-                                <button class="btn btn-primary bid-btn" data-id="${spice.id}">Bid Now</button>
+                                <button class="btn btn-outline-success bid-btn" data-id="${spice.id}">Bid Now</button>
                             </div>
                         </div>
                     </div>
@@ -31,10 +31,10 @@ $(document).ready(function() {
                     contentType: 'application/json',
                     data: JSON.stringify({ spiceId: spiceId }),
                     success: function(response) {
-                        alert('Bid placed successfully');
+                          Swal.fire('Bid placed successfully');
                     },
                     error: function(error) {
-                        alert('Error placing bid: ' + error.responseText);
+                          Swal.fire('Error placing bid: ' + error.responseText);
                     }
                 });
             });
@@ -56,4 +56,19 @@ function filterSpices() {
             card.style.display = 'none';
         }
     }
+}
+function confirmLogout() {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#0082ff',
+        cancelButtonColor: '#ff0000',
+        confirmButtonText: 'Yes, logout!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = "login.html";
+        }
+    });
 }
