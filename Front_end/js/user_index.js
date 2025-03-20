@@ -22,25 +22,45 @@ $(document).ready(function() {
                 `;
                 spiceContainer.append(spiceCard);
             });
-
             $('.bid-btn').click(function() {
                 let spiceId = $(this).data('id');
+                let bidAmount = parseFloat(prompt("Enter your bid amount:"));
+                let userId = localStorage.getItem('userId'); // Assuming userId is stored in localStorage
+
+                if (isNaN(bidAmount) || bidAmount <= 0) {
+                    Swal.fire('Invalid bid amount');
+                    return;
+                }
+
+                let bidData = {
+                    bidAmount: bidAmount,
+                    listingId: spiceId,
+                    userId: userId,
+                    status: 'ACTIVE',
+                    bidTime: new Date().toISOString()
+                };
+
                 $.ajax({
-                    url: 'http://localhost:8080/api/v1/bids',
+                    url: 'http://localhost:8080/api/v1/bids/save',
                     method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('token'), // Include authentication token if required
+                        'Accept': 'application/json' // Ensure the server expects JSON response
+                    },
                     contentType: 'application/json',
-                    data: JSON.stringify({ spiceId: spiceId }),
+                    data: JSON.stringify(bidData),
                     success: function(response) {
-                          Swal.fire('Bid placed successfully');
+                        Swal.fire('Bid placed successfully');
                     },
                     error: function(error) {
-                          Swal.fire('Error placing bid: ' + error.responseText);
+                        let errorMessage = error.responseText ? error.responseText : 'An unknown error occurred';
+                        Swal.fire('Error placing bid: ' + errorMessage);
                     }
                 });
             });
         },
         error: function(error) {
-            console.log('Error:', error);
+            console.log(error);
         }
     });
 });
@@ -71,4 +91,28 @@ function confirmLogout() {
             window.location.href = "login.html";
         }
     });
+}
+function inactivateBid(bidId) {
+    fetch(`http://localhost:8080/api/v1/bids/inactivate/${bidId}`, {
+        method: 'PUT',
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+    })
+        .then(response => {
+            if (!response.ok) {
+                return response.text().then(errorText => {
+                    console.error('Server response:', errorText);
+                    throw new Error(errorText);
+                });
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Bid inactivated successfully:', data);
+            Swal.fire('Bid inactivated successfully');
+        })
+        .catch(error => {
+            console.error('Error:', error.message);
+        });
 }

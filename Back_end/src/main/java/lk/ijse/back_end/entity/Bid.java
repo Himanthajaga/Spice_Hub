@@ -30,10 +30,10 @@ public class Bid implements Serializable {
     private BidStatus status = BidStatus.PENDING;
 
     private LocalDateTime bidTime = LocalDateTime.now();
-
+    private String imageURL;
     public enum BidStatus {
         PENDING,
-        ACCEPTED,
-        REJECTED
+        ACTIVE,
+        DEACTIVATED,
     }
 }
