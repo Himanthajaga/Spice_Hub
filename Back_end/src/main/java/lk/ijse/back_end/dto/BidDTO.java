@@ -1,5 +1,6 @@
 package lk.ijse.back_end.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class BidDTO<T>implements Serializable {
+public class BidDTO<T> implements Serializable {
     private UUID id;
 
     private UUID userId;
@@ -21,6 +22,7 @@ public class BidDTO<T>implements Serializable {
     private double bidAmount;
 
     private String status;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     private LocalDateTime bidTime;
-    private String imageURL;
+    private T imageURL;
 }

@@ -4,9 +4,13 @@ package lk.ijse.back_end.controller;
 import lk.ijse.back_end.dto.AuthDTO;
 import lk.ijse.back_end.dto.ResponseDTO;
 import lk.ijse.back_end.dto.UserDTO;
+import lk.ijse.back_end.service.EmailService;
+import lk.ijse.back_end.service.UserService;
 import lk.ijse.back_end.service.impl.UserServiceImpl;
 import lk.ijse.back_end.utill.JwtUtil;
+import lk.ijse.back_end.utill.ResponseUtil;
 import lk.ijse.back_end.utill.VarList;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,7 +20,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("api/v1/auth")
 public class AuthController {
-
+@Autowired
+private UserService userService1;
+@Autowired
+private EmailService emailService;
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
     private final UserServiceImpl userService;
@@ -59,5 +66,26 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(new ResponseDTO(VarList.Created, "Success", authDTO));
     }
+    @PostMapping("/forgot-password")
+    public ResponseUtil forgotPassword(@RequestParam String email) {
+        try {
+            String token = userService.createPasswordResetToken(email);
+            String resetLink = "http://localhost:8080/reset-password?token=" + token;
+            emailService.sendPasswordResetEmail(email, resetLink);
+        } catch (Exception e) {
+            return new ResponseUtil(200, "Password reset link sent to your email", null);
+    }
+        return new ResponseUtil(500, "Failed to send password reset link", null);
+    }
 
+    @PostMapping("/reset-password")
+    public ResponseUtil resetPassword(@RequestParam String token, @RequestParam String password) {
+        try {
+            userService.resetPassword(token, password);
+            return new ResponseUtil(200, "Password reset successfully", null);
+        } catch (Exception e) {
+            return new ResponseUtil(500, "Failed to reset password", null);
+        }
+
+}
 }

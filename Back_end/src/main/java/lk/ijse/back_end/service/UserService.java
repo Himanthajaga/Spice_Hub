@@ -17,4 +17,6 @@ public interface UserService {
 
     UserDTO loadUserDetailsByUsername(String email);
     User findByEmail(String email);
+
+    String createPasswordResetToken(String email);
 }

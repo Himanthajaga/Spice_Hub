@@ -6,11 +6,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lk.ijse.back_end.dto.BidDTO;
-import lk.ijse.back_end.entity.Bid;
 import lk.ijse.back_end.entity.Bid.BidStatus;
 import lk.ijse.back_end.entity.User;
 import lk.ijse.back_end.service.UserService;
 import lk.ijse.back_end.service.impl.BidServiceImpl;
+import lk.ijse.back_end.utill.ImageUtil;
 import lk.ijse.back_end.utill.JwtUtil;
 import lk.ijse.back_end.utill.ResponseUtil;
 import org.slf4j.Logger;
@@ -26,7 +26,8 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/bids")
 @CrossOrigin(origins = "http://localhost:63342")
-public class BidController {private  static final Logger log = LoggerFactory.getLogger(SpiceController.class);
+public class BidController {
+    private  static final Logger log = LoggerFactory.getLogger(SpiceController.class);
 
     @Autowired
     private BidServiceImpl bidService;
@@ -34,18 +35,22 @@ public class BidController {private  static final Logger log = LoggerFactory.get
     private JwtUtil jwtUtil;
     @Autowired
     private UserService userService;
+@Autowired
+private ObjectMapper objectMapper;
+@Autowired
+private ImageUtil imageUtil;
 
-    @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseUtil saveBid(@RequestBody @Valid String bidJson, HttpServletRequest request) {
+    @PostMapping(value = "/save", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil saveBid(@RequestPart("bid") @Valid String bidJson, @RequestPart(value = "file", required = false) MultipartFile file, @RequestPart(value = "imageURL", required = false) String imageURL, HttpServletRequest request) {
         String token = request.getHeader("Authorization").substring(7);
         try {
-            String userEmail = jwtUtil.extractUserEmailFromJwt(jwtUtil.extractAuthTokenFromHeader(request));
+            String userEmail = jwtUtil.extractUserEmailFromJwt(token);
             log.info("Received userEmail: {}", userEmail);
 
-//            Fetch the user entity using the email
+            // Fetch the user entity using the email
             User user = userService.findByEmail(userEmail);
             if (user == null) {
-                log.error("User not found with email: {}", userEmail);
+                log.error("User not found for email: {}", userEmail);
                 return new ResponseUtil(404, "User not found", null);
             }
 
@@ -56,20 +61,33 @@ public class BidController {private  static final Logger log = LoggerFactory.get
                 log.error("Bid JSON is null or empty");
                 return new ResponseUtil(400, "Bid JSON is required", null);
             }
-          BidDTO bidDTO = new ObjectMapper().readValue(bidJson, BidDTO.class);
+
+            BidDTO bidDTO = objectMapper.readValue(bidJson, BidDTO.class);
             log.info("Deserialized BidDTO: {}", bidDTO);
-            bidDTO.setStatus(String.valueOf(BidStatus.PENDING));
-            bidDTO.setUserId(user.getUid());
-            bidService.save(bidDTO, null);
-            return new ResponseUtil(201, "Bid saved successfully", null);
+            bidDTO.setStatus(BidStatus.PENDING.name());
+            bidDTO.setUserId(user.getUid()); // Set the user ID
+
+            if (file != null && !file.isEmpty()) {
+                bidDTO.setImageURL(file.getOriginalFilename());
+            } else if (imageURL != null && !imageURL.isEmpty()) {
+                bidDTO.setImageURL(imageURL);
+            }
+
+            BidDTO<String> savedBid = bidService.save(bidDTO, file);
+            log.info("Bid saved successfully: {}", savedBid);
+            return new ResponseUtil(201, "Bid saved successfully", savedBid);
         } catch (JsonMappingException e) {
-            throw new RuntimeException(e);
+            log.error("Error mapping JSON", e);
+            return new ResponseUtil(400, "Invalid JSON format", null);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            log.error("Error processing JSON", e);
+            return new ResponseUtil(500, "Internal server error", null);
+        } catch (Exception e) {
+            log.error("Unexpected error", e);
+            return new ResponseUtil(500, "Internal server error", null);
         }
     }
-
-    @GetMapping(path = "/get")
+            @GetMapping(path = "/get")
     public ResponseUtil getAllBids() {
         return new ResponseUtil(201, "Bid saved successfully", bidService.getAll());
     }

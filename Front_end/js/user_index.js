@@ -6,10 +6,10 @@ $(document).ready(function() {
             let spiceContainer = $('#spiceContainer');
             spiceContainer.empty();
             response.data.forEach(spice => {
-                const imageUrl = spice.imageURL ? `data:image/png;base64,${spice.imageURL}` : 'assests/Images/noImage.png';
+                const imageUrl = spice.imageURL ? `data:image/png;base64,${spice.imageURL}` : 'assets/Images/noImage.png';
                 let spiceCard = `
-                    <div class="col-md-4">
-                        <div class="card mb-4 fs-5 border border-success rounded shadow-lg spice-card bg-light text-dark p-3 mb-5 border-2" style="width: 20rem">
+                    <div class="col-md-4 spice-card" data-url="${imageUrl}">
+                        <div class="card mb-4 fs-5 border border-success rounded shadow-lg bg-light text-dark p-3 mb-5 border-2" style="width: 20rem">
                             <img src="${imageUrl}" class="card-img-top" alt="Spice Image">
                             <div class="card-body">
                                 <h5 class="card-title">${spice.name}</h5>
@@ -22,10 +22,11 @@ $(document).ready(function() {
                 `;
                 spiceContainer.append(spiceCard);
             });
-            $('.bid-btn').click(function() {
+
+            $('.bid-btn').click(function(event) {
+                event.stopPropagation(); // Prevent the card click event from firing
                 let spiceId = $(this).data('id');
                 let bidAmount = parseFloat(prompt("Enter your bid amount:"));
-                let userId = localStorage.getItem('userId'); // Assuming userId is stored in localStorage
 
                 if (isNaN(bidAmount) || bidAmount <= 0) {
                     Swal.fire('Invalid bid amount');
@@ -35,28 +36,55 @@ $(document).ready(function() {
                 let bidData = {
                     bidAmount: bidAmount,
                     listingId: spiceId,
-                    userId: userId,
                     status: 'ACTIVE',
                     bidTime: new Date().toISOString()
                 };
 
-                $.ajax({
-                    url: 'http://localhost:8080/api/v1/bids/save',
-                    method: 'POST',
-                    headers: {
-                        'Authorization': 'Bearer ' + localStorage.getItem('token'), // Include authentication token if required
-                        'Accept': 'application/json' // Ensure the server expects JSON response
-                    },
-                    contentType: 'application/json',
-                    data: JSON.stringify(bidData),
-                    success: function(response) {
-                        Swal.fire('Bid placed successfully');
-                    },
-                    error: function(error) {
-                        let errorMessage = error.responseText ? error.responseText : 'An unknown error occurred';
-                        Swal.fire('Error placing bid: ' + errorMessage);
-                    }
-                });
+                let formData = new FormData();
+                formData.append('bid', JSON.stringify(bidData));
+
+                let token = localStorage.getItem('token');
+                if (!token) {
+                    Swal.fire('Authentication token not found');
+                    return;
+                }
+
+                // Get the image URL from the selected card
+                let imageUrl = $(this).closest('.spice-card').data('url');
+                if (imageUrl) {
+                    fetch(imageUrl)
+                        .then(res => res.blob())
+                        .then(blob => {
+                            const reader = new FileReader();
+                            reader.onloadend = () => {
+                                const base64data = reader.result.split(',')[1];
+                                formData.append('imageURL', base64data);
+
+                                // Send the form data with the Base64 image URL
+                                $.ajax({
+                                    url: 'http://localhost:8080/api/v1/bids/save',
+                                    method: 'POST',
+                                    headers: {
+                                        'Authorization': 'Bearer ' + token // Include authentication token
+                                    },
+                                    contentType: false, // Important: set to false for multipart/form-data
+                                    processData: false, // Important: set to false for multipart/form-data
+                                    data: formData,
+                                    success: function(response) {
+                                        Swal.fire('Bid placed successfully');
+                                    },
+                                    error: function(error) {
+                                        let errorMessage = error.responseText ? error.responseText : 'An unknown error occurred';
+                                        Swal.fire('Error placing bid: ' + errorMessage);
+                                    }
+                                });
+                            };
+                            reader.readAsDataURL(blob);
+                        });
+                } else {
+                    console.error('Image URL is undefined');
+                    return;
+                }
             });
         },
         error: function(error) {
@@ -64,6 +92,7 @@ $(document).ready(function() {
         }
     });
 });
+
 function filterSpices() {
     const filter = document.getElementById('filterInput').value.toLowerCase();
     const cards = document.getElementsByClassName('spice-card');
@@ -77,6 +106,7 @@ function filterSpices() {
         }
     }
 }
+
 function confirmLogout() {
     Swal.fire({
         title: 'Are you sure?',
@@ -92,6 +122,7 @@ function confirmLogout() {
         }
     });
 }
+
 function inactivateBid(bidId) {
     fetch(`http://localhost:8080/api/v1/bids/inactivate/${bidId}`, {
         method: 'PUT',

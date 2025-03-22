@@ -8,6 +8,7 @@ import lk.ijse.back_end.entity.User;
 import lk.ijse.back_end.enums.ImageType;
 import lk.ijse.back_end.repository.SpiceRepo;
 import lk.ijse.back_end.repository.UserRepository;
+import lk.ijse.back_end.service.EmailService;
 import lk.ijse.back_end.service.SpiceService;
 import lk.ijse.back_end.utill.ImageUtil;
 import org.hibernate.StaleObjectStateException;
@@ -35,10 +36,12 @@ public class SpiceServiceImpl implements SpiceService {
     private ImageUtil imageUtil;
 @Autowired
 private UserRepository userRepo;
+@Autowired
+private EmailService emailService;
     @Override
     @Transactional
     public SpiceDTO<String> save(SpiceDTO spiceDTO, MultipartFile file) {
-        String base64Image = imageUtil.saveImage( ImageType.SPICE,file);
+        String base64Image = imageUtil.saveImage(ImageType.SPICE, file);
         logger.info("Base64 image: {}", base64Image);
         Spice spice = modelMapper.map(spiceDTO, Spice.class);
         spice.setImageURL(base64Image);
@@ -47,19 +50,27 @@ private UserRepository userRepo;
         if (userId == null) {
             throw new IllegalArgumentException("User ID must not be null");
         }
-       User user = userRepo.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        User user = userRepo.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         spice.setUser(user);
 
         try {
             Spice savedSpice = spiceRepo.save(spice);
             SpiceDTO<String> stringSpiceDTO = modelMapper.map(savedSpice, SpiceDTO.class);
             stringSpiceDTO.setImageURL(base64Image);
+
+            List<User> users = userRepo.findAll();
+            for (User registeredUser : users) {
+                String emailContent = "A new spice has been added. Click the link to bid: <a href='http://localhost:8080/bidnow'>Bid Now</a>";
+                emailService.sendEmail(registeredUser.getEmail(), "New Spice Added", emailContent);
+            }
+
             return stringSpiceDTO;
         } catch (Exception e) {
             logger.error("Failed to save spice: {}", spice, e);
             throw new RuntimeException("Failed to save spice");
         }
     }
+
 
     @Override
     public List<SpiceDTO<String>> getAll() {

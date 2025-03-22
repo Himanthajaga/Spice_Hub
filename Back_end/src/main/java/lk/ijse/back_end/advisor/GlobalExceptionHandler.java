@@ -1,11 +1,14 @@
 package lk.ijse.back_end.advisor;
 
 import lk.ijse.back_end.dto.ResponseDTO;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.HashMap;
@@ -26,5 +29,10 @@ public class GlobalExceptionHandler {
                 null
                 );
         return new ResponseEntity<>(responseDTO, org.springframework.http.HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(ObjectOptimisticLockingFailureException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public String handleOptimisticLockingFailure(ObjectOptimisticLockingFailureException ex) {
+        return "The entity was updated or deleted by another transaction. Please try again.";
     }
 }

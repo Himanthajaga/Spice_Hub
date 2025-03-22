@@ -1,8 +1,10 @@
 package lk.ijse.back_end.service.impl;
 
 import lk.ijse.back_end.dto.UserDTO;
+import lk.ijse.back_end.entity.PasswordResetToken;
 import lk.ijse.back_end.entity.User;
 import lk.ijse.back_end.enums.ImageType;
+import lk.ijse.back_end.repository.PasswordResetTokenRepository;
 import lk.ijse.back_end.repository.UserRepository;
 import lk.ijse.back_end.service.UserService;
 import lk.ijse.back_end.utill.ImageUtil;
@@ -17,6 +19,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,14 +35,16 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Autowired
     private UserRepository userRepository;
 
-@Autowired
-private ImageUtil imageUtil;
+    @Autowired
+    private ImageUtil imageUtil;
     @Autowired
     private ModelMapper modelMapper;
+    @Autowired
+    private PasswordResetTokenRepository tokenRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-     User user= userRepository.findByEmail(email);
+        User user = userRepository.findByEmail(email);
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), getAuthority(user));
     }
 
@@ -57,11 +62,22 @@ private ImageUtil imageUtil;
         return userRepository.findByEmail(email);
     }
 
+    @Override
+    public String createPasswordResetToken(String email) {
+        User user = userRepository.findByEmail(email);
+        String token = UUID.randomUUID().toString();
+        PasswordResetToken passwordResetToken = new PasswordResetToken(token, user);
+        tokenRepository.save(passwordResetToken);
+        return token;
+    }
+
+
     private Set<SimpleGrantedAuthority> getAuthority(User user) {
         Set<SimpleGrantedAuthority> authorities = new HashSet<>();
         authorities.add(new SimpleGrantedAuthority(user.getRole()));
         return authorities;
     }
+
     @Transactional
     @Override
     public UserDTO<String> saveUser(UserDTO userDTO, MultipartFile file) {
@@ -82,35 +98,37 @@ private ImageUtil imageUtil;
     @Override
     public List<UserDTO<String>> getAll() {
         List<User> users = userRepository.findAll();
-        List<UserDTO<String>> userDTOS = modelMapper.map(users, new TypeToken<List<UserDTO<String>>>(){}.getType());
+        List<UserDTO<String>> userDTOS = modelMapper.map(users, new TypeToken<List<UserDTO<String>>>() {
+        }.getType());
         for (UserDTO<String> userDTO : userDTOS) {
             users.stream().filter(user ->
-                    user.getUid().equals(userDTO.getUid()))
+                            user.getUid().equals(userDTO.getUid()))
                     .findFirst()
                     .ifPresent(user -> userDTO.setProfilePicture(imageUtil.getImage(user.getProfilePicture())));
         }
         return userDTOS;
     }
-@Transactional
+
+    @Transactional
     @Override
     public void deleteUser(UUID id) {
-logger.info("Deleting user with id: {}", id);
-if (userRepository.existsById(id)){
-    userRepository.deleteById(id);
-}else {
-    throw new RuntimeException("User not found");
-}
+        logger.info("Deleting user with id: {}", id);
+        if (userRepository.existsById(id)) {
+            userRepository.deleteById(id);
+        } else {
+            throw new RuntimeException("User not found");
+        }
     }
 
     @Override
     public UserDTO<String> updateUser(UUID id, UserDTO userDTO, MultipartFile file) {
         Optional<User> tempUser = userRepository.findById(id);
-        if (tempUser.isPresent()){
+        if (tempUser.isPresent()) {
             String imageName = tempUser.get().getProfilePicture();
-            if (!file.isEmpty()){
+            if (!file.isEmpty()) {
                 imageName = imageUtil.updateImage(tempUser.get().getProfilePicture(), ImageType.USER, file);
             }
-          tempUser.get().setProfilePicture(imageName);
+            tempUser.get().setProfilePicture(imageName);
             tempUser.get().setEmail(userDTO.getEmail());
             tempUser.get().setName(userDTO.getName());
             tempUser.get().setRole(userDTO.getRole());
@@ -121,13 +139,25 @@ if (userRepository.existsById(id)){
                 userRepository.save(tempUser.get());
                 logger.info("User updated successfully");
                 return modelMapper.map(tempUser.get(), UserDTO.class);
-            }catch (StaleObjectStateException e){
+            } catch (StaleObjectStateException e) {
                 logger.error("Failed to update user: {}", tempUser, e);
                 throw new RuntimeException("Failed to update user");
             }
-            }else {
-            logger.warn("User with id {} not found", id);         throw new RuntimeException("User not found");
+        } else {
+            logger.warn("User with id {} not found", id);
+            throw new RuntimeException("User not found");
 
         }
+    }
+
+    public void sendPasswordResetLink(String email) {
+    }
+
+    public void resetPassword(String token, String password) throws Exception {
+        PasswordResetToken resetToken = tokenRepository.findByToken(token).orElseThrow(() -> new Exception("Invalid token"));
+        User user = resetToken.getUser();
+        user.setPassword(new BCryptPasswordEncoder().encode(password));
+        userRepository.save(user);
+        tokenRepository.delete(resetToken);
     }
 }

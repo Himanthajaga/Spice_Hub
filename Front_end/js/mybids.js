@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $.ajax({
-        url: 'http://localhost:8080/api/v1/spice/get',
+        url: 'http://localhost:8080/api/v1/bids/get',
         method: 'GET',
         success: function(response) {
             let spiceContainer = $('#spiceContainer');

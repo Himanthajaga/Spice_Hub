@@ -30,6 +30,8 @@ public class Bid implements Serializable {
     private BidStatus status = BidStatus.PENDING;
 
     private LocalDateTime bidTime = LocalDateTime.now();
+//    @Column(columnDefinition = "LONGTEXT")
+    @Column(length = 255)
     private String imageURL;
     public enum BidStatus {
         PENDING,
