@@ -19,7 +19,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -41,7 +40,6 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     private ModelMapper modelMapper;
     @Autowired
     private PasswordResetTokenRepository tokenRepository;
-
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email);
@@ -66,11 +64,19 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     public String createPasswordResetToken(String email) {
         User user = userRepository.findByEmail(email);
         String token = UUID.randomUUID().toString();
-        PasswordResetToken passwordResetToken = new PasswordResetToken(token, user);
-        tokenRepository.save(passwordResetToken);
+        Optional<PasswordResetToken> existingToken = Optional.ofNullable(tokenRepository.findByUser(user));
+
+        if (existingToken.isPresent()) {
+            PasswordResetToken passwordResetToken = existingToken.get();
+            passwordResetToken.setToken(token);
+            tokenRepository.save(passwordResetToken);
+        } else {
+            PasswordResetToken passwordResetToken = new PasswordResetToken(token, user);
+            tokenRepository.save(passwordResetToken);
+        }
+
         return token;
     }
-
 
     private Set<SimpleGrantedAuthority> getAuthority(User user) {
         Set<SimpleGrantedAuthority> authorities = new HashSet<>();

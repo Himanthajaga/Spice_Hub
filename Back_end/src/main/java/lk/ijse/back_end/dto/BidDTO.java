@@ -25,4 +25,6 @@ public class BidDTO<T> implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     private LocalDateTime bidTime;
     private T imageURL;
+    private String listingName; // Add this field
+    private String listingDescription; // Add this field
 }

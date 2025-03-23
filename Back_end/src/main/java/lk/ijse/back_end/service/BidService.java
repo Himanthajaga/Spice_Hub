@@ -12,4 +12,5 @@ public interface BidService {
     void delete(UUID id);
     BidDTO<String> update(UUID id,BidDTO bidDTO,MultipartFile file);
     boolean deleteBidById(String id);
+    List<BidDTO<String>> getBidsByUserId(UUID userId);
 }

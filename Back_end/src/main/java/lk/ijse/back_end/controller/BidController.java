@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -104,5 +105,16 @@ private ImageUtil imageUtil;
         BidDTO bidDTO = new ObjectMapper().readValue(bidJson, BidDTO.class);
         bidService.update(bidId, bidDTO, file);
         return new ResponseUtil(201, "Bid Updated Successfully", null);
+    }
+    @GetMapping("/user")
+    public ResponseUtil getBidsByUser(HttpServletRequest request) {
+        String token = request.getHeader("Authorization").substring(7);
+        String userEmail = jwtUtil.extractUserEmailFromJwt(token);
+        User user = userService.findByEmail(userEmail);
+        if (user == null) {
+            return new ResponseUtil(404, "User not found", null);
+        }
+        List<BidDTO<String>> bids = bidService.getBidsByUserId(user.getUid());
+        return new ResponseUtil(200, "Bids retrieved successfully", bids);
     }
 }

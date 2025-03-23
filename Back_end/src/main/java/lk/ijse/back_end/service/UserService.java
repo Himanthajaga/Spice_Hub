@@ -19,4 +19,5 @@ public interface UserService {
     User findByEmail(String email);
 
     String createPasswordResetToken(String email);
+    void resetPassword(String token, String password) throws Exception;
 }

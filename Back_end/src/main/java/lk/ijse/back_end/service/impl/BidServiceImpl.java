@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class BidServiceImpl implements BidService {
@@ -46,6 +47,7 @@ public class BidServiceImpl implements BidService {
         if (file != null && !file.isEmpty()) {
             imageUrl = imageUtil.saveImage(ImageType.BID, file);
             logger.info("Image saved with URL: {}", imageUrl);
+            imageUrl = imageUtil.convertToBase64(file);
         } else if (bidDTO.getImageURL() != null) {
             imageUrl = (String) bidDTO.getImageURL();
         }
@@ -68,6 +70,18 @@ public class BidServiceImpl implements BidService {
                 Bid savedBid = bidRepo.save(bid);
                 BidDTO<String> stringBidDTO = modelMapper.map(savedBid, BidDTO.class);
                 stringBidDTO.setImageURL(imageUrl);
+
+                // Send email after successful bid save
+                User spiceOwner = spice.getUser();
+                String emailContent = "Your spice has been bid. Check it out!";
+                try {
+                    logger.info("Attempting to send email to spice owner: {}", spiceOwner.getEmail());
+                    emailService.sendEmail(spiceOwner.getEmail(), "Spice Bid", emailContent);
+                    logger.info("Email sent successfully to {}", spiceOwner.getEmail());
+                } catch (Exception e) {
+                    logger.error("Failed to send email to {}: {}", spiceOwner.getEmail(), e.getMessage());
+                }
+
                 return stringBidDTO;
             } catch (ObjectOptimisticLockingFailureException e) {
                 logger.error("Optimistic locking failure: {}", e.getMessage());
@@ -76,9 +90,6 @@ public class BidServiceImpl implements BidService {
                 }
             }
         }
-        User spiceOwner = spice.getUser();
-        String emailContent = "Your spice has been bid. Check it out!";
-        emailService.sendEmail(spiceOwner.getEmail(), "Spice Bid", emailContent);
 
         throw new RuntimeException("Failed to save bid after 3 attempts");
     }
@@ -125,5 +136,20 @@ public class BidServiceImpl implements BidService {
     @Override
     public boolean deleteBidById(String id) {
         return false;
+    }
+
+    @Override
+    public List<BidDTO<String>> getBidsByUserId(UUID userId) {
+        List<Bid> bids = bidRepo.findByUserUid(userId);
+        return bids.stream()
+                .map(bid -> {
+                    BidDTO<String> bidDTO = modelMapper.map(bid, BidDTO.class);
+                    bidDTO.setUserId(bid.getUser().getUid());
+                    bidDTO.setListingName(bid.getListing().getName());
+                    bidDTO.setListingDescription(bid.getListing().getDescription());
+                    bidDTO.setImageURL(imageUtil.getImage(bid.getListing().getImageURL())); // Retrieve image URL from Spice table
+                    return bidDTO;
+                })
+                .collect(Collectors.toList());
     }
 }

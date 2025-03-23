@@ -107,15 +107,16 @@ public class ImageUtil {
                 Files.delete(resource.get());
             }
         } catch (IOException e) {
-            throw new ImagePersistFailedException("Failed to delete image: "+imageId);
+            throw new ImagePersistFailedException("Failed to delete image: " + imageId);
         }
     }
 
-    public String toBase64(MultipartFile file) {
+    public String convertToBase64(MultipartFile file) {
         try {
-            return Base64.getEncoder().encodeToString(file.getBytes());
+            byte[] bytes = file.getBytes();
+            return Base64.getEncoder().encodeToString(bytes);
         } catch (IOException e) {
-            throw new ImageExtractionFailedException("Failed to convert image to base64");
+            throw new RuntimeException("Failed to convert image to base64", e);
         }
     }
 }
