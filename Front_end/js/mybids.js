@@ -20,11 +20,17 @@ $(document).ready(function() {
                                 <p class="card-text"><strong>Bid Amount: </strong> ${bid.bidAmount}</p>
                                 <p class="card-text"><strong>Status: </strong> ${bid.status}</p>
                                 <p class="card-text"><strong>Bid Time: </strong> ${new Date(bid.bidTime).toLocaleString()}</p>
+                                 <button class="btn btn-primary pay-btn" data-bid-id="${bid.id}">Pay</button>
                             </div>
                         </div>
                     </div>
                 `;
                 bidsContainer.append(bidCard);
+            });
+            // Add click event listener for pay buttons
+            $('.pay-btn').click(function() {
+                const bidId = $(this).data('bid-id');
+                window.location.href = `payment.html?bidId=${bidId}`;
             });
         },
         error: function(error) {

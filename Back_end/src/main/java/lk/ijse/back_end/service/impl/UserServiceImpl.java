@@ -166,4 +166,10 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         userRepository.save(user);
         tokenRepository.delete(resetToken);
     }
+
+    @Override
+    public void saveUser(UserDTO user) {
+        User newUser = modelMapper.map(user, User.class);
+        userRepository.save(newUser);
+    }
 }

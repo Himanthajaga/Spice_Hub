@@ -33,7 +33,7 @@ public class Spice implements Serializable {
     @JoinColumn(name = "user_uid", referencedColumnName = "uid")
     private User user;
 
-    @OneToMany(mappedBy = "listing")
+    @OneToMany(mappedBy = "listing", cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Bid> bids;
 
 }

@@ -19,9 +19,8 @@ public class Payment implements Serializable {
     private UUID pid;
     private double amount;
     private Date paymentdate;
-    private String paymentmethod;
-
-    @ManyToOne
-    @JoinColumn(name = "oid")
-    private Order order;
+    private String paymentMethodId;
+    private String bidId;
+    private String spiceOwnerEmail;
+    private String buyerEmail;
 }

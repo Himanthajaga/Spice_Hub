@@ -117,4 +117,13 @@ private ImageUtil imageUtil;
         List<BidDTO<String>> bids = bidService.getBidsByUserId(user.getUid());
         return new ResponseUtil(200, "Bids retrieved successfully", bids);
     }
+    @GetMapping(path = "/{bidId}")
+    public ResponseUtil getBidById(@PathVariable UUID bidId) {
+        BidDTO bidDTO = bidService.getBidById(bidId);
+        if (bidDTO != null) {
+            return new ResponseUtil(200, "Bid retrieved successfully", bidDTO);
+        } else {
+            return new ResponseUtil(404, "Bid not found", null);
+        }
+    }
 }

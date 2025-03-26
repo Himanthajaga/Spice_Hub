@@ -1,7 +1,7 @@
 package lk.ijse.back_end.dto;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 import java.util.UUID;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -21,11 +22,18 @@ public class PaymentDTO {
     @Size(max = 10)
     private double amount;
     @NotBlank
-    @Pattern(regexp = "^[0-9]{4}-[0-9]{2}-[0-9]{2}$", message = "Invalid date")
     private Date paymentDate;
-    @NotBlank(message = "Payment method is required")
-    @Size(max = 255)
-    private String paymentMethod;
-    @NotNull
-    private UUID orderId;
+    @NotBlank(message = "Payment method ID is required")
+    private String paymentMethodId;
+    @NotBlank(message = "Bid ID is required")
+    private String bidId;
+    @NotBlank(message = "Spice owner email is required")
+    @Email(message = "Invalid email format")
+    private String spiceOwnerEmail;
+
+    @NotBlank(message = "Buyer email is required")
+    @Email(message = "Invalid email format")
+    private String buyerEmail;
+    private String spiceName;
+    private String spiceId;
 }

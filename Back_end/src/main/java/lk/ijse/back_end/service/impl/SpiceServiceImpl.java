@@ -38,6 +38,8 @@ public class SpiceServiceImpl implements SpiceService {
 private UserRepository userRepo;
 @Autowired
 private EmailService emailService;
+@Autowired
+private BidServiceImpl bidService;
     @Override
     @Transactional
     public SpiceDTO<String> save(SpiceDTO spiceDTO, MultipartFile file) {
@@ -153,11 +155,41 @@ private EmailService emailService;
 
     @Override
     public boolean deleteSpiceById(String id) {
-        if (spiceRepo.existsById(UUID.fromString(id))) {
-            spiceRepo.deleteById(UUID.fromString(id));
+        UUID spiceId = UUID.fromString(id);
+        if (spiceRepo.existsById(spiceId)) {
+            spiceRepo.deleteById(spiceId);
             return true;
         } else {
             return false;
         }
     }
+    @Override
+    @Transactional
+    public void delete(String spiceId) {
+        UUID id;
+        try {
+            id = UUID.fromString(spiceId);
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("Invalid UUID format: " + spiceId);
+        }
+
+        Optional<Spice> spiceOptional = spiceRepo.findById(id);
+        if (spiceOptional.isPresent()) {
+            spiceRepo.delete(spiceOptional.get());
+            logger.info("Spice deleted successfully");
+        } else {
+            logger.warn("Spice with id {} not found", id);
+            throw new RuntimeException("Spice Listing Not Found");
+        }
+    }
+@Transactional
+    @Override
+    public boolean deleteSpiceByName(String name) {
+    if (spiceRepo.existsByName(name)) {
+        spiceRepo.deleteByName(name);
+        return true;
+    } else {
+        return false;
+    }
+}
 }

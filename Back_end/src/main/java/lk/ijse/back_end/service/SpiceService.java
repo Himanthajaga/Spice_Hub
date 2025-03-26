@@ -1,5 +1,6 @@
 package lk.ijse.back_end.service;
 
+import jakarta.transaction.Transactional;
 import lk.ijse.back_end.dto.SpiceDTO;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,4 +19,7 @@ public interface SpiceService {
   SpiceDTO<String> getById(String id);
 
   boolean deleteSpiceById(String id);
+
+    void delete(String spiceId);
+  boolean deleteSpiceByName(String name);
 }

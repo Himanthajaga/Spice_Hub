@@ -1,6 +1,8 @@
 package lk.ijse.back_end.service.impl;
 
+import jakarta.transaction.Transactional;
 import lk.ijse.back_end.dto.PaymentDTO;
+import lk.ijse.back_end.entity.Payment;
 import lk.ijse.back_end.repository.PaymentRepo;
 import lk.ijse.back_end.service.PaymentService;
 import org.modelmapper.ModelMapper;
@@ -16,9 +18,11 @@ public class PaymentServiceImpl implements PaymentService {
     @Autowired
     private ModelMapper modelMapper;
     @Override
+    @Transactional
     public void save(PaymentDTO paymentDTO) {
-
-    }
+            Payment payment = modelMapper.map(paymentDTO, Payment.class);
+            paymentRepo.save(payment);
+        }
 
     @Override
     public List<PaymentDTO> getAll() {

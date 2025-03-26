@@ -18,6 +18,7 @@ public interface SpiceRepo extends JpaRepository<Spice, UUID> {
 
     List<Spice> findByCategory(String category);
     List<Spice> findByUserUid(UUID userUid);
+    void deleteByName(String name);
 
-
+    boolean existsByName(String name);
 }

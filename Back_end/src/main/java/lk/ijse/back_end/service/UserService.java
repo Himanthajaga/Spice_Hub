@@ -20,4 +20,5 @@ public interface UserService {
 
     String createPasswordResetToken(String email);
     void resetPassword(String token, String password) throws Exception;
+    void saveUser(UserDTO user);
 }

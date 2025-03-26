@@ -142,4 +142,18 @@ public class SpiceController {
             return new ResponseUtil(500, "Internal server error", null);
         }
     }
+    @DeleteMapping(path = "/deleteByName")
+    public ResponseUtil deleteSpiceByName(@RequestParam String name) {
+        try {
+            boolean isDeleted = spiceService.deleteSpiceByName(name);
+            if (isDeleted) {
+                return new ResponseUtil(200, "Spice deleted successfully", null);
+            } else {
+                return new ResponseUtil(404, "Spice not found", null);
+            }
+        } catch (Exception e) {
+            log.error("Error deleting spice", e);
+            return new ResponseUtil(500, "Internal server error", null);
+        }
+    }
 }

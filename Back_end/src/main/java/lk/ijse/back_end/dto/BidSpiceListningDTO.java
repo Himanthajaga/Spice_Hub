@@ -24,7 +24,5 @@ public class BidSpiceListningDTO {
     @Size(max = 255)
     private double price;
     @NotNull
-    private UUID orderId;
-    @NotNull
     private UUID spiceId;
 }

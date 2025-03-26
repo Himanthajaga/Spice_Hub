@@ -40,6 +40,7 @@ public class BidServiceImpl implements BidService {
     private SpiceRepo spiceRepo;
     @Autowired
     private EmailService emailService;
+
     @Override
     @Transactional
     public BidDTO<String> save(BidDTO bidDTO, MultipartFile file) {
@@ -105,13 +106,12 @@ public class BidServiceImpl implements BidService {
         }.getType());
         for (BidDTO<String> bidDTO : bidDTOS) {
             bids.stream().filter(bid ->
-                    bid.getId().equals(bidDTO.getId()))
+                            bid.getId().equals(bidDTO.getId()))
                     .findFirst()
                     .ifPresent(bid -> bidDTO.setImageURL(imageUtil.getImage(bid.getImageURL())));
         }
         return bidDTOS;
     }
-
 
 
     @Override
@@ -128,7 +128,7 @@ public class BidServiceImpl implements BidService {
     }
 
     @Override
-    public BidDTO<String> update(UUID id,BidDTO bidDTO,MultipartFile file) {
+    public BidDTO<String> update(UUID id, BidDTO bidDTO, MultipartFile file) {
         return null;
 
     }
@@ -151,5 +151,30 @@ public class BidServiceImpl implements BidService {
                     return bidDTO;
                 })
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public BidDTO getBidById(UUID bidId) {
+        Bid bid = bidRepo.findById(bidId).orElse(null);
+        if (bid != null) {
+            BidDTO bidDTO = modelMapper.map(bid, BidDTO.class);
+            bidDTO.setUserId(bid.getUser().getUid());
+            bidDTO.setListingName(bid.getListing().getName());
+            bidDTO.setListingDescription(bid.getListing().getDescription());
+            bidDTO.setImageURL(imageUtil.getImage(bid.getListing().getImageURL())); // Retrieve image URL from Spice table
+            return bidDTO;
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public void delete(String bidid) {
+        bidRepo.deleteById(UUID.fromString(bidid));
+    }
+
+    @Transactional
+    public void deleteBidsBySpiceId(UUID spiceId) {
+        bidRepo.deleteByListing_id(spiceId);
     }
 }

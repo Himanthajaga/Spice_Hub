@@ -23,10 +23,6 @@ public class Bid_SpiceListning implements Serializable {
     private String bidQty;
 
     @ManyToOne
-    @JoinColumn(name = "oid")
-    private Order order;
-
-    @ManyToOne
     @JoinColumn(name = "id")
     private Spice spice;
 
