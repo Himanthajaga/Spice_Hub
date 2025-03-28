@@ -21,4 +21,12 @@ public interface UserService {
     String createPasswordResetToken(String email);
     void resetPassword(String token, String password) throws Exception;
     void saveUser(UserDTO user);
+
+    void deactivateUser(String id);
+
+ List<UserDTO<String>> getAllUsers();
+
+ void toggleUserStatus(UUID id);
+
+ User findById(UUID sellerId);
 }

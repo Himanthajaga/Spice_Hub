@@ -15,7 +15,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "systemuser")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "role", discriminatorType = DiscriminatorType.STRING)
+//@DiscriminatorColumn(name = "role", discriminatorType = DiscriminatorType.STRING)
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -26,7 +26,15 @@ public class User implements Serializable {
     private String address;
     private String password;
     private String name;
-    @Column(insertable = false, updatable = false)
+    //@Column(insertable = false, updatable = false)
     private String role;
     private String profilePicture;
+    private boolean active;
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
 }

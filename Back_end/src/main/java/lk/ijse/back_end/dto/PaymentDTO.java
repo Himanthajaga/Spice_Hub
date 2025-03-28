@@ -4,6 +4,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lk.ijse.back_end.entity.Payment;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,5 +36,9 @@ public class PaymentDTO {
     @Email(message = "Invalid email format")
     private String buyerEmail;
     private String spiceName;
+    @NotBlank(message = "Spice ID is required")
     private String spiceId;
+
+//    public PaymentDTO(Payment payment) {
+//    }
 }

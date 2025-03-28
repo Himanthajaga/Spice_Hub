@@ -13,9 +13,11 @@ import lk.ijse.back_end.utill.VarList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.UUID;
 
 @CrossOrigin(origins = "http://localhost:63342")
@@ -45,6 +47,7 @@ public class UserController {
                 AuthDTO authDTO = new AuthDTO();
                 authDTO.setEmail(userDTO.getEmail());
                 authDTO.setToken(token);
+                authDTO.setProfilePicture(res.getProfilePicture());
                 return new ResponseUtil(VarList.Created, "User Registered Successfully", authDTO);
             } else if (res.equals(VarList.Not_Acceptable)) {
                 return new ResponseUtil(VarList.Not_Acceptable, "Email Already Used", null);
@@ -107,5 +110,21 @@ public class UserController {
             log.error("Error retrieving user", e);
             return new ResponseUtil(500, "Internal server error", null);
         }
+    }
+    @PutMapping("/deactivate/{id}")
+    public ResponseUtil deactivateUser(@PathVariable String id) {
+        userService.deactivateUser(id);
+        return new ResponseUtil(200, "User deactivated successfully", null);
+    }
+    @GetMapping("/getAll")
+    public List<UserDTO<String>> getAllUsers() {
+        // Fetch users from the database
+        return userService.getAllUsers();
+    }
+
+    @PostMapping("/{id}/toggleStatus")
+    public ResponseEntity<Void> toggleUserStatus(@PathVariable UUID id) {
+        userService.toggleUserStatus(id);
+        return ResponseEntity.ok().build();
     }
 }

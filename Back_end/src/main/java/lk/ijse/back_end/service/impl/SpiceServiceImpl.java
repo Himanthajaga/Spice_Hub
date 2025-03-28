@@ -1,6 +1,7 @@
 // SpiceServiceImpl.java
 package lk.ijse.back_end.service.impl;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lk.ijse.back_end.dto.SpiceDTO;
 import lk.ijse.back_end.entity.Spice;
@@ -143,15 +144,33 @@ private BidServiceImpl bidService;
 
     @Override
     public SpiceDTO<String> getById(String id) {
-        Optional<Spice> spice = spiceRepo.findById(UUID.fromString(id));
-        if (spice.isPresent()) {
-            SpiceDTO<String> spiceDTO = modelMapper.map(spice.get(), SpiceDTO.class);
-            spiceDTO.setImageURL(imageUtil.getImage(spice.get().getImageURL()));
-            return spiceDTO;
-        } else {
+        return null;
+    }
+
+    @Override
+    public SpiceDTO<String> getById(UUID id) {
+        // Trim and convert the UUID to lowercase
+        String trimmedId = id.toString().trim().toLowerCase();
+        UUID uuid;
+        try {
+            uuid = UUID.fromString(trimmedId);
+        } catch (IllegalArgumentException e) {
+            logger.error("Invalid UUID format: {}", trimmedId);
+            throw new RuntimeException("Invalid UUID format");
+        }
+
+        logger.info("Retrieving spice with id: {}", uuid);
+        Spice spice = spiceRepo.findById(uuid).orElse(null);
+        if (spice == null) {
+            logger.error("Spice not found with id: {}", uuid);
             return null;
         }
+        SpiceDTO<String> spiceDTO = modelMapper.map(spice, SpiceDTO.class);
+        logger.info("SpiceDTO retrieved: {}", spiceDTO);
+        return spiceDTO;
+
     }
+
 
     @Override
     public boolean deleteSpiceById(String id) {
@@ -166,21 +185,29 @@ private BidServiceImpl bidService;
     @Override
     @Transactional
     public void delete(String spiceId) {
-        UUID id;
-        try {
-            id = UUID.fromString(spiceId);
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException("Invalid UUID format: " + spiceId);
+        if (spiceId == null || spiceId.isEmpty()) {
+            throw new IllegalArgumentException("Spice ID cannot be null or empty");
         }
 
-        Optional<Spice> spiceOptional = spiceRepo.findById(id);
-        if (spiceOptional.isPresent()) {
-            spiceRepo.delete(spiceOptional.get());
-            logger.info("Spice deleted successfully");
-        } else {
-            logger.warn("Spice with id {} not found", id);
-            throw new RuntimeException("Spice Listing Not Found");
+        // Assuming spiceId is a UUID string
+        UUID spiceUUID;
+        try {
+            spiceUUID = UUID.fromString(spiceId);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Invalid Spice ID format", e);
         }
+
+        // Fetch the spice entity
+        Spice spice = spiceRepo.findById(spiceUUID)
+                .orElseThrow(() -> new EntityNotFoundException("Spice not found"));
+
+        // Check if the name is null
+        if (spice.getName() == null) {
+            throw new NullPointerException("Spice name is null");
+        }
+
+        // Proceed with the deletion
+        spiceRepo.delete(spice);
     }
 @Transactional
     @Override

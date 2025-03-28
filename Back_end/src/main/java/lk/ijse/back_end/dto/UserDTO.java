@@ -36,5 +36,5 @@ public class UserDTO <T>implements Serializable {
     @Pattern(regexp = "^(ADMIN|USER)$", message = "Invalid role")
     private String role;
     private T profilePicture;
-
+    private boolean active;
 }

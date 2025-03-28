@@ -18,7 +18,7 @@ $(document).ready(function() {
                     window.localStorage.setItem('token', response.data.token);
                     console.log('User role:', response.data.role); // Log the user role
                     if (response.data.role === 'ADMIN') {
-                        window.location.href = 'admin_index.html';
+                        window.location.href = 'admin.html';
                     } else {
                         window.location.href = 'user_index.html';
                     }

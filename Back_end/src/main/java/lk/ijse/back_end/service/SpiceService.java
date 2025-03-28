@@ -18,6 +18,8 @@ public interface SpiceService {
 
   SpiceDTO<String> getById(String id);
 
+  SpiceDTO<String> getById(UUID id);
+
   boolean deleteSpiceById(String id);
 
     void delete(String spiceId);

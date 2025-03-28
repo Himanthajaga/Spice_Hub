@@ -9,4 +9,6 @@ public interface PaymentService {
     List<PaymentDTO> getAll();
     void delete(String id);
     void update(PaymentDTO paymentDTO);
+
+    List<PaymentDTO> getAllPayments();
 }

@@ -15,4 +15,6 @@ public class AuthDTO {
     @Email(message = "Invalid email")
     private String email;
     private String token;
+    private String role;
+    private String profilePicture;
 }

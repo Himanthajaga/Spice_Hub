@@ -3,6 +3,38 @@ function isValidUUID(uuid) {
     return regex.test(uuid);
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    fetchCategories();
+});
+
+function fetchCategories() {
+    fetch('http://localhost:8080/api/v1/category/get', {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token'),
+            'Accept': 'application/json'
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.code === 200) {
+                const categories = data.data;
+                const categorySelect = document.getElementById('spiceCategory');
+                categories.forEach(category => {
+                    const option = document.createElement('option');
+                    option.value = category.id;
+                    option.text = category.name;
+                    categorySelect.appendChild(option);
+                });
+            } else {
+                console.error('Failed to load categories');
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching categories:', error);
+        });
+}
+
 document.getElementById('addSpiceForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
@@ -11,13 +43,8 @@ document.getElementById('addSpiceForm').addEventListener('submit', function(even
         description: document.getElementById('spiceDescription').value.trim(),
         quantity: parseInt(document.getElementById('spiceStock').value),
         price: parseFloat(document.getElementById('spicePrice').value),
-        category: document.getElementById('spiceCategory').value.trim()
+        category: document.getElementById('spiceCategory').selectedOptions[0].text.trim() // Get the category name
     };
-
-    // Validate the name field
-    if (!spice.name) {
-        return;
-    }
 
     const formData = new FormData();
     formData.append('spice', JSON.stringify(spice));
@@ -30,17 +57,12 @@ document.getElementById('addSpiceForm').addEventListener('submit', function(even
         return;
     }
 
-    // Log the FormData object
-    for (let pair of formData.entries()) {
-        console.log(pair[0] + ': ' + pair[1]);
-    }
-
     fetch('http://localhost:8080/api/v1/spice/save', {
         method: 'POST',
         body: formData,
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('token'), // Include authentication token if required
-            'Accept': 'application/json' // Ensure the server expects JSON response
+            'Authorization': 'Bearer ' + localStorage.getItem('token'),
+            'Accept': 'application/json'
         }
     })
         .then(response => {
@@ -54,7 +76,7 @@ document.getElementById('addSpiceForm').addEventListener('submit', function(even
         })
         .then(data => {
             console.log('Spice saved successfully:', data);
-              Swal.fire('Spice saved successfully');
+            Swal.fire('Spice saved successfully');
             window.location.href = 'user_index.html';
         })
         .catch(error => {
@@ -72,6 +94,7 @@ document.getElementById('addSpiceForm').addEventListener('submit', function(even
             }
         });
 });
+
 function confirmLogout() {
     Swal.fire({
         title: 'Are you sure?',

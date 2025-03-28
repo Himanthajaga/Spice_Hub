@@ -1,5 +1,6 @@
 package lk.ijse.back_end.service.impl;
 
+import jakarta.persistence.EntityNotFoundException;
 import lk.ijse.back_end.dto.UserDTO;
 import lk.ijse.back_end.entity.PasswordResetToken;
 import lk.ijse.back_end.entity.User;
@@ -40,12 +41,15 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     private ModelMapper modelMapper;
     @Autowired
     private PasswordResetTokenRepository tokenRepository;
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email);
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), getAuthority(user));
     }
 
+    @Override
+    @Transactional
     public UserDTO loadUserDetailsByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(username);
         UserDTO userDTO = modelMapper.map(user, UserDTO.class);
@@ -91,10 +95,12 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         User user = modelMapper.map(userDTO, User.class);
         user.setProfilePicture(base64Image);
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        user.setRole(userDTO.getRole());
+        user.setActive(true); //
         try {
             User savedUser = userRepository.save(user);
             UserDTO<String> stringUserDTO = modelMapper.map(savedUser, UserDTO.class);
-            stringUserDTO.setProfilePicture(base64Image);
+            stringUserDTO.setProfilePicture(imageUtil.getImage(base64Image));
             return stringUserDTO;
         } catch (Exception e) {
             throw new RuntimeException("Failed to save user");
@@ -171,5 +177,48 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     public void saveUser(UserDTO user) {
         User newUser = modelMapper.map(user, User.class);
         userRepository.save(newUser);
+    }
+
+    @Override
+    public void deactivateUser(String id) {
+        User user = userRepository.findById(UUID.fromString(id)).orElseThrow(() -> new RuntimeException("User not found"));
+        user.setActive(false);
+        userRepository.save(user);
+
+    }
+
+    @Override
+    public List<UserDTO<String>> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        List<UserDTO<String>> userDTOs = new ArrayList<>();
+        for (User user : users) {
+            if (!"ADMIN".equals(user.getRole())) {
+                UserDTO<String> userDTO = modelMapper.map(user, UserDTO.class);
+                userDTO.setActive(user.isActive()); // Ensure active status is set
+                if (user.getProfilePicture() != null) {
+                    userDTO.setProfilePicture(imageUtil.getImage(user.getProfilePicture()));
+                }
+                userDTOs.add(userDTO);
+            }
+        }
+        return userDTOs;
+    }
+
+
+    @Override
+    public void toggleUserStatus(UUID id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+        user.setActive(!user.isActive());
+        userRepository.save(user);
+    }
+
+    @Override
+    public User findById(UUID sellerId) {
+        if (sellerId == null) {
+            throw new IllegalArgumentException("The given id must not be null");
+        }
+        // Add logging to see the value of sellerId
+    logger.info("Seller ID: {}", sellerId);
+        return userRepository.findById(sellerId).orElseThrow(() -> new EntityNotFoundException("User not found"));
     }
 }

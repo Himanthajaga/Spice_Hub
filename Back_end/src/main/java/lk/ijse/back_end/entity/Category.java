@@ -17,4 +17,6 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String name;
+    private String description;
+    private String imageURL;
 }

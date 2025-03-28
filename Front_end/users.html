@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">SpiceHub</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <ul class="navbar-nav ms-auto fs-6 fw-bolder">
+            <li class="nav-item"><a class="nav-link" href="admin.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="users.html">Users</a></li>
+            <li class="nav-item"><a class="nav-link" href="admin_profile.html">Profile</a></li>
+            <li class="nav-item"><a class="nav-link" href="payments_view.html">Payments</a></li>
+            <li class="nav-item"><a class="nav-link" href="add_category.html">Add Category</a></li>
+            <li class="nav-item"><a class="nav-link" href="manage_category.html">Category</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" onclick="confirmLogout()">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="container mt-4">
+    <h2>User Management</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+           <th>Image</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody id="userContainer">
+        <!-- User rows will be appended here by JavaScript -->
+        </tbody>
+    </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+<script src="js/users.js"></script>
+</body>
+</html>
