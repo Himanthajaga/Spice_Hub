@@ -16,8 +16,6 @@ public interface SpiceService {
 
     List<SpiceDTO<String>> getByUserId(UUID userId);
 
-  SpiceDTO<String> getById(String id);
-
   SpiceDTO<String> getById(UUID id);
 
   boolean deleteSpiceById(String id);

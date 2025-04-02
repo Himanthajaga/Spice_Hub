@@ -41,8 +41,9 @@ document.getElementById('addSpiceForm').addEventListener('submit', function(even
     const spice = {
         name: document.getElementById('spiceName').value.trim(),
         description: document.getElementById('spiceDescription').value.trim(),
-        quantity: parseInt(document.getElementById('spiceStock').value),
+        quantity: document.getElementById('spiceStock').value.trim(),
         price: parseFloat(document.getElementById('spicePrice').value),
+        location: document.getElementById('spiceLocation').value.trim(),
         category: document.getElementById('spiceCategory').selectedOptions[0].text.trim() // Get the category name
     };
 
@@ -93,6 +94,10 @@ document.getElementById('addSpiceForm').addEventListener('submit', function(even
                 console.error('Failed to parse error message:', e);
             }
         });
+});
+
+document.getElementById('cancelButton').addEventListener('click', function() {
+    window.location.href = 'user_index.html';
 });
 
 function confirmLogout() {

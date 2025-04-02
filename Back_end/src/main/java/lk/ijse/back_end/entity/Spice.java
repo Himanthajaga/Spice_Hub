@@ -21,11 +21,10 @@ public class Spice implements Serializable {
     private String description;
     private String category;
     private double price;
-    @Min(1)
-    @Max(10000)
-    private int quantity;
+    private String quantity;
 //    @Column(columnDefinition = "LONGTEXT",name = "image_url")
     private String imageURL;
+    private String location;
 
     @Version
     private int version;

@@ -24,14 +24,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
 import java.util.*;
-
 
 @Service
 @Transactional
 public class UserServiceImpl implements UserDetailsService, UserService {
     private static final Logger logger = LoggerFactory.getLogger(SpiceServiceImpl.class);
-
     @Autowired
     private UserRepository userRepository;
 
@@ -136,41 +135,57 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     public UserDTO<String> updateUser(UUID id, UserDTO userDTO, MultipartFile file) {
         Optional<User> tempUser = userRepository.findById(id);
         if (tempUser.isPresent()) {
-            String imageName = tempUser.get().getProfilePicture();
+            User user = tempUser.get();
             if (!file.isEmpty()) {
-                imageName = imageUtil.updateImage(tempUser.get().getProfilePicture(), ImageType.USER, file);
+                String imageName = imageUtil.updateImage(user.getProfilePicture(), ImageType.USER, file);
+                user.setProfilePicture(imageName);
             }
-            tempUser.get().setProfilePicture(imageName);
-            tempUser.get().setEmail(userDTO.getEmail());
-            tempUser.get().setName(userDTO.getName());
-            tempUser.get().setRole(userDTO.getRole());
-            tempUser.get().setPassword(new BCryptPasswordEncoder().encode(userDTO.getPassword()));
-            tempUser.get().setAddress(userDTO.getAddress());
-            tempUser.get().setPhone(userDTO.getPhone());
+            if (userDTO.getEmail() != null) {
+                user.setEmail(userDTO.getEmail());
+            }
+            if (userDTO.getName() != null) {
+                user.setName(userDTO.getName());
+            }
+            if (userDTO.getPassword() != null) {
+                user.setPassword(new BCryptPasswordEncoder().encode(userDTO.getPassword()));
+            }
+            if (userDTO.getAddress() != null) {
+                user.setAddress(userDTO.getAddress());
+            }
+            if (userDTO.getPhone() != null) {
+                user.setPhone(userDTO.getPhone());
+            }
+            if (userDTO.getRole() != null) {
+                user.setRole(userDTO.getRole());
+            }
             try {
-                userRepository.save(tempUser.get());
+                userRepository.save(user);
                 logger.info("User updated successfully");
-                return modelMapper.map(tempUser.get(), UserDTO.class);
+                return modelMapper.map(user, UserDTO.class);
             } catch (StaleObjectStateException e) {
-                logger.error("Failed to update user: {}", tempUser, e);
+                logger.error("Failed to update user: {}", user, e);
                 throw new RuntimeException("Failed to update user");
             }
         } else {
             logger.warn("User with id {} not found", id);
             throw new RuntimeException("User not found");
-
         }
     }
 
     public void sendPasswordResetLink(String email) {
     }
 
-    public void resetPassword(String token, String password) throws Exception {
-        PasswordResetToken resetToken = tokenRepository.findByToken(token).orElseThrow(() -> new Exception("Invalid token"));
-        User user = resetToken.getUser();
-        user.setPassword(new BCryptPasswordEncoder().encode(password));
-        userRepository.save(user);
-        tokenRepository.delete(resetToken);
+    public void resetPassword(String email, String newPassword) throws Exception {
+        User user = userRepository.findByEmail(email);
+        PasswordResetToken token = tokenRepository.findByUser(user);
+
+        if (token != null) {
+            user.setPassword(new BCryptPasswordEncoder().encode(newPassword));
+            userRepository.save(user);
+            tokenRepository.delete(token);
+        } else {
+            throw new Exception("Invalid token");
+        }
     }
 
     @Override
@@ -184,7 +199,6 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         User user = userRepository.findById(UUID.fromString(id)).orElseThrow(() -> new RuntimeException("User not found"));
         user.setActive(false);
         userRepository.save(user);
-
     }
 
     @Override
@@ -204,7 +218,6 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         return userDTOs;
     }
 
-
     @Override
     public void toggleUserStatus(UUID id) {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
@@ -218,7 +231,30 @@ public class UserServiceImpl implements UserDetailsService, UserService {
             throw new IllegalArgumentException("The given id must not be null");
         }
         // Add logging to see the value of sellerId
-    logger.info("Seller ID: {}", sellerId);
+        logger.info("Seller ID: {}", sellerId);
         return userRepository.findById(sellerId).orElseThrow(() -> new EntityNotFoundException("User not found"));
+    }
+
+    @Override
+    public String createPasswordResetOTP(String email) {
+        User user = userRepository.findByEmail(email);
+        String otp = String.valueOf(new Random().nextInt(999999));
+        PasswordResetToken token = tokenRepository.findByUser(user);
+
+        if (token != null) {
+            token.setToken(otp);
+            token.setExpiryDate(LocalDateTime.now().plusMinutes(15)); // Set new expiry date
+        } else {
+            token = new PasswordResetToken(otp, user);
+        }
+        tokenRepository.save(token);
+        return otp;
+    }
+
+    @Override
+    public boolean verifyPasswordResetOTP(String email, String otp) {
+        User user = userRepository.findByEmail(email);
+        PasswordResetToken token = tokenRepository.findByUser(user);
+        return token != null && token.getToken().equals(otp);
     }
 }

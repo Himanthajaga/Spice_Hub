@@ -1,5 +1,6 @@
 package lk.ijse.back_end.dto;
 
+import lk.ijse.back_end.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,9 +27,11 @@ public class SpiceDTO<T> implements Serializable {
     private Double price;
 
 
-    private int quantity;
+    private String quantity;
 
     private T imageURL;
+    private String location;
     private UUID sellerId;
     private boolean active;
+
 }

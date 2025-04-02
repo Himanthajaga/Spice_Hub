@@ -52,3 +52,137 @@ select:focus {
     margin-bottom: 5px;
     display: block;
 }
+/*!* style.css *!*/
+/*nav a {*/
+/*    color: #1fe309; !* Change text color *!*/
+/*    text-decoration: none; !* Remove underline *!*/
+/*    padding: 10px 15px; !* Add padding *!*/
+/*    transition: color 0.3s ease, background-color 0.3s ease; !* Add transition for smooth effect *!*/
+/*}*/
+
+/*nav a:hover {*/
+/*    color: #4285F4; !* Change text color on hover *!*/
+/*    background-color: rgba(255, 255, 255, 0.1); !* Add background color on hover *!*/
+/*}*/
+
+/*nav a.active {*/
+/*    color: #4285F4; !* Change text color for active link *!*/
+/*    background-color: rgba(255, 255, 255, 0.2); !* Add background color for active link *!*/
+/*}*/
+#profileForm {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 3px solid #000000;
+    border-radius: 10px;
+    background-color: #ade8a6;
+}
+
+/* Reduce the length of the input fields */
+#profileForm .form-control {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+#update {
+    background-color: #4285F4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the text horizontally */
+    text-align: center; /* Center the text horizontally */
+    transition: background-color 0.3s ease;
+}
+
+#spiceContainer{
+    color: #6edff6;
+}
+.card {
+    margin-bottom: 20px;
+}
+
+.card {
+    width: 100%;
+    max-width: 20rem;
+    border: 2px solid #28a745; /* Change border color */
+    border-radius: 10px; /* Add rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+    background-color: #f8f9fa; /* Change background color */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition for hover effect */
+}
+
+.card:hover {
+    transform: translateY(-10px); /* Lift the card on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+}
+
+ .card-img-top {
+    border-top-left-radius: 10px; /* Match card border radius */
+    border-top-right-radius: 10px; /* Match card border radius */
+}
+
+.card-body {
+    text-align: center; /* Center align text */
+}
+
+.card-title {
+    font-size: 1.25rem; /* Increase font size */
+    font-weight: bold; /* Make title bold */
+    color: #343a40; /* Change text color */
+}
+
+.card-text {
+    font-size: 1rem; /* Adjust font size */
+    color: #6c757d; /* Change text color */
+}
+
+.btn-outline-success:not(.no-style-change) {
+    font-size: 2rem; /* Adjust button font size */
+    padding: 5px 10px; /* Adjust button padding */
+    border-radius: 5px; /* Add rounded corners to button */
+}
+/*.btn-outline-danger {*/
+/*    font-size: 2rem; !* Adjust button font size *!*/
+/*    padding: 5px 10px; !* Adjust button padding *!*/
+/*    border-radius: 5px; !* Add rounded corners to button *!*/
+/*}*/
+/*body:not(.manage-spice-page) .btn-outline-danger {*/
+/*    font-size: 2rem; !* Adjust button font size *!*/
+/*    padding: 5px 10px; !* Adjust button padding *!*/
+/*    border-radius: 5px; !* Add rounded corners to button *!*/
+/*}*/
+body:not(.manage-spice-page) .btn-outline-danger:not(.no-style-change) {
+    font-size: 2rem; /* Adjust button font size */
+    padding: 5px 10px; /* Adjust button padding */
+    border-radius: 5px; /* Add rounded corners to button */
+}
+.card-text .price {
+    font-size: 1.25rem; /* Increase font size */
+    font-weight: bold; /* Make text bold */
+    color: #ff5733; /* Change text color to a highlight color */
+}
+.card-text .qty {
+    font-size: 1.25rem; /* Increase font size */
+    font-weight: bold; /* Make text bold */
+    color: #d8310d; /* Change text color to a highlight color */
+}
+body {
+    background: linear-gradient(to right, #ffecd2, #edeae9);
+    font-family: 'Arial', sans-serif;
+}
+
+.navbar {
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+}
+.navbar-brand{
+    color: #fff;
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: "Sitka Subheading";
+    font-style: italic;
+}

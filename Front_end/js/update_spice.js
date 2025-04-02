@@ -16,14 +16,15 @@ $(document).ready(function() {
                     if (spice.imageURL) {
                         $('#profilePicture').attr('src', 'data:image/png;base64,' + spice.imageURL);
                     }
-                    $('#uid').val(spice.id); // Ensure the hidden field is populated with a valid UUID
+                    $('#uid').val(spice.id);
                     $('#spiceName').val(spice.name);
                     $('#spiceDescription').val(spice.description);
                     $('#spicePrice').val(spice.price);
                     $('#spiceStock').val(spice.quantity);
+                    $('#spiceLocation').val(spice.location);
                     $('#spiceCategory').val(spice.category);
                 } else {
-                   Swal.fire('Failed to load spice details');
+                    Swal.fire('Failed to load spice details');
                 }
             },
             error: function() {
@@ -37,13 +38,20 @@ $(document).ready(function() {
     $('#updateSpiceForm').submit(function(event) {
         event.preventDefault();
         const formData = new FormData();
-        formData.append('file', $('#profilePictureFile')[0].files[0]);
+        const fileInput = $('#profilePictureFile')[0].files[0];
+        if (fileInput) {
+            formData.append('file', fileInput);
+        } else {
+            const existingImage = $('#profilePicture').attr('src').split(',')[1];
+            formData.append('existingImage', existingImage);
+        }
         const spice = {
-            id: $('#uid').val(), // Ensure this is a valid UUID
+            id: $('#uid').val(),
             name: $('#spiceName').val(),
             description: $('#spiceDescription').val(),
             price: $('#spicePrice').val(),
             quantity: $('#spiceStock').val(),
+            location: $('#spiceLocation').val(),
             category: $('#spiceCategory').val()
         };
         formData.append('spice', JSON.stringify(spice));
@@ -59,7 +67,6 @@ $(document).ready(function() {
             contentType: false,
             success: function(response) {
                 Swal.fire('Spice updated successfully');
-                // Redirect to the manage spices page
                 window.location.href = 'manage_spice.html';
             },
             error: function() {
@@ -68,6 +75,7 @@ $(document).ready(function() {
         });
     });
 });
+
 function confirmLogout() {
     Swal.fire({
         title: 'Are you sure?',

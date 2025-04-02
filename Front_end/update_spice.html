@@ -27,45 +27,54 @@
     </div>
 </nav>
 <div class="container mt-4">
-    <h2>Update Spice</h2>
-    <form id="updateSpiceForm" enctype="multipart/form-data">
-        <div class="row"><div class="mb-3">
-            <label for="profilePicture" class="form-label">Profile Picture</label>
-            <img id="profilePicture" src="" alt="Profile Picture" class="img-thumbnail" style="max-width: 150px;">
-            <input type="file" class="form-control mt-2" id="profilePictureFile">
+    <div class="card mx-auto" style="max-width: 800px;">
+        <div class="card-body">
+            <h2 class="card-title text-center">Update Spice</h2>
+            <form id="updateSpiceForm" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="spiceName" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="spiceName" placeholder="Enter spice name" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="hidden" id="uid" value="USER_ID_HERE">
+                        </div>
+                        <div class="mb-3">
+                            <label for="spiceDescription" class="form-label">Description</label>
+                            <textarea class="form-control" id="spiceDescription" placeholder="Enter spice description" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="spicePrice" class="form-label">Price</label>
+                            <input type="number" class="form-control" id="spicePrice" placeholder="Enter spice price" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="spiceStock" class="form-label">Items in Stock</label>
+                            <input type="text" class="form-control" id="spiceStock" placeholder="Enter items in stock" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="spiceLocation" class="form-label">Location</label>
+                            <input type="text" class="form-control" id="spiceLocation" placeholder="Enter spice location" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="spiceCategory" class="form-label">Category</label>
+                            <input type="text" class="form-control" id="spiceCategory" placeholder="Enter spice category" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="profilePictureFile" class="form-label">Profile Picture</label>
+                            <img id="profilePicture" src="" alt="Profile Picture" class="img-thumbnail" style="max-width: 150px;">
+                            <input type="file" class="form-control mt-2" id="profilePictureFile">
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-outline-success mt-3">Update Spice</button>
+                </div>
+            </form>
         </div>
-            <div class="col-md-6">
-                <div class="mb-3">
-                    <label for="spiceName" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="spiceName" placeholder="Enter spice name" required>
-                </div>
-                <div class="mb-3">
-                    <!--            <label for="uid" class="form-label">ID</label>-->
-                    <input type="hidden" id="uid" value="USER_ID_HERE">
-                </div>
-                <div class="mb-3">
-                    <label for="spiceDescription" class="form-label">Description</label>
-                    <textarea class="form-control" id="spiceDescription" placeholder="Enter spice description" required></textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="spicePrice" class="form-label">Price</label>
-                    <input type="number" class="form-control" id="spicePrice" placeholder="Enter spice price" required>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="mb-3">
-                    <label for="spiceStock" class="form-label">Items in Stock</label>
-                    <input type="number" class="form-control" id="spiceStock" placeholder="Enter items in stock" required>
-                </div>
-                <div class="mb-3">
-                    <label for="spiceCategory" class="form-label">Category</label>
-                    <input type="text" class="form-control" id="spiceCategory" placeholder="Enter spice category" required>
-                </div>
-
-            </div>
-        </div>
-        <button type="submit" class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 w-50">Update Spice</button>
-    </form>
+    </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

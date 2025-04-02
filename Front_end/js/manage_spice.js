@@ -39,11 +39,12 @@ $(document).ready(function() {
                                                         <div class="card-body">
                                                             <h5 class="card-title">${spice.name}</h5>
                                                             <p class="card-text">${spice.description}</p>
-                                                            <p class="card-text"><strong>Price: </strong> $${spice.price}</p>
-                                                            <p class="card-text"><strong>Items in Stock: </strong> ${spice.quantity}</p>
-                                                            <a href="#" class="btn btn-primary">View</a>
-                                                            <a href="#" class="btn btn-danger delete-btn" data-id="${spice.id}">Delete</a>
-                                                            <a href="update_spice.html?id=${spice.id}" class="btn btn-warning update-btn" data-id="${spice.id}">Update</a>
+                                                            <p class="card-text"><strong>Price: </strong> <span class="price">${spice.price}</span></p>
+                                                            <p class="card-text"><strong>Location: </strong> <span class="location">${spice.location}</span></p>
+                                                            <p class="card-text"><strong>Items in Stock: </strong> <span class = "qty">${spice.quantity}</span> </p>
+                                                            <a href="#" class="btn btn-outline-info">View</a>
+                                                            <a href="#" class="btn btn-outline-danger delete-btn" data-id="${spice.id}">Delete</a>
+                                                            <a href="update_spice.html?id=${spice.id}" class="btn btn-outline-warning update-btn" data-id="${spice.id}">Update</a>
                                                         </div>
                                                     </div>
                                                 </div>

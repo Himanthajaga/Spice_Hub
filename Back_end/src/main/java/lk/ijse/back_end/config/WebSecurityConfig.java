@@ -58,7 +58,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
                     config.setAllowCredentials(true);
                     return config;
                 }))
-                .csrf(AbstractHttpConfigurer::disable)
+               // .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/images/**",
@@ -77,7 +77,8 @@ public class WebSecurityConfig implements WebMvcConfigurer {
                                 "/api/v1/auth/refreshToken",
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
-                                "/swagger-ui.html").permitAll()
+                                "/swagger-ui.html",
+                                "/reset-password").permitAll() // Add this line                          .permitAll()
                         .anyRequest().authenticated()
 
                 )

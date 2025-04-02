@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import lk.ijse.back_end.dto.SpiceDTO;
 import lk.ijse.back_end.entity.User;
+import lk.ijse.back_end.service.EmailService;
 import lk.ijse.back_end.service.UserService;
 import lk.ijse.back_end.service.impl.SpiceServiceImpl;
 import lk.ijse.back_end.utill.AppUtil;
@@ -32,6 +33,8 @@ public class SpiceController {
     private JwtUtil jwtUtil;
     @Autowired
     private UserService userService;
+    @Autowired
+    private EmailService emailService;
     @PostMapping(value = "/save", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseUtil saveSpice(@RequestPart("spice") String spiceJson, @RequestPart("file") MultipartFile file, HttpServletRequest request) {
         try {
@@ -93,9 +96,9 @@ public class SpiceController {
         }
     }
     @DeleteMapping(path = "/delete")
-    public ResponseUtil deleteSpice(@RequestParam String id) {
+    public ResponseUtil deleteSpice(@RequestParam UUID id) {
         try {
-            boolean isDeleted = spiceService.deleteSpiceById(id);
+            boolean isDeleted = spiceService.deleteSpiceById(String.valueOf(id));
             if (isDeleted) {
                 return new ResponseUtil(200, "Spice deleted successfully", null);
             } else {
@@ -111,7 +114,10 @@ public class SpiceController {
         try {
             SpiceDTO spiceDTO = new ObjectMapper().readValue(spiceJson, SpiceDTO.class);
             log.info("Received request to update spice: {}", spiceDTO.getName());
-            spiceDTO.setImageURL(AppUtil.toBase64(file));
+
+            if (file != null && !file.isEmpty()) {
+                spiceDTO.setImageURL(AppUtil.toBase64(file));
+            }
 
             // Assuming the spiceDTO contains the spice ID
             UUID spiceId = spiceDTO.getId();
@@ -131,7 +137,7 @@ public class SpiceController {
     @GetMapping(path = "/getById")
     public ResponseUtil getSpiceById(@RequestParam String id) {
         try {
-            SpiceDTO<String> spice = spiceService.getById(id);
+            SpiceDTO<String> spice = spiceService.getById(UUID.fromString(id));
             if (spice == null) {
                 log.error("Spice not found with id: {}", id);
                 return new ResponseUtil(404, "Spice not found", null);
@@ -156,4 +162,5 @@ public class SpiceController {
             return new ResponseUtil(500, "Internal server error", null);
         }
     }
+
 }

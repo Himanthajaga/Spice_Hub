@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -20,12 +21,13 @@ public class PasswordResetToken {
     @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
     @JoinColumn(nullable = false, name = "user_id")
     private User user;
-    private Date expiryDate;
+    private LocalDateTime expiryDate;
+
 
     public PasswordResetToken(String token, User user) {
         this.token = token;
         this.user = user;
-        this.expiryDate = calculateExpiryDate(24 * 60); // 24 hours
+        this.expiryDate = LocalDateTime.now().plusMinutes(15); // 24 hours
     }
 
     private Date calculateExpiryDate(int expiryTimeInMinutes) {

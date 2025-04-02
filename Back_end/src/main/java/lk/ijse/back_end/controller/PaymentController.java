@@ -81,8 +81,8 @@ public class PaymentController {
             log.info("Received paymentDTO: {}", paymentDTO);
             log.info("Spice ID received: {}", paymentDTO.getSpiceId());
 
-            // Fetch the spice details to get the owner email
-//            SpiceDTO<String> spiceDTO = spiceService.getById(paymentDTO.getSpiceId());
+//            // Fetch the spice details to get the owner email
+//            SpiceDTO<String> spiceDTO = spiceService.getById(UUID.fromString(paymentDTO.getSpiceId()));
 //            if (spiceDTO == null) {
 //                log.error("Spice not found with id: {}", paymentDTO.getSpiceId());
 //                return new ResponseUtil(404, "Spice not found", null);
@@ -99,8 +99,8 @@ public class PaymentController {
 //            }
 //            paymentDTO.setSpiceOwnerEmail(spiceOwner.getEmail());
 //            paymentDTO.setSpiceName(spiceDTO.getName());
-
-// Fetch the bid details to get the buyer email
+//
+// //Fetch the bid details to get the buyer email
 //            BidDTO<String> bidDTO = bidService.getBidById(UUID.fromString(paymentDTO.getBidId()));
 //            if (bidDTO == null) {
 //                log.error("Bid not found with id: {}", paymentDTO.getBidId());

@@ -19,7 +19,6 @@ public interface UserService {
     User findByEmail(String email);
 
     String createPasswordResetToken(String email);
-    void resetPassword(String token, String password) throws Exception;
     void saveUser(UserDTO user);
 
     void deactivateUser(String id);
@@ -29,4 +28,8 @@ public interface UserService {
  void toggleUserStatus(UUID id);
 
  User findById(UUID sellerId);
+ String createPasswordResetOTP(String email);
+ boolean verifyPasswordResetOTP(String email, String otp);
+ void resetPassword(String email, String newPassword) throws Exception;
+
 }

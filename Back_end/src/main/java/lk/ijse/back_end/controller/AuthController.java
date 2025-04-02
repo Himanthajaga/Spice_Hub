@@ -119,23 +119,39 @@ private EmailService emailService;
     @PostMapping("/forgot-password")
     public ResponseUtil forgotPassword(@RequestParam String email) {
         try {
-            String token = userService.createPasswordResetToken(email);
-            String resetLink = "http://localhost:8080/reset-password?token=" + token;
-            emailService.sendPasswordResetEmail(email, resetLink);
+            String otp = userService.createPasswordResetOTP(email);
+            emailService.sendPasswordResetEmail(email, otp);
+            return new ResponseUtil(200, "OTP sent to your email", null);
         } catch (Exception e) {
-            return new ResponseUtil(200, "Password reset link sent to your email", null);
+            return new ResponseUtil(500, "Failed to send OTP", null);
+        }
     }
-        return new ResponseUtil(500, "Failed to send password reset link", null);
+    @PostMapping("/verify-otp")
+    public ResponseUtil verifyOTP(@RequestParam String email, @RequestParam String otp) {
+        try {
+            boolean isValid = userService.verifyPasswordResetOTP(email, otp);
+            if (isValid) {
+                return new ResponseUtil(200, "OTP verified successfully", null);
+            } else {
+                return new ResponseUtil(400, "Invalid OTP", null);
+            }
+        } catch (Exception e) {
+            return new ResponseUtil(500, "Failed to verify OTP", null);
+        }
     }
 
     @PostMapping("/reset-password")
-    public ResponseUtil resetPassword(@RequestParam String token, @RequestParam String password) {
+    public ResponseUtil resetPassword(@RequestParam String email, @RequestParam String otp, @RequestParam String newPassword) {
         try {
-            userService.resetPassword(token, password);
-            return new ResponseUtil(200, "Password reset successfully", null);
+            boolean isValid = userService.verifyPasswordResetOTP(email, otp);
+            if (isValid) {
+                userService.resetPassword(email, newPassword);
+                return new ResponseUtil(200, "Password reset successfully", null);
+            } else {
+                return new ResponseUtil(400, "Invalid OTP", null);
+            }
         } catch (Exception e) {
             return new ResponseUtil(500, "Failed to reset password", null);
         }
-
-}
+    }
 }

@@ -54,7 +54,9 @@ document.getElementById('addCategoryForm').addEventListener('submit', function(e
             }
         });
 });
-
+document.getElementById('cancelButton').addEventListener('click', function() {
+    window.location.href = 'admin.html';
+});
 function confirmLogout() {
     Swal.fire({
         title: 'Are you sure?',

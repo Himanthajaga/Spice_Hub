@@ -95,8 +95,13 @@ private ImageUtil imageUtil;
 
     @DeleteMapping(path = "/delete/{id}")
     public ResponseUtil deleteBid(@PathVariable UUID id) {
-        bidService.delete(id);
-        return new ResponseUtil(201, "Bid Deleted Successfully", null);
+        try {
+            bidService.delete(id);
+            return new ResponseUtil(200, "Bid deleted successfully", null);
+        } catch (Exception e) {
+            log.error("Error deleting bid", e);
+            return new ResponseUtil(500, "Internal server error", null);
+        }
     }
 
     @PutMapping(value = "/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -126,4 +131,5 @@ private ImageUtil imageUtil;
             return new ResponseUtil(404, "Bid not found", null);
         }
     }
+
 }

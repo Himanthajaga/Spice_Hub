@@ -68,17 +68,20 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     @Transactional
     public CategoryDTO<String> update(UUID id, CategoryDTO categoryDTO, MultipartFile file) {
-        Optional<Category> category = categoryRepo.findById(id);
-        if (category.isPresent()) {
-            String imageName = category.get().getImageURL();
-            if (!file.isEmpty()) {
-                imageName = imageUtil.updateImage(category.get().getImageURL(), ImageType.CATEGORY, file);
+        Optional<Category> categoryOptional = categoryRepo.findById(id);
+        if (categoryOptional.isPresent()) {
+            Category category = categoryOptional.get();
+            if (categoryDTO.getName() != null) {
+                category.setName(categoryDTO.getName());
             }
-            category.get().setImageURL(imageName);
-            category.get().setName(categoryDTO.getName());
-            category.get().setDescription(categoryDTO.getDescription());
-
-            Category updatedCategory = categoryRepo.save(category.get());
+            if (categoryDTO.getDescription() != null) {
+                category.setDescription(categoryDTO.getDescription());
+            }
+            if (file != null && !file.isEmpty()) {
+                String imageName = imageUtil.updateImage(category.getImageURL(), ImageType.CATEGORY, file);
+                category.setImageURL(imageName);
+            }
+            Category updatedCategory = categoryRepo.save(category);
             return modelMapper.map(updatedCategory, CategoryDTO.class);
         } else {
             throw new EntityNotFoundException("Category not found");
