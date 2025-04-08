@@ -18,6 +18,8 @@ $(document).ready(function() {
                                 <h5 class="card-title">${spice.name}</h5>
                                 <p class="card-text">${spice.description}</p>
                                 <p class="card-text"><strong>Price: </strong> <span class="price">${spice.price}</span></p>
+                                <p class="card-text"><strong>Quantity: </strong> <span class="quantity">${spice.quantity}</span></p>
+                                <p class="card-text"><strong>Listed Time: </strong> <span class="listed-time">${spice.listedTime ? new Date(spice.listedTime).toLocaleString() : 'N/A'}</span></p>
                                 <p class="card-text"><strong>Location: </strong> <span class="location">${spice.location}</span></p>
                                 <button class="btn btn-outline-success bid-btn" data-id="${spice.id}">Bid Now</button>
                             </div>

@@ -21,6 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -48,6 +49,7 @@ private BidServiceImpl bidService;
         logger.info("Base64 image: {}", base64Image);
         Spice spice = modelMapper.map(spiceDTO, Spice.class);
         spice.setImageURL(base64Image);
+        spice.setListedTime(new Date());
         // Retrieve the User object using the userId from the SpiceDTO
         UUID userId = spiceDTO.getSellerId();
         if (userId == null) {

@@ -4,20 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SpiceHub - Home</title>
+     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-
-    <!-- Your other stylesheets -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css">
-    <link rel="stylesheet" href="css/style.css">
+   <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap">
 </head>
 <body>
-
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">SpiceHub</a>
-        <img src="assests/Images/Capture.PNG" alt="logo" style="width: 50px; height: 50px;">
+        <img src="assests/Images/Capture.PNG" alt="logo" style="width: 250px; height: 100px;">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -34,18 +38,51 @@
 <!-- Main Content -->
 <div class="container mt-4">
     <div class="mb-3">
-        <input type="text" id="filterInput" class="form-control" placeholder="Filter spices by name" onkeyup="filterSpices()">
+        <input type="text" id="filterInput" placeholder="Filter by name">
+        <input type="text" id="locationInput" placeholder="Filter by location">
+        <input type="number" id="minPriceInput" placeholder="Min price">
+        <input type="number" id="maxPriceInput" placeholder="Max price">
+        <input type="checkbox" id="latestItemsCheckbox"> Sort by latest items
+        <button onclick="filterSpices()">Filter</button>
     </div>
     <div class="row" id="spiceContainer">
         <!-- Spice cards will be dynamically generated here -->
     </div>
 </div>
-
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h5>About Us</h5>
+                <p>SpiceHub is your go-to platform for all things spices. Discover, learn, and enjoy the world of spices with us.</p>
+            </div>
+            <div class="col-md-4">
+                <h5>Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="admin.html" class="text-white">Home</a></li>
+                    <li><a href="users.html" class="text-white">Users</a></li>
+                    <li><a href="admin_profile.html" class="text-white">Profile</a></li>
+                    <li><a href="payments_view.html" class="text-white">Payments</a></li>
+                    <li><a href="add_category.html" class="text-white">Add Category</a></li>
+                    <li><a href="manage_category.html" class="text-white">Category</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h5>Contact Us</h5>
+                <p>Email: support@spicehub.com</p>
+                <p>Phone: 0771122345</p>
+                <p>Address: 188,weliowita,magedara,galle</p>
+            </div>
+        </div>
+        <div class="mt-3 text-center">
+            <p>&copy; 2025 SpiceHub. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 <script src="js/user_index.js"></script>
-
 </body>
 </html>

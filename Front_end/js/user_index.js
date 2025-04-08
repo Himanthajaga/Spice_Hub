@@ -1,113 +1,201 @@
-$(document).ready(function() {
+$(document).ready(function () {
+    // Fetch spices and populate the container
+    fetchSpices();
+
+    // Attach event listeners for dynamic filtering
+    attachFilterListeners();
+});
+// Function to attach event listeners for filters
+function attachFilterListeners() {
+    document.getElementById('filterInput').addEventListener('input', filterSpices);
+    document.getElementById('locationInput').addEventListener('input', filterSpices);
+    document.getElementById('minPriceInput').addEventListener('input', filterSpices);
+    document.getElementById('maxPriceInput').addEventListener('input', filterSpices);
+    document.getElementById('latestItemsCheckbox').addEventListener('change', filterSpices);
+}
+// Function to fetch spices and populate the container
+function fetchSpices() {
     $.ajax({
         url: 'http://localhost:8080/api/v1/spice/get',
         method: 'GET',
-        success: function(response) {
-            let spiceContainer = $('#spiceContainer');
-            spiceContainer.empty();
-            response.data.forEach(spice => {
-                const imageUrl = spice.imageURL ? `data:image/png;base64,${spice.imageURL}` : 'assets/Images/noImage.png';
-                let spiceCard = `
-                    <div class="col-md-4 spice-card" data-url="${imageUrl}">
-                        <div class="card mb-4 fs-5 border border-success rounded shadow-lg bg-light text-dark p-3 mb-5 border-2" style="width: 20rem">
-                            <img src="${imageUrl}" class="card-img-top" alt="Spice Image">
-                            <div class="card-body">
-                                <h5 class="card-title">${spice.name}</h5>
-                                <p class="card-text">${spice.description}</p>
-                              <p class="card-text"><strong>Price: </strong> <span class="price">${spice.price}</span></p>
-                           <p class="card-text"><strong>Location: </strong> <span class="location">${spice.location}</span></p>
-                                <button class="btn btn-outline-success bid-btn" data-id="${spice.id}">Bid Now</button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                spiceContainer.append(spiceCard);
-            });
-
-            $('.bid-btn').click(function(event) {
-                event.stopPropagation(); // Prevent the card click event from firing
-                let spiceId = $(this).data('id');
-                let bidAmount = parseFloat(prompt("Enter your bid amount:"));
-
-                if (isNaN(bidAmount) || bidAmount <= 0) {
-                    Swal.fire('Invalid bid amount');
-                    return;
-                }
-
-                let bidData = {
-                    bidAmount: bidAmount,
-                    listingId: spiceId,
-                    status: 'ACTIVE',
-                    bidTime: new Date().toISOString()
-                };
-
-                let formData = new FormData();
-                formData.append('bid', JSON.stringify(bidData));
-
-                let token = localStorage.getItem('token');
-                if (!token) {
-                    Swal.fire('Authentication token not found');
-                    return;
-                }
-
-                // Get the image URL from the selected card
-                let imageUrl = $(this).closest('.spice-card').data('url');
-                if (imageUrl) {
-                    fetch(imageUrl)
-                        .then(res => res.blob())
-                        .then(blob => {
-                            const reader = new FileReader();
-                            reader.onloadend = () => {
-                                const base64data = reader.result.split(',')[1];
-                                formData.append('imageURL', base64data);
-
-                                // Send the form data with the Base64 image URL
-                                $.ajax({
-                                    url: 'http://localhost:8080/api/v1/bids/save',
-                                    method: 'POST',
-                                    headers: {
-                                        'Authorization': 'Bearer ' + token // Include authentication token
-                                    },
-                                    contentType: false, // Important: set to false for multipart/form-data
-                                    processData: false, // Important: set to false for multipart/form-data
-                                    data: formData,
-                                    success: function(response) {
-                                        Swal.fire('Bid placed successfully');
-                                    },
-                                    error: function(error) {
-                                        let errorMessage = error.responseText ? error.responseText : 'An unknown error occurred';
-                                        Swal.fire('Error placing bid: ' + errorMessage);
-                                    }
-                                });
-                            };
-                            reader.readAsDataURL(blob);
-                        });
-                } else {
-                    console.error('Image URL is undefined');
-                    return;
-                }
-            });
+        success: function (response) {
+            populateSpiceContainer(response.data);
         },
-        error: function(error) {
-            console.log(error);
+        error: function (error) {
+            console.error('Error fetching spices:', error);
         }
     });
-});
+}
 
-function filterSpices() {
-    const filter = document.getElementById('filterInput').value.toLowerCase();
-    const cards = document.getElementsByClassName('spice-card');
-    for (let i = 0; i < cards.length; i++) {
-        const card = cards[i];
-        const name = card.getElementsByClassName('card-title')[0].innerText.toLowerCase();
-        if (name.includes(filter)) {
-            card.style.display = '';
-        } else {
-            card.style.display = 'none';
+// Function to populate the spice container
+function populateSpiceContainer(spices) {
+    let spiceContainer = $('#spiceContainer');
+    spiceContainer.empty();
+
+    spices.forEach(spice => {
+        const imageUrl = spice.imageURL ? `data:image/png;base64,${spice.imageURL}` : 'assets/Images/noImage.png';
+        const listedTime = spice.listedTime ? new Date(spice.listedTime).toLocaleString() : 'N/A';
+
+        let spiceCard = `
+            <div class="col-md-4 spice-card" data-url="${imageUrl}">
+                <div class="card mb-4 fs-5 border border-success rounded shadow-lg bg-light text-dark p-3 mb-5 border-2" style="width: 20rem">
+                    <img src="${imageUrl}" class="card-img-top" alt="Spice Image">
+                    <div class="card-body">
+                        <h5 class="card-title">${spice.name}</h5>
+                        <p class="card-text">${spice.description}</p>
+                        <p class="card-text"><strong>Price: </strong> <span class="price">${spice.price}</span></p>
+                        <p class="card-text"><strong>Quantity: </strong> <span class="quantity">${spice.quantity}</span></p>
+                        <p class="card-text"><strong>Location: </strong> <span class="location">${spice.location}</span></p>
+                       <p class="card-text"><strong>Listed Time: </strong> <span class="listed-time">${spice.listedTime ? new Date(spice.listedTime).toLocaleString() : 'N/A'}</span></p>
+                        <button class="btn btn-outline-success bid-btn" data-id="${spice.id}">Bid Now</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        spiceContainer.append(spiceCard);
+    });
+
+    // Attach click event to bid buttons
+    attachBidButtonListeners();
+}
+
+// Function to attach event listeners for bid buttons
+function attachBidButtonListeners() {
+    $('.bid-btn').click(function (event) {
+        event.stopPropagation();
+        let spiceId = $(this).data('id');
+        let bidAmount = parseFloat(prompt("Enter your bid amount:"));
+
+        if (isNaN(bidAmount) || bidAmount <= 0) {
+            Swal.fire('Invalid bid amount');
+            return;
         }
+
+        placeBid(spiceId, bidAmount, $(this).closest('.spice-card').data('url'));
+    });
+}
+
+// Function to place a bid
+function placeBid(spiceId, bidAmount, imageUrl) {
+    let token = localStorage.getItem('token');
+    if (!token) {
+        Swal.fire('Authentication token not found');
+        return;
+    }
+
+    let bidData = {
+        bidAmount: bidAmount,
+        listingId: spiceId,
+        status: 'ACTIVE',
+        bidTime: new Date().toISOString()
+    };
+
+    let formData = new FormData();
+    formData.append('bid', JSON.stringify(bidData));
+
+    if (imageUrl) {
+        fetch(imageUrl)
+            .then(res => res.blob())
+            .then(blob => {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    const base64data = reader.result.split(',')[1];
+                    formData.append('imageURL', base64data);
+
+                    sendBidRequest(formData, token);
+                };
+                reader.readAsDataURL(blob);
+            });
+    } else {
+        console.error('Image URL is undefined');
     }
 }
 
+// Function to send the bid request
+function sendBidRequest(formData, token) {
+    $.ajax({
+        url: 'http://localhost:8080/api/v1/bids/save',
+        method: 'POST',
+        headers: {
+            'Authorization': 'Bearer ' + token
+        },
+        contentType: false,
+        processData: false,
+        data: formData,
+        success: function () {
+            Swal.fire('Bid placed successfully');
+        },
+        error: function (error) {
+            let errorMessage = error.responseText ? error.responseText : 'An unknown error occurred';
+            Swal.fire('Error placing bid: ' + errorMessage);
+        }
+    });
+}
+
+// Function to filter spices dynamically
+function filterSpices() {
+    console.log("Filter function triggered");
+
+    const nameFilter = document.getElementById('filterInput').value.toLowerCase();
+    const locationFilter = document.getElementById('locationInput').value.toLowerCase();
+    const minPrice = parseFloat(document.getElementById('minPriceInput').value);
+    const maxPrice = parseFloat(document.getElementById('maxPriceInput').value);
+    const sortByLatest = document.getElementById('latestItemsCheckbox').checked;
+
+    console.log("Name Filter:", nameFilter);
+    console.log("Location Filter:", locationFilter);
+    console.log("Min Price:", minPrice);
+    console.log("Max Price:", maxPrice);
+    console.log("Sort By Latest:", sortByLatest);
+
+    const cards = Array.from(document.getElementsByClassName('spice-card'));
+
+    // If all filter fields are empty, reload all cards
+    if (!nameFilter && !locationFilter && isNaN(minPrice) && isNaN(maxPrice) && !sortByLatest) {
+        console.log("No filters applied, reloading all cards");
+        fetchSpices(); // Re-fetch and re-render all cards
+        return;
+    }
+
+    const filteredCards = [];
+
+    cards.forEach(card => {
+        const name = card.getElementsByClassName('card-title')[0].innerText.toLowerCase();
+        const location = card.getElementsByClassName('location')[0].innerText.toLowerCase();
+        const price = parseFloat(card.getElementsByClassName('price')[0].innerText);
+        const listedTime = parseInt(card.getElementsByClassName('listed-time')[0].innerText);
+
+        let isVisible = true;
+
+        if (nameFilter && !name.includes(nameFilter)) isVisible = false;
+        if (locationFilter && !location.includes(locationFilter)) isVisible = false;
+        if (!isNaN(minPrice) && price < minPrice) isVisible = false;
+        if (!isNaN(maxPrice) && price > maxPrice) isVisible = false;
+
+        if (isVisible) {
+            filteredCards.push({ card, listedTime });
+        } else {
+            card.style.display = 'none';
+        }
+    });
+
+    if (sortByLatest) {
+        filteredCards.sort((a, b) => b.listedTime - a.listedTime);
+    }
+
+    const container = document.getElementById('spiceContainer');
+    const fragment = document.createDocumentFragment();
+
+    filteredCards.forEach(({ card }) => {
+        card.style.display = '';
+        fragment.appendChild(card);
+    });
+
+    container.innerHTML = '';
+    container.appendChild(fragment);
+}
+
+// Function to confirm logout
 function confirmLogout() {
     Swal.fire({
         title: 'Are you sure?',
@@ -124,6 +212,7 @@ function confirmLogout() {
     });
 }
 
+// Function to inactivate a bid
 function inactivateBid(bidId) {
     fetch(`http://localhost:8080/api/v1/bids/inactivate/${bidId}`, {
         method: 'PUT',
@@ -140,8 +229,7 @@ function inactivateBid(bidId) {
             }
             return response.json();
         })
-        .then(data => {
-            console.log('Bid inactivated successfully:', data);
+        .then(() => {
             Swal.fire('Bid inactivated successfully');
         })
         .catch(error => {

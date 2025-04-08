@@ -1,6 +1,5 @@
 package lk.ijse.back_end.service;
 
-import jakarta.transaction.Transactional;
 import lk.ijse.back_end.dto.SpiceDTO;
 import org.springframework.web.multipart.MultipartFile;
 

@@ -53,7 +53,7 @@ $(document).ready(function() {
             success: function(response) {
                 Swal.fire('Profile updated successfully');
                 // Redirect to the Home page
-                window.location.href = 'admin_html';
+                window.location.href = 'admin.html';
             },
             error: function() {
                 Swal.fire('Error updating profile');

@@ -1,11 +1,13 @@
 package lk.ijse.back_end.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 @AllArgsConstructor
@@ -25,6 +27,7 @@ public class Spice implements Serializable {
 //    @Column(columnDefinition = "LONGTEXT",name = "image_url")
     private String imageURL;
     private String location;
+    private Date listedTime; // Add this line
 
     @Version
     private int version;

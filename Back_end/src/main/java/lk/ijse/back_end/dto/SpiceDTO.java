@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -33,5 +34,6 @@ public class SpiceDTO<T> implements Serializable {
     private String location;
     private UUID sellerId;
     private boolean active;
+    private Date listedTime; // Add this line
 
 }

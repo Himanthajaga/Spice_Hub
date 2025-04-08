@@ -78,7 +78,8 @@ public class WebSecurityConfig implements WebMvcConfigurer {
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",
-                                "/reset-password").permitAll() // Add this line                          .permitAll()
+                                "/reset-password",
+                        "/oauth2/**").permitAll() // Add this line                          .permitAll()
                         .anyRequest().authenticated()
 
                 )

@@ -7,6 +7,7 @@ import lk.ijse.back_end.entity.User;
 import lk.ijse.back_end.enums.ImageType;
 import lk.ijse.back_end.repository.PasswordResetTokenRepository;
 import lk.ijse.back_end.repository.UserRepository;
+import lk.ijse.back_end.service.EmailService;
 import lk.ijse.back_end.service.UserService;
 import lk.ijse.back_end.utill.ImageUtil;
 import org.hibernate.StaleObjectStateException;
@@ -40,10 +41,18 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     private ModelMapper modelMapper;
     @Autowired
     private PasswordResetTokenRepository tokenRepository;
+    @Autowired
+    private EmailService emailService;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        if (!user.isActive()) {
+            throw new RuntimeException("Your account was suspended by an admin and you can't log in until the admin reactivates it.");
+        }
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), getAuthority(user));
     }
 
@@ -146,8 +155,10 @@ public class UserServiceImpl implements UserDetailsService, UserService {
             if (userDTO.getName() != null) {
                 user.setName(userDTO.getName());
             }
-            if (userDTO.getPassword() != null) {
+            if (userDTO.getPassword() != null && !userDTO.getPassword().isEmpty()) {
                 user.setPassword(new BCryptPasswordEncoder().encode(userDTO.getPassword()));
+            } else {
+                userDTO.setPassword(user.getPassword());
             }
             if (userDTO.getAddress() != null) {
                 user.setAddress(userDTO.getAddress());
@@ -223,6 +234,12 @@ public class UserServiceImpl implements UserDetailsService, UserService {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
         user.setActive(!user.isActive());
         userRepository.save(user);
+
+        String status = user.isActive() ? "activated" : "deactivated";
+        String subject = "Account Status Changed";
+        String message = "Your account has been " + status + ".";
+
+        emailService.sendEmail(user.getEmail(), subject, message);
     }
 
     @Override

@@ -4,15 +4,51 @@
     <meta charset="UTF-8">
     <title>Login</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
-
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap">
+    <meta name="google-signin-client_id" content="501922145163-s0v51frjeoja5l19q7mskucsb7kaklj3.apps.googleusercontent.com">
+    <style>
+        .vh-100 {
+            height: 100vh !important;
+        }
+        .login-card {
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-height: 90vh; /* Adjust the max height */
+            overflow-y: auto; /* Add scroll if content overflows */
+        }
+        .login-card .form-label,
+        .login-card .form-check-label,
+        .login-card .text-dark {
+            font-size: 1rem !important; /* Reduce the font size of the labels and text */
+        }
+        .login-card #loginBtn {
+            font-size: 1rem !important; /* Reduce the font size of the button */
+            padding: 10px 20px !important; /* Adjust the padding of the button */
+        }
+        #imgspice {
+            width: 100px; /* Adjust the width of the image */
+            height: auto; /* Maintain the aspect ratio */
+        }
+    </style>
 </head>
 <body>
 
 <div class="container d-flex justify-content-center align-items-center vh-100">
-    <div class="card p-3 shadow text-primary fs-1" style="width: 800px;"> <!-- Increased width to 600px -->
+    <div class="card p-3 shadow text-primary fs-1 login-card">
+        <div class="d-flex justify-content-center align-items-center">
+            <img src="assests/Images/Capture.PNG" alt="spice Image" id="imgspice">
+        </div>
         <h1 class="text-center mt-5 text-success">Welcome to SpiceHub</h1>
         <form>
             <div class="mb-3 text-color-dark">
@@ -30,7 +66,11 @@
             <button id="loginBtn" type="button" class="btn btn-outline-success w-100">Login</button>
         </form>
         <p class="text-center mt-3"><a href="forgot-password.html" class="text-dark fs-1 fw-bolder">Forgot Password?</a></p>
-        <p class="text-center mt-3">Don't have an account? <a href="signup.html" class="text-dark fs-1 fw-bolder">Register</a></p>
+        <p class="text-center mt-3 fs-5">Don't have an account? <a href="signup.html" class="text-dark fs-6 fw-bolder">Register</a></p>
+        <div class="text-center mt-3 fs-5">Or</div>
+        <div class="d-flex justify-content-center mt-3">
+            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        </div>
     </div>
 </div>
 
@@ -39,6 +79,62 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+<script>
+    function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        var email = profile.getEmail();
+
+        // Autofill the login form
+        document.getElementById('email').value = email;
+
+        // Save user details in the database
+        saveUserDetails(email);
+    }
+    function saveUserDetails(email) {
+        $.ajax({
+            url: 'http://localhost:8080/api/v1/user/register',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                email: email,
+                password: 'defaultPassword' // You can generate a random password or use a default one
+            }),
+            success: function(response) {
+                console.log('User details saved successfully:', response);
+            },
+            error: function(error) {
+                console.error('Error saving user details:', error);
+            }
+        });
+    }
+
+    $(document).ready(function() {
+        $('#loginBtn').click(function() {
+            var email = $('#email').val();
+            var password = $('#password').val();
+
+            $.ajax({
+                url: 'http://localhost:8080/api/v1/auth/login',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    email: email,
+                    password: password
+                }),
+                success: function(response) {
+                    console.log('Login successful:', response);
+                    Swal.fire('User logged in successfully');
+                    window.localStorage.setItem('token', response.data.token);
+                    window.location.href = 'user_index.html';
+                },
+                error: function(error) {
+                    console.error('Error logging in:', error);
+                    Swal.fire('Login failed: ' + (error.responseText || 'Unknown error'));
+                }
+            });
+        });
+    });
+</script>
 <script src="js/login.js"></script>
 </body>
 </html>
