@@ -33,14 +33,20 @@ $(document).ready(function() {
             data: formData,
             success: function(response) {
                 console.log('Registration successful:', response);
-                  Swal.fire('User registered successfully');
-                window.localStorage.setItem('token', response.data.token);
-                console.log('Redirecting to login page...');
-                window.location.href = 'login.html';
+
+                if (response && response.data && response.data.token) {
+                    Swal.fire('User registered successfully');
+                    window.localStorage.setItem('token', response.data.token);
+                    console.log('Redirecting to login page...');
+                    window.location.href = 'login.html';
+                } else {
+                    console.error('Token not found in response:', response);
+                    Swal.fire('Registration successful, but token is missing.');
+                }
             },
             error: function(error) {
                 console.error('Error details:', error);
-                  Swal.fire('An error occurred while registering user: ' + (error.responseText || 'Unknown error'));
+                Swal.fire('An error occurred while registering user: ' + (error.responseText || 'Unknown error'));
             }
         });
     });

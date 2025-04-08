@@ -71,7 +71,19 @@ $(document).ready(function() {
         Swal.fire('User not logged in');
     }
 });
+function filterCategories() {
+    const filterValue = document.getElementById('filterInput').value.toLowerCase();
+    const categoryCards = document.querySelectorAll('.category-card');
 
+    categoryCards.forEach(card => {
+        const categoryName = card.querySelector('.card-title').textContent.toLowerCase();
+        if (categoryName.includes(filterValue)) {
+            card.style.display = ''; // Show the card
+        } else {
+            card.style.display = 'none'; // Hide the card
+        }
+    });
+}
 function confirmLogout() {
     Swal.fire({
         title: 'Are you sure?',

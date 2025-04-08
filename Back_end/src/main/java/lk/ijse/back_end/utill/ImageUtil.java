@@ -12,10 +12,8 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Base64;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+
 @Component
 public class ImageUtil {
     public static Path IMAGE_DIRECTORY = Paths.get(System.getProperty("user.home"), "Desktop", "LocalS3Bucket").toAbsolutePath().normalize();
@@ -58,11 +56,16 @@ public class ImageUtil {
             return null;
         }
         //Check whether the file types are valid
-        if (!Objects.requireNonNull(file.getOriginalFilename()).endsWith("jpg") &&
-                !Objects.requireNonNull(file.getOriginalFilename()).endsWith("png") &&
-                !Objects.requireNonNull(file.getOriginalFilename()).endsWith("jpeg")
-        ) {
-            throw new InvalidImageTypeException("Invalid file type. Only JPG and PNG files are allowed.");
+        if (file.isEmpty()) {
+            throw new IllegalArgumentException("File is required and cannot be empty");
+        }
+
+// List of allowed MIME types for images
+        List<String> allowedMimeTypes = Arrays.asList("image/jpeg", "image/JPEG","image/png","image/PNG", "image/gif", "image/bmp", "image/webp");
+
+        String mimeType = file.getContentType();
+        if (mimeType == null || !allowedMimeTypes.contains(mimeType)) {
+            throw new InvalidImageTypeException("Invalid file type. Only image files are allowed.");
         }
 
         String fileName = imageType.toString() + "-" + UUID.randomUUID();

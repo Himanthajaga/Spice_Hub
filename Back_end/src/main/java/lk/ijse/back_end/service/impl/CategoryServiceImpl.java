@@ -11,6 +11,8 @@ import lk.ijse.back_end.utill.ImageUtil;
 import lk.ijse.back_end.enums.ImageType;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,6 +23,7 @@ import java.util.UUID;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
+    private static final Logger logger = LoggerFactory.getLogger(SpiceServiceImpl.class);
     @Autowired
     private CategoryRepo categoryRepo;
     @Autowired
@@ -30,11 +33,14 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryDTO<String> save(CategoryDTO categoryDTO, MultipartFile file) {
+        logger.info("Saving category: " + categoryDTO.getName());
         String base64Image = imageUtil.saveImage(ImageType.CATEGORY, file);
         Category category = modelMapper.map(categoryDTO, Category.class);
         category.setImageURL(base64Image);
 
         Category savedCategory = categoryRepo.save(category);
+        logger.info("Category saved with ID: " + savedCategory.getId());
+
         CategoryDTO<String> stringCategoryDTO = modelMapper.map(savedCategory, CategoryDTO.class);
         stringCategoryDTO.setImageURL(base64Image);
 

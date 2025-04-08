@@ -37,22 +37,28 @@ public class UserController {
     @PostMapping(value = "/register", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseUtil registerUser(@RequestPart("user") String userJson, @RequestPart("file") MultipartFile file) throws JsonProcessingException {
         try {
+            // Deserialize the user JSON into a UserDTO object
             UserDTO userDTO = new ObjectMapper().readValue(userJson, UserDTO.class);
             log.info("Received request to register user: {}", userDTO.getName());
+
+            // Convert the profile picture to Base64 and set it in the UserDTO
             userDTO.setProfilePicture(AppUtil.toBase64(file));
 
+            // Save the user and get the result
             UserDTO<String> res = userService.saveUser(userDTO, file);
-            if (res.equals(VarList.Created)) {
-                String token = jwtUtil.generateToken(userDTO);
+
+            // Check the result and generate a token if the user is successfully created
+            if (res != null) {
+                String token = jwtUtil.generateToken(userDTO); // Generate JWT token
                 AuthDTO authDTO = new AuthDTO();
                 authDTO.setEmail(userDTO.getEmail());
                 authDTO.setToken(token);
                 authDTO.setProfilePicture(res.getProfilePicture());
+
+                // Return success response with the token
                 return new ResponseUtil(VarList.Created, "User Registered Successfully", authDTO);
-            } else if (res.equals(VarList.Not_Acceptable)) {
-                return new ResponseUtil(VarList.Not_Acceptable, "Email Already Used", null);
             } else {
-                return new ResponseUtil(VarList.Bad_Gateway, "Error", null);
+                return new ResponseUtil(VarList.Not_Acceptable, "Email Already Used", null);
             }
         } catch (Exception e) {
             log.error("Error registering user", e);

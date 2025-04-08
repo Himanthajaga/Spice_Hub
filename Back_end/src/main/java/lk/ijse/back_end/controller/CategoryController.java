@@ -26,7 +26,8 @@ public class CategoryController {
             CategoryDTO<String> savedCategory = categoryService.save(categoryDTO, file);
             return new ResponseUtil(201, "Category added successfully", savedCategory);
         } catch (Exception e) {
-            return new ResponseUtil(500, "Internal server error", null);
+            e.printStackTrace(); // Log the full stack trace
+            return new ResponseUtil(500, "Internal server error: " + e.getMessage(), null);
         }
     }
     @GetMapping(path = "/get")
