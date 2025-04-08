@@ -1,0 +1,4561 @@
+2025-04-08 11:02:12 - Properties location [classpath:otherprops.properties] not resolvable: class path resource [otherprops.properties] cannot be opened because it does not exist
+2025-04-08 11:02:13 - Overriding bean definition for bean 'modelMapper' with a different definition: replacing [Root bean: class=null; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; fallback=false; factoryBeanName=webAppConfig; factoryMethodName=modelMapper; initMethodNames=null; destroyMethodNames=[(inferred)]; defined in class path resource [lk/ijse/back_end/config/WebAppConfig.class]] with [Root bean: class=null; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; fallback=false; factoryBeanName=backEndApplication; factoryMethodName=modelMapper; initMethodNames=null; destroyMethodNames=[(inferred)]; defined in lk.ijse.back_end.BackEndApplication]
+2025-04-08 11:02:13 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-08 11:02:13 - Finished Spring Data repository scanning in 132 ms. Found 8 JPA repository interfaces.
+2025-04-08 11:02:16 - Tomcat initialized with port 8080 (http)
+2025-04-08 11:02:16 - Starting service [Tomcat]
+2025-04-08 11:02:16 - Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-04-08 11:02:16 - Initializing Spring embedded WebApplicationContext
+2025-04-08 11:02:16 - Root WebApplicationContext: initialization completed in 4980 ms
+2025-04-08 11:02:17 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-08 11:02:17 - HHH000412: Hibernate ORM core version 6.6.6.Final
+2025-04-08 11:02:17 - HHH000026: Second-level cache disabled
+2025-04-08 11:02:18 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-08 11:02:18 - HikariPool-1 - Starting...
+2025-04-08 11:02:19 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3ec62141
+2025-04-08 11:02:19 - HikariPool-1 - Start completed.
+2025-04-08 11:02:19 - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-08 11:02:19 - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-04-08 11:02:19 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-08 11:02:21 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-08 11:02:21 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-08 11:02:22 - Global AuthenticationManager configured with UserDetailsService bean with name userServiceImpl
+2025-04-08 11:02:22 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-04-08 11:02:24 - Exposing 1 endpoint beneath base path '/actuator'
+2025-04-08 11:02:25 - Tomcat started on port 8080 (http) with context path '/'
+2025-04-08 11:02:26 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-08 11:02:26 - Initializing Servlet 'dispatcherServlet'
+2025-04-08 11:02:26 - Completed initialization in 3 ms
+2025-04-08 11:02:32 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 11:02:34 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 11:03:01 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 11:03:15 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 11:03:20 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 11:03:24 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 11:03:24 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 11:03:25 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 11:03:25 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 11:03:32 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 11:03:32 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role,
+        s1_0.version 
+    from
+        spice s1_0 
+    left join
+        systemuser u1_0 
+            on u1_0.uid=s1_0.user_uid 
+    where
+        s1_0.id=?
+2025-04-08 11:03:32 - 
+    select
+        b1_0.listing_id,
+        b1_0.id,
+        b1_0.bid_amount,
+        b1_0.bid_time,
+        b1_0.imageurl,
+        b1_0.status,
+        b1_0.user_id,
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        bid b1_0 
+    left join
+        systemuser u1_0 
+            on u1_0.uid=b1_0.user_id 
+    where
+        b1_0.listing_id=?
+2025-04-08 11:03:36 - 
+    delete 
+    from
+        spice 
+    where
+        id=? 
+        and version=?
+2025-04-08 11:03:38 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 11:03:38 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 11:03:47 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 11:03:47 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 11:03:48 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0
+2025-04-08 11:04:11 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 11:04:14 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 11:04:15 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 11:04:15 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 11:04:15 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 11:04:19 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 11:04:19 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 11:04:19 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 11:04:19 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0 
+    left join
+        systemuser u1_0 
+            on u1_0.uid=s1_0.user_uid 
+    where
+        u1_0.uid=?
+2025-04-08 11:04:19 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 11:04:26 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 11:04:26 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 11:04:26 - 
+    select
+        b1_0.id,
+        b1_0.bid_amount,
+        b1_0.bid_time,
+        b1_0.imageurl,
+        b1_0.listing_id,
+        b1_0.status,
+        b1_0.user_id 
+    from
+        bid b1_0 
+    left join
+        systemuser u1_0 
+            on u1_0.uid=b1_0.user_id 
+    where
+        u1_0.uid=?
+2025-04-08 11:04:27 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 11:04:27 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 11:09:49 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 11:09:49 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 11:10:21 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 11:10:21 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 11:10:25 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 11:10:25 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 11:10:28 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 11:10:28 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 11:10:47 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 11:10:47 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 11:10:58 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 11:10:58 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 11:11:06 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 11:11:06 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 11:11:39 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 11:11:39 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 11:11:46 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 11:11:46 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 11:11:51 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 11:11:51 - 
+    select
+        c1_0.id,
+        c1_0.description,
+        c1_0.imageurl,
+        c1_0.name 
+    from
+        category c1_0
+2025-04-08 11:12:55 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 11:12:55 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 11:12:55 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 11:12:55 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0
+2025-04-08 11:13:07 - 
+    insert 
+    into
+        spice
+        (category, description, imageurl, listed_time, location, name, price, quantity, user_uid, version, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2025-04-08 11:13:08 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 11:13:08 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 11:14:00 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 11:14:00 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 11:19:18 - Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-08 11:19:18 - Graceful shutdown complete
+2025-04-08 11:19:19 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-08 11:19:19 - HikariPool-1 - Shutdown initiated...
+2025-04-08 11:19:19 - HikariPool-1 - Shutdown completed.
+2025-04-08 11:19:41 - Properties location [classpath:otherprops.properties] not resolvable: class path resource [otherprops.properties] cannot be opened because it does not exist
+2025-04-08 11:19:42 - Overriding bean definition for bean 'modelMapper' with a different definition: replacing [Root bean: class=null; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; fallback=false; factoryBeanName=webAppConfig; factoryMethodName=modelMapper; initMethodNames=null; destroyMethodNames=[(inferred)]; defined in class path resource [lk/ijse/back_end/config/WebAppConfig.class]] with [Root bean: class=null; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; fallback=false; factoryBeanName=backEndApplication; factoryMethodName=modelMapper; initMethodNames=null; destroyMethodNames=[(inferred)]; defined in lk.ijse.back_end.BackEndApplication]
+2025-04-08 11:19:42 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-04-08 11:19:42 - Finished Spring Data repository scanning in 120 ms. Found 8 JPA repository interfaces.
+2025-04-08 11:19:44 - Tomcat initialized with port 8080 (http)
+2025-04-08 11:19:44 - Starting service [Tomcat]
+2025-04-08 11:19:44 - Starting Servlet engine: [Apache Tomcat/10.1.36]
+2025-04-08 11:19:44 - Initializing Spring embedded WebApplicationContext
+2025-04-08 11:19:44 - Root WebApplicationContext: initialization completed in 3865 ms
+2025-04-08 11:19:45 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-04-08 11:19:45 - HHH000412: Hibernate ORM core version 6.6.6.Final
+2025-04-08 11:19:45 - HHH000026: Second-level cache disabled
+2025-04-08 11:19:45 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-04-08 11:19:46 - HikariPool-1 - Starting...
+2025-04-08 11:19:46 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@403cff1c
+2025-04-08 11:19:46 - HikariPool-1 - Start completed.
+2025-04-08 11:19:46 - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-04-08 11:19:46 - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-04-08 11:19:46 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-04-08 11:19:48 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-04-08 11:19:49 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-04-08 11:19:49 - Global AuthenticationManager configured with UserDetailsService bean with name userServiceImpl
+2025-04-08 11:19:50 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-04-08 11:19:51 - Exposing 1 endpoint beneath base path '/actuator'
+2025-04-08 11:19:52 - Tomcat started on port 8080 (http) with context path '/'
+2025-04-08 11:19:56 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-08 11:19:56 - Initializing Servlet 'dispatcherServlet'
+2025-04-08 11:19:56 - Completed initialization in 4 ms
+2025-04-08 11:20:08 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 11:20:08 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 11:22:19 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 11:22:19 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 11:23:19 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 11:23:19 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 11:23:40 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 11:23:40 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 11:24:10 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 11:24:10 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 11:57:47 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 11:57:47 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 11:57:58 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 11:57:58 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 11:58:13 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 11:58:13 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 11:58:19 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 11:58:19 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 11:58:19 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 11:58:19 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role,
+        s1_0.version 
+    from
+        spice s1_0 
+    left join
+        systemuser u1_0 
+            on u1_0.uid=s1_0.user_uid 
+    where
+        s1_0.id=?
+2025-04-08 11:58:24 - 
+    insert 
+    into
+        bid
+        (bid_amount, bid_time, imageurl, listing_id, status, user_id, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?)
+2025-04-08 11:58:30 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 11:58:30 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 11:58:30 - 
+    select
+        b1_0.id,
+        b1_0.bid_amount,
+        b1_0.bid_time,
+        b1_0.imageurl,
+        b1_0.listing_id,
+        b1_0.status,
+        b1_0.user_id 
+    from
+        bid b1_0 
+    left join
+        systemuser u1_0 
+            on u1_0.uid=b1_0.user_id 
+    where
+        u1_0.uid=?
+2025-04-08 11:58:30 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role,
+        s1_0.version 
+    from
+        spice s1_0 
+    left join
+        systemuser u1_0 
+            on u1_0.uid=s1_0.user_uid 
+    where
+        s1_0.id=?
+2025-04-08 11:58:33 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 11:58:33 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 11:58:34 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 11:58:34 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 11:58:34 - 
+    select
+        b1_0.id,
+        b1_0.bid_amount,
+        b1_0.bid_time,
+        b1_0.imageurl,
+        b1_0.listing_id,
+        b1_0.status,
+        b1_0.user_id 
+    from
+        bid b1_0 
+    left join
+        systemuser u1_0 
+            on u1_0.uid=b1_0.user_id 
+    where
+        u1_0.uid=?
+2025-04-08 11:58:34 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role,
+        s1_0.version 
+    from
+        spice s1_0 
+    left join
+        systemuser u1_0 
+            on u1_0.uid=s1_0.user_uid 
+    where
+        s1_0.id=?
+2025-04-08 11:58:36 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 11:58:36 - 
+    select
+        count(*) 
+    from
+        bid b1_0 
+    where
+        b1_0.id=?
+2025-04-08 11:58:36 - 
+    select
+        b1_0.id,
+        b1_0.bid_amount,
+        b1_0.bid_time,
+        b1_0.imageurl,
+        b1_0.listing_id,
+        l1_0.id,
+        l1_0.category,
+        l1_0.description,
+        l1_0.imageurl,
+        l1_0.listed_time,
+        l1_0.location,
+        l1_0.name,
+        l1_0.price,
+        l1_0.quantity,
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role,
+        l1_0.version,
+        b1_0.status,
+        b1_0.user_id,
+        u2_0.uid,
+        u2_0.phone,
+        u2_0.active,
+        u2_0.address,
+        u2_0.email,
+        u2_0.name,
+        u2_0.password,
+        u2_0.profile_picture,
+        u2_0.role 
+    from
+        bid b1_0 
+    join
+        spice l1_0 
+            on l1_0.id=b1_0.listing_id 
+    left join
+        systemuser u1_0 
+            on u1_0.uid=l1_0.user_uid 
+    join
+        systemuser u2_0 
+            on u2_0.uid=b1_0.user_id 
+    where
+        b1_0.id=?
+2025-04-08 11:58:36 - 
+    delete 
+    from
+        bid 
+    where
+        id=?
+2025-04-08 11:58:38 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 11:58:38 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 11:58:38 - 
+    select
+        b1_0.id,
+        b1_0.bid_amount,
+        b1_0.bid_time,
+        b1_0.imageurl,
+        b1_0.listing_id,
+        b1_0.status,
+        b1_0.user_id 
+    from
+        bid b1_0 
+    left join
+        systemuser u1_0 
+            on u1_0.uid=b1_0.user_id 
+    where
+        u1_0.uid=?
+2025-04-08 11:58:41 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 11:58:41 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 11:58:59 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 11:58:59 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:00:04 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:00:04 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:00:16 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:00:16 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:00:27 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:00:27 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:00:50 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:00:50 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:01:52 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:01:52 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:02:21 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:02:21 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:03:50 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:03:50 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:04:57 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:04:57 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:05:01 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:05:01 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:05:08 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:05:08 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:05:28 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:05:28 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:05:44 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:05:44 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:09:02 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:09:02 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:09:09 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:09:09 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:09:13 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:09:13 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:09:17 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:09:17 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:09:26 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:09:26 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:09:28 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:09:28 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:09:38 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:09:38 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:09:40 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 12:09:40 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 12:09:40 - 
+    select
+        b1_0.id,
+        b1_0.bid_amount,
+        b1_0.bid_time,
+        b1_0.imageurl,
+        b1_0.listing_id,
+        b1_0.status,
+        b1_0.user_id 
+    from
+        bid b1_0 
+    left join
+        systemuser u1_0 
+            on u1_0.uid=b1_0.user_id 
+    where
+        u1_0.uid=?
+2025-04-08 12:09:48 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 12:09:48 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 12:09:48 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 12:09:48 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0 
+    left join
+        systemuser u1_0 
+            on u1_0.uid=s1_0.user_uid 
+    where
+        u1_0.uid=?
+2025-04-08 12:09:48 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:12:49 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 12:12:49 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 12:12:50 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 12:12:50 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0 
+    left join
+        systemuser u1_0 
+            on u1_0.uid=s1_0.user_uid 
+    where
+        u1_0.uid=?
+2025-04-08 12:12:50 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:12:54 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:12:54 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:13:24 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:13:24 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:13:56 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:13:56 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:14:55 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:14:55 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:15:04 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:15:04 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:15:07 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:15:07 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:15:10 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:15:10 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:20:24 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:20:24 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:21:32 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:21:32 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:21:54 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:21:54 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:21:58 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:21:58 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:21:59 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:21:59 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:22:06 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:22:06 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:23:53 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:23:53 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:24:00 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:24:00 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:24:41 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:24:41 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:24:46 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:24:46 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:25:37 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:25:37 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:25:42 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:25:42 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:25:43 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:25:43 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:25:53 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:25:53 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:26:05 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:26:05 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:26:07 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:26:07 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:26:17 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role,
+        s1_0.version 
+    from
+        spice s1_0 
+    left join
+        systemuser u1_0 
+            on u1_0.uid=s1_0.user_uid 
+    where
+        s1_0.id=?
+2025-04-08 12:26:17 - 
+    select
+        b1_0.listing_id,
+        b1_0.id,
+        b1_0.bid_amount,
+        b1_0.bid_time,
+        b1_0.imageurl,
+        b1_0.status,
+        b1_0.user_id,
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        bid b1_0 
+    left join
+        systemuser u1_0 
+            on u1_0.uid=b1_0.user_id 
+    where
+        b1_0.listing_id=?
+2025-04-08 12:26:21 - 
+    delete 
+    from
+        spice 
+    where
+        id=? 
+        and version=?
+2025-04-08 12:26:23 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:26:23 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:26:39 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:26:39 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:27:55 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:27:55 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:27:57 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:27:57 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:27:58 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:27:58 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:28:06 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 12:28:06 - 
+    select
+        c1_0.id,
+        c1_0.description,
+        c1_0.imageurl,
+        c1_0.name 
+    from
+        category c1_0
+2025-04-08 12:28:21 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 12:28:21 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 12:28:21 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:28:21 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0
+2025-04-08 12:28:34 - 
+    insert 
+    into
+        spice
+        (category, description, imageurl, listed_time, location, name, price, quantity, user_uid, version, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2025-04-08 12:28:35 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:28:35 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:28:38 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:28:38 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:28:51 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:28:51 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:28:55 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:28:55 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:29:00 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:29:00 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:29:31 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:29:31 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:29:37 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:29:37 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:30:06 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:30:06 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:30:10 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:30:10 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:30:26 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:30:26 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:30:32 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:30:32 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:30:34 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:30:34 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:31:05 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:31:05 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:31:11 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:31:11 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:32:22 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:32:22 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:33:11 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:33:11 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:33:15 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:33:15 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:33:17 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:33:17 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:33:21 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:33:21 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:33:23 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:33:23 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:33:31 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:33:31 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:33:40 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:33:40 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:34:08 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:34:08 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:34:32 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:34:32 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:34:39 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 12:34:39 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 12:34:39 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 12:34:39 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0 
+    left join
+        systemuser u1_0 
+            on u1_0.uid=s1_0.user_uid 
+    where
+        u1_0.uid=?
+2025-04-08 12:34:39 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:34:42 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 12:34:42 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role,
+        s1_0.version 
+    from
+        spice s1_0 
+    left join
+        systemuser u1_0 
+            on u1_0.uid=s1_0.user_uid 
+    where
+        s1_0.id=?
+2025-04-08 12:34:53 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 12:34:53 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role,
+        s1_0.version 
+    from
+        spice s1_0 
+    left join
+        systemuser u1_0 
+            on u1_0.uid=s1_0.user_uid 
+    where
+        s1_0.id=?
+2025-04-08 12:34:53 - 
+    update
+        spice 
+    set
+        category=?,
+        description=?,
+        imageurl=?,
+        listed_time=?,
+        location=?,
+        name=?,
+        price=?,
+        quantity=?,
+        user_uid=?,
+        version=? 
+    where
+        id=? 
+        and version=?
+2025-04-08 12:34:54 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 12:34:54 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 12:34:54 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.email=?
+2025-04-08 12:34:54 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0 
+    left join
+        systemuser u1_0 
+            on u1_0.uid=s1_0.user_uid 
+    where
+        u1_0.uid=?
+2025-04-08 12:34:54 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:34:57 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:34:57 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:35:01 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:35:01 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:35:04 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:35:04 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:35:08 - 
+    select
+        s1_0.id,
+        s1_0.category,
+        s1_0.description,
+        s1_0.imageurl,
+        s1_0.listed_time,
+        s1_0.location,
+        s1_0.name,
+        s1_0.price,
+        s1_0.quantity,
+        s1_0.user_uid,
+        s1_0.version 
+    from
+        spice s1_0
+2025-04-08 12:35:08 - 
+    select
+        u1_0.uid,
+        u1_0.phone,
+        u1_0.active,
+        u1_0.address,
+        u1_0.email,
+        u1_0.name,
+        u1_0.password,
+        u1_0.profile_picture,
+        u1_0.role 
+    from
+        systemuser u1_0 
+    where
+        u1_0.uid=?
+2025-04-08 12:35:15 - Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-08 12:35:17 - Graceful shutdown complete
+2025-04-08 12:35:17 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-04-08 12:35:17 - HikariPool-1 - Shutdown initiated...
+2025-04-08 12:35:17 - HikariPool-1 - Shutdown completed.

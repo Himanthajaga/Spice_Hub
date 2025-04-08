@@ -36,7 +36,12 @@
 <!-- Main Content -->
 <div class="container mt-4">
     <div class="mb-3">
-        <input type="text" id="filterInput" class="form-control" placeholder="Filter spices by name" onkeyup="filterSpices()">
+        <input type="text" id="filterInput" placeholder="Filter by name">
+        <input type="text" id="locationInput" placeholder="Filter by location">
+        <input type="number" id="minPriceInput" placeholder="Min price">
+        <input type="number" id="maxPriceInput" placeholder="Max price">
+        <input type="checkbox" id="latestItemsCheckbox"> Sort by latest items
+        <button onclick="filterSpices()">Filter</button>
     </div>
     <div class="row" id="spiceContainer">
         <!-- Spice cards will be dynamically generated here -->

@@ -5,14 +5,6 @@ $(document).ready(function () {
     // Attach event listeners for dynamic filtering
     attachFilterListeners();
 });
-// Function to attach event listeners for filters
-function attachFilterListeners() {
-    document.getElementById('filterInput').addEventListener('input', filterSpices);
-    document.getElementById('locationInput').addEventListener('input', filterSpices);
-    document.getElementById('minPriceInput').addEventListener('input', filterSpices);
-    document.getElementById('maxPriceInput').addEventListener('input', filterSpices);
-    document.getElementById('latestItemsCheckbox').addEventListener('change', filterSpices);
-}
 // Function to fetch spices and populate the container
 function fetchSpices() {
     $.ajax({
@@ -132,7 +124,16 @@ function sendBidRequest(formData, token) {
     });
 }
 
-// Function to filter spices dynamically
+// Debounce function to limit the frequency of filter execution
+function debounce(func, delay) {
+    let timeout;
+    return function (...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), delay);
+    };
+}
+
+// Optimized filter function
 function filterSpices() {
     console.log("Filter function triggered");
 
@@ -150,7 +151,7 @@ function filterSpices() {
 
     const cards = Array.from(document.getElementsByClassName('spice-card'));
 
-    // If all filter fields are empty, reload all cards
+    // If all filter fields are empty and "Sort by Latest" is unchecked, reload all cards
     if (!nameFilter && !locationFilter && isNaN(minPrice) && isNaN(maxPrice) && !sortByLatest) {
         console.log("No filters applied, reloading all cards");
         fetchSpices(); // Re-fetch and re-render all cards
@@ -160,10 +161,10 @@ function filterSpices() {
     const filteredCards = [];
 
     cards.forEach(card => {
-        const name = card.getElementsByClassName('card-title')[0].innerText.toLowerCase();
-        const location = card.getElementsByClassName('location')[0].innerText.toLowerCase();
-        const price = parseFloat(card.getElementsByClassName('price')[0].innerText);
-        const listedTime = parseInt(card.getElementsByClassName('listed-time')[0].innerText);
+        const name = card.querySelector('.card-title').innerText.toLowerCase();
+        const location = card.querySelector('.location').innerText.toLowerCase();
+        const price = parseFloat(card.querySelector('.price').innerText);
+        const listedTime = new Date(card.querySelector('.listed-time').innerText).getTime();
 
         let isVisible = true;
 
@@ -172,27 +173,27 @@ function filterSpices() {
         if (!isNaN(minPrice) && price < minPrice) isVisible = false;
         if (!isNaN(maxPrice) && price > maxPrice) isVisible = false;
 
-        if (isVisible) {
-            filteredCards.push({ card, listedTime });
-        } else {
-            card.style.display = 'none';
-        }
+        card.dataset.listedTime = listedTime; // Cache listed time for sorting
+        card.style.display = isVisible ? '' : 'none';
+        if (isVisible) filteredCards.push(card);
     });
 
+    // Sort filtered cards if "Sort by Latest" is checked
     if (sortByLatest) {
-        filteredCards.sort((a, b) => b.listedTime - a.listedTime);
+        filteredCards.sort((a, b) => b.dataset.listedTime - a.dataset.listedTime);
+        const container = document.getElementById('spiceContainer');
+        filteredCards.forEach(card => container.appendChild(card));
     }
+}
 
-    const container = document.getElementById('spiceContainer');
-    const fragment = document.createDocumentFragment();
-
-    filteredCards.forEach(({ card }) => {
-        card.style.display = '';
-        fragment.appendChild(card);
-    });
-
-    container.innerHTML = '';
-    container.appendChild(fragment);
+// Attach debounced filter function to input events
+function attachFilterListeners() {
+    const debouncedFilter = debounce(filterSpices, 300);
+    document.getElementById('filterInput').addEventListener('input', debouncedFilter);
+    document.getElementById('locationInput').addEventListener('input', debouncedFilter);
+    document.getElementById('minPriceInput').addEventListener('input', debouncedFilter);
+    document.getElementById('maxPriceInput').addEventListener('input', debouncedFilter);
+    document.getElementById('latestItemsCheckbox').addEventListener('change', debouncedFilter);
 }
 
 // Function to confirm logout
