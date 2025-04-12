@@ -23,4 +23,5 @@ public class Payment implements Serializable {
     private String bidId;
     private String spiceOwnerEmail;
     private String buyerEmail;
+    private String friendlyId;
 }

@@ -38,7 +38,7 @@ public class PaymentDTO {
     private String spiceName;
     @NotBlank(message = "Spice ID is required")
     private String spiceId;
-
+    private String friendlyId;
 //    public PaymentDTO(Payment payment) {
 //    }
 }

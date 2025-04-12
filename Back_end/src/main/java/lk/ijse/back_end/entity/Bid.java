@@ -33,6 +33,8 @@ public class Bid implements Serializable {
 //    @Column(columnDefinition = "LONGTEXT")
     @Column(length = 255)
     private String imageURL;
+    @Column(nullable = false) // Add this field
+    private String spiceOwnerEmail;
     public enum BidStatus {
         PENDING,
         ACTIVE,

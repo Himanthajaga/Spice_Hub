@@ -27,4 +27,8 @@ public class BidDTO<T> implements Serializable {
     private T imageURL;
     private String listingName; // Add this field
     private String listingDescription; // Add this field
+    private String spiceOwnerEmail; // Add this field
+    public void setSpiceOwnerEmail(String spiceOwnerEmail) {
+        this.spiceOwnerEmail = spiceOwnerEmail;
+    }
 }

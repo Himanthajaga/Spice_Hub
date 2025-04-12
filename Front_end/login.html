@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap">
+    <script src="js/validation.js" defer></script>
     <meta name="google-signin-client_id" content="501922145163-s0v51frjeoja5l19q7mskucsb7kaklj3.apps.googleusercontent.com">
     <style>
         .vh-100 {
@@ -79,62 +80,6 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
-<script>
-    function onSignIn(googleUser) {
-        var profile = googleUser.getBasicProfile();
-        var email = profile.getEmail();
-
-        // Autofill the login form
-        document.getElementById('email').value = email;
-
-        // Save user details in the database
-        saveUserDetails(email);
-    }
-    function saveUserDetails(email) {
-        $.ajax({
-            url: 'http://localhost:8080/api/v1/user/register',
-            method: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({
-                email: email,
-                password: 'defaultPassword' // You can generate a random password or use a default one
-            }),
-            success: function(response) {
-                console.log('User details saved successfully:', response);
-            },
-            error: function(error) {
-                console.error('Error saving user details:', error);
-            }
-        });
-    }
-
-    $(document).ready(function() {
-        $('#loginBtn').click(function() {
-            var email = $('#email').val();
-            var password = $('#password').val();
-
-            $.ajax({
-                url: 'http://localhost:8080/api/v1/auth/login',
-                method: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify({
-                    email: email,
-                    password: password
-                }),
-                success: function(response) {
-                    console.log('Login successful:', response);
-                    Swal.fire('User logged in successfully');
-                    window.localStorage.setItem('token', response.data.token);
-                    window.location.href = 'user_index.html';
-                },
-                error: function(error) {
-                    console.error('Error logging in:', error);
-                    Swal.fire('Login failed: ' + (error.responseText || 'Unknown error'));
-                }
-            });
-        });
-    });
-</script>
 <script src="js/login.js"></script>
 </body>
 </html>

@@ -36,12 +36,13 @@ public class SpiceServiceImpl implements SpiceService {
     private ModelMapper modelMapper;
     @Autowired
     private ImageUtil imageUtil;
-@Autowired
-private UserRepository userRepo;
-@Autowired
-private EmailService emailService;
-@Autowired
-private BidServiceImpl bidService;
+    @Autowired
+    private UserRepository userRepo;
+    @Autowired
+    private EmailService emailService;
+    @Autowired
+    private BidServiceImpl bidService;
+
     @Override
     @Transactional
     public SpiceDTO<String> save(SpiceDTO spiceDTO, MultipartFile file) {
@@ -80,12 +81,13 @@ private BidServiceImpl bidService;
     @Override
     public List<SpiceDTO<String>> getAll() {
         List<Spice> spices = spiceRepo.findAll();
-        List<SpiceDTO<String>> spiceDTOS = modelMapper.map(spices, new TypeToken<List<SpiceDTO<String>>>() {}.getType());
+        List<SpiceDTO<String>> spiceDTOS = modelMapper.map(spices, new TypeToken<List<SpiceDTO<String>>>() {
+        }.getType());
         for (SpiceDTO<String> spiceDTO : spiceDTOS) {
-           spices.stream().filter(spice ->
-                   spice.getId().equals(spiceDTO.getId()))
-                   .findFirst()
-                   .ifPresent(spice -> spiceDTO.setImageURL(imageUtil.getImage(spice.getImageURL())));
+            spices.stream().filter(spice ->
+                            spice.getId().equals(spiceDTO.getId()))
+                    .findFirst()
+                    .ifPresent(spice -> spiceDTO.setImageURL(imageUtil.getImage(spice.getImageURL())));
         }
         return spiceDTOS;
     }
@@ -102,55 +104,57 @@ private BidServiceImpl bidService;
             throw new RuntimeException("Spice Listing Not Found");
         }
     }
-@Transactional
+
+    @Transactional
     @Override
     public SpiceDTO<String> update(UUID id, SpiceDTO spiceDTO, MultipartFile file) {
-    Optional<Spice> spiceOptional = spiceRepo.findById(id);
-    if (spiceOptional.isPresent()) {
-        Spice spice = spiceOptional.get();
-        if (spiceDTO.getName() != null) {
-            spice.setName(spiceDTO.getName());
+        Optional<Spice> spiceOptional = spiceRepo.findById(id);
+        if (spiceOptional.isPresent()) {
+            Spice spice = spiceOptional.get();
+            if (spiceDTO.getName() != null) {
+                spice.setName(spiceDTO.getName());
+            }
+            if (spiceDTO.getPrice() != null) {
+                spice.setPrice(spiceDTO.getPrice());
+            }
+            if (spiceDTO.getQuantity() != null) {
+                spice.setQuantity(spiceDTO.getQuantity());
+            }
+            if (spiceDTO.getDescription() != null) {
+                spice.setDescription(spiceDTO.getDescription());
+            }
+            if (spiceDTO.getCategory() != null) {
+                spice.setCategory(spiceDTO.getCategory());
+            }
+            if (spiceDTO.getLocation() != null) {
+                spice.setLocation(spiceDTO.getLocation());
+            }
+            if (file != null && !file.isEmpty()) {
+                String imageName = imageUtil.updateImage(spice.getImageURL(), ImageType.SPICE, file);
+                spice.setImageURL(imageName);
+            }
+            try {
+                spiceRepo.save(spice);
+                logger.info("Spice updated successfully: {}", spice);
+                return modelMapper.map(spice, SpiceDTO.class);
+            } catch (StaleObjectStateException e) {
+                logger.error("Failed to update spice: {}", spice, e);
+                throw new RuntimeException("Failed to update spice");
+            }
+        } else {
+            logger.warn("Spice with id {} not found", id);
+            throw new RuntimeException("Spice Listing Not Found");
         }
-        if (spiceDTO.getPrice() != null) {
-            spice.setPrice(spiceDTO.getPrice());
-        }
-        if (spiceDTO.getQuantity() != null) {
-            spice.setQuantity(spiceDTO.getQuantity());
-        }
-        if (spiceDTO.getDescription() != null) {
-            spice.setDescription(spiceDTO.getDescription());
-        }
-        if (spiceDTO.getCategory() != null) {
-            spice.setCategory(spiceDTO.getCategory());
-        }
-        if (spiceDTO.getLocation() != null) {
-            spice.setLocation(spiceDTO.getLocation());
-        }
-        if (file != null && !file.isEmpty()) {
-            String imageName = imageUtil.updateImage(spice.getImageURL(), ImageType.SPICE, file);
-            spice.setImageURL(imageName);
-        }
-        try {
-            spiceRepo.save(spice);
-            logger.info("Spice updated successfully: {}", spice);
-            return modelMapper.map(spice, SpiceDTO.class);
-        } catch (StaleObjectStateException e) {
-            logger.error("Failed to update spice: {}", spice, e);
-            throw new RuntimeException("Failed to update spice");
-        }
-    } else {
-        logger.warn("Spice with id {} not found", id);
-        throw new RuntimeException("Spice Listing Not Found");
-    }
     }
 
     @Override
     public List<SpiceDTO<String>> getByUserId(UUID userId) {
         List<Spice> spices = spiceRepo.findByUserUid(userId);
-        List<SpiceDTO<String>> spiceDTOS = modelMapper.map(spices, new TypeToken<List<SpiceDTO<String>>>() {}.getType());
+        List<SpiceDTO<String>> spiceDTOS = modelMapper.map(spices, new TypeToken<List<SpiceDTO<String>>>() {
+        }.getType());
         for (SpiceDTO<String> spiceDTO : spiceDTOS) {
             spices.stream().filter(spice ->
-                    spice.getId().equals(spiceDTO.getId()))
+                            spice.getId().equals(spiceDTO.getId()))
                     .findFirst()
                     .ifPresent(spice -> spiceDTO.setImageURL(imageUtil.getImage(spice.getImageURL())));
         }
@@ -213,12 +217,13 @@ private BidServiceImpl bidService;
 
         // Proceed with the deletion
         spiceRepo.delete(spice);
-     //send email to the user
+        //send email to the user
         User user = spice.getUser();
         String emailContent = "Your spice listing has been removed by an admin.";
         emailService.sendEmail(user.getEmail(), "Spice Listing Removed", emailContent);
         return true;
     }
+
     @Override
     @Transactional
     public void delete(String spiceId) {
@@ -246,14 +251,37 @@ private BidServiceImpl bidService;
         // Proceed with the deletion
         spiceRepo.delete(spice);
     }
-@Transactional
+
+    @Transactional
     @Override
     public boolean deleteSpiceByName(String name) {
-    if (spiceRepo.existsByName(name)) {
-        spiceRepo.deleteByName(name);
-        return true;
-    } else {
-        return false;
+        if (spiceRepo.existsByName(name)) {
+            spiceRepo.deleteByName(name);
+            return true;
+        } else {
+            return false;
+        }
     }
-}
+
+    @Override
+    public String getSpiceOwnerEmailById(UUID listingId) {
+        logger.info("getSpiceOwnerEmailById called with listingId: {}", listingId);
+
+        // Fetch the spice entity
+        Spice spice = spiceRepo.findById(listingId)
+                .orElseThrow(() -> new EntityNotFoundException("Spice not found for listingId: " + listingId));
+        logger.info("Spice found: {}", spice);
+
+        // Fetch the user associated with the spice
+        User user = spice.getUser();
+        if (user == null) {
+            logger.warn("No user associated with the spice for listingId: {}", listingId);
+            throw new EntityNotFoundException("User not found for spice with listingId: " + listingId);
+        }
+
+        String spiceOwnerEmail = user.getEmail();
+        logger.info("Spice owner email retrieved: {}", spiceOwnerEmail);
+
+        return spiceOwnerEmail;
+    }
 }

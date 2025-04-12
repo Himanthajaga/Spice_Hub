@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import lk.ijse.back_end.dto.BidDTO;
 import lk.ijse.back_end.entity.Bid.BidStatus;
 import lk.ijse.back_end.entity.User;
+import lk.ijse.back_end.service.SpiceService;
 import lk.ijse.back_end.service.UserService;
 import lk.ijse.back_end.service.impl.BidServiceImpl;
 import lk.ijse.back_end.utill.ImageUtil;
@@ -28,7 +29,7 @@ import java.util.UUID;
 @RequestMapping("/api/v1/bids")
 @CrossOrigin(origins = "http://localhost:63342")
 public class BidController {
-    private  static final Logger log = LoggerFactory.getLogger(SpiceController.class);
+    private static final Logger log = LoggerFactory.getLogger(SpiceController.class);
 
     @Autowired
     private BidServiceImpl bidService;
@@ -36,10 +37,12 @@ public class BidController {
     private JwtUtil jwtUtil;
     @Autowired
     private UserService userService;
-@Autowired
-private ObjectMapper objectMapper;
-@Autowired
-private ImageUtil imageUtil;
+    @Autowired
+    private SpiceService spiceService;
+    @Autowired
+    private ObjectMapper objectMapper;
+    @Autowired
+    private ImageUtil imageUtil;
 
     @PostMapping(value = "/save", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseUtil saveBid(@RequestPart("bid") @Valid String bidJson, @RequestPart(value = "file", required = false) MultipartFile file, @RequestPart(value = "imageURL", required = false) String imageURL, HttpServletRequest request) {
@@ -88,7 +91,8 @@ private ImageUtil imageUtil;
             return new ResponseUtil(500, "Internal server error", null);
         }
     }
-            @GetMapping(path = "/get")
+
+    @GetMapping(path = "/get")
     public ResponseUtil getAllBids() {
         return new ResponseUtil(201, "Bid saved successfully", bidService.getAll());
     }
@@ -111,6 +115,7 @@ private ImageUtil imageUtil;
         bidService.update(bidId, bidDTO, file);
         return new ResponseUtil(201, "Bid Updated Successfully", null);
     }
+
     @GetMapping("/user")
     public ResponseUtil getBidsByUser(HttpServletRequest request) {
         String token = request.getHeader("Authorization").substring(7);
@@ -122,14 +127,19 @@ private ImageUtil imageUtil;
         List<BidDTO<String>> bids = bidService.getBidsByUserId(user.getUid());
         return new ResponseUtil(200, "Bids retrieved successfully", bids);
     }
+
     @GetMapping(path = "/{bidId}")
     public ResponseUtil getBidById(@PathVariable UUID bidId) {
         BidDTO bidDTO = bidService.getBidById(bidId);
-        if (bidDTO != null) {
-            return new ResponseUtil(200, "Bid retrieved successfully", bidDTO);
-        } else {
+        if (bidDTO == null) {
             return new ResponseUtil(404, "Bid not found", null);
         }
-    }
 
+        // Fetch spice owner email if not already included
+        String spiceOwnerEmail = spiceService.getSpiceOwnerEmailById(bidDTO.getListingId());
+        bidDTO.setSpiceOwnerEmail(spiceOwnerEmail);
+
+        return new ResponseUtil(200, "Bid retrieved successfully", bidDTO);
+
+    }
 }

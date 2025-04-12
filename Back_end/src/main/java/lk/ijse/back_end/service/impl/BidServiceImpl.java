@@ -66,6 +66,13 @@ public class BidServiceImpl implements BidService {
         Spice spice = spiceRepo.findById(bidDTO.getListingId()).orElseThrow(() -> new RuntimeException("Spice not found"));
         bid.setListing(spice);
 
+        // Set the spice owner's email
+        User spiceOwner = spice.getUser();
+        if (spiceOwner == null) {
+            throw new RuntimeException("Spice owner not found");
+        }
+        bid.setSpiceOwnerEmail(spiceOwner.getEmail()); // Store the spice owner's email
+
         for (int i = 0; i < 3; i++) { // Retry up to 3 times
             try {
                 Bid savedBid = bidRepo.save(bid);
@@ -73,7 +80,6 @@ public class BidServiceImpl implements BidService {
                 stringBidDTO.setImageURL(imageUrl);
 
                 // Send email after successful bid save
-                User spiceOwner = spice.getUser();
                 String emailContent = "Your spice has been bid. Check it out!";
                 try {
                     logger.info("Attempting to send email to spice owner: {}", spiceOwner.getEmail());
@@ -147,7 +153,8 @@ public class BidServiceImpl implements BidService {
                     bidDTO.setUserId(bid.getUser().getUid());
                     bidDTO.setListingName(bid.getListing().getName());
                     bidDTO.setListingDescription(bid.getListing().getDescription());
-                    bidDTO.setImageURL(imageUtil.getImage(bid.getListing().getImageURL())); // Retrieve image URL from Spice table
+                    bidDTO.setImageURL(imageUtil.getImage(bid.getListing().getImageURL()));
+                    bidDTO.setSpiceOwnerEmail(bid.getSpiceOwnerEmail()); // Explicitly set spiceOwnerEmail
                     return bidDTO;
                 })
                 .collect(Collectors.toList());
@@ -161,7 +168,8 @@ public class BidServiceImpl implements BidService {
             bidDTO.setUserId(bid.getUser().getUid());
             bidDTO.setListingName(bid.getListing().getName());
             bidDTO.setListingDescription(bid.getListing().getDescription());
-            bidDTO.setImageURL(imageUtil.getImage(bid.getListing().getImageURL())); // Retrieve image URL from Spice table
+            bidDTO.setImageURL(imageUtil.getImage(bid.getListing().getImageURL()));
+            bidDTO.setSpiceOwnerEmail(bid.getSpiceOwnerEmail()); // Ensure this is set
             return bidDTO;
         } else {
             return null;

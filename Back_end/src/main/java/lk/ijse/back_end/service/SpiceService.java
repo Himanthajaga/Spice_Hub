@@ -21,4 +21,6 @@ public interface SpiceService {
 
     void delete(String spiceId);
   boolean deleteSpiceByName(String name);
+
+  String getSpiceOwnerEmailById(UUID listingId);
 }
