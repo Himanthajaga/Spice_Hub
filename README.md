@@ -31,7 +31,7 @@ SpiceHub is a platform designed to manage and facilitate the buying and selling 
 ![Home Page](screenshots/userindex3.PNG)
 
 ###  Admin  Home Page
-![Admin Home Page](screenshots/admin index1.PNG)
+![Admin Home Page](screenshots/adminindex1.PNG)
 ![Admin Home Page](screenshots/adminindex2.PNG)
 
 ### Add Category Page
