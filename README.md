@@ -26,55 +26,55 @@ SpiceHub is a platform designed to manage and facilitate the buying and selling 
 
 ## Screenshots
 ###  User Home Page
-![Home Page](screenshots/user index 1.PNG)
-![Home Page](screenshots/user index 2.PNG)
-![Home Page](screenshots/user index 3.PNG)
+![Home Page](screenshots/userindex1.PNG)
+![Home Page](screenshots/userindex2.PNG)
+![Home Page](screenshots/userindex3.PNG)
 
 ###  Admin  Home Page
-![Admin Home Page](screenshots/admin index 1.PNG)
-![Admin Home Page](screenshots/admin index 2.PNG)
+![Admin Home Page](screenshots/admin index1.PNG)
+![Admin Home Page](screenshots/adminindex2.PNG)
 
 ### Add Category Page
-![Add Category](screenshots/add category.PNG)
+![Add Category](screenshots/addcategory.PNG)
 
 ### Login Page
-![Login Page](screenshots/login 1.PNG)
-![Login Page](screenshots/login 2.PNG)
+![Login Page](screenshots/login1.PNG)
+![Login Page](screenshots/login2.PNG)
 
 ### Manage Category Page
-![Manage Category](screenshots/manage category.PNG)
+![Manage Category](screenshots/managecategory.PNG)
 
 ### Manage Spice Page
-![Manage Spice](screenshots/manage spices 1.PNG)
-![Manage Spice](screenshots/manage spices 2.PNG)
+![Manage Spice](screenshots/managespices1.PNG)
+![Manage Spice](screenshots/managespices2.PNG)
 
 ## My Bids Page
-![My Bids](screenshots/my bids 1.PNG)
-![My Bids](screenshots/my bids 2.PNG)
+![My Bids](screenshots/mybids1.PNG)
+![My Bids](screenshots/mybids2.PNG)
 
 ### Payment Page
-![Payment Page](screenshots/payment 1.PNG)
-![Payment Page](screenshots/payment 2.PNG)
-![Payment Page](screenshots/payment 3.PNG)
-![Payment Page](screenshots/payment 4.PNG)
+![Payment Page](screenshots/payment1.PNG)
+![Payment Page](screenshots/payment2.PNG)
+![Payment Page](screenshots/payment3.PNG)
+![Payment Page](screenshots/payment4.PNG)
 
 ### Admin Payments Page
-![Admin Payments](screenshots/paymentss admin.PNG)
+![Admin Payments](screenshots/paymentssadmin.PNG)
 
 ### Profile Management Page
-![Profile](screenshots/profile 1.PNG)
+![Profile](screenshots/profile1.PNG)
 
 ### Signup Page
 ![Signup](screenshots/signup.PNG)
 
 ### Update Category Page
-![Update Category](screenshots/update category.PNG)
+![Update Category](screenshots/updatecategory.PNG)
 
 ### Update Spice Page
-![Update Spice](screenshots/update spice.PNG)
+![Update Spice](screenshots/updatespice.PNG)
 
 ### Users Manage Page
-![Users Manage](screenshots/users manage 1.PNG)
+![Users Manage](screenshots/usersmanage1.PNG)
 ---
 
 ## Setup Instructions
